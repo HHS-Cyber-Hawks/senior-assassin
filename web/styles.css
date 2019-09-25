@@ -1,0 +1,46 @@
+@CHARSET "UTF-8";
+
+body {
+    margin-top: 50px;
+    background-color: red;
+}
+
+
+#current {
+    background-color: blue;
+    border-color: blue;
+    color: white;
+}
+
+#resultsTable {
+  text-align: center;
+  margin: auto;
+  border: 1px solid black;
+}
+
+
+
+.header {
+    height: 150px;
+    width: 100%;
+    text-align: center;
+    margin: auto;
+}
+
+.title {
+    margin-top: 0px;
+    margin-bottom: 30px;
+    font-family: arial;
+    color: blue;
+}
+
+.button {
+    width: 100px;
+    height: 25px;
+    background-color: yellow;
+    border-style: solid;
+    border-color: yellow;
+    color: black;
+    font-family: arial;
+    font-weight: bolder;
+}

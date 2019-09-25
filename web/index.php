@@ -1,38 +1,63 @@
-<?php
-$servername = "mysql.server295.com";
-$username = "assassin";
-$password = "billiard gale seeing";
-$dbname = "passingf_assassin";
+<html>
+  <head>
+    <title>Senior Assassin</title>
+    <script src='scripts.js?<?php echo rand(); ?>'></script>
+    <link rel="stylesheet" type="text/css" href="styles.css?<?php echo rand(); ?>" />
+  </head>
+  <body>
+    <div class="header">
+        <h1 class="title">Hanover Senior Assassin</h1>
+        <span>
+            <button class="button" id="current">Home</button>
+        </span>
+        &nbsp;
+        <span>
+            <a href="rules.php"><button class="button">Rules</button></a>
+        </span>
+        &nbsp;
+        <span>
+            <a href=".php"><button class="button">-----</button></a>
+        </span>
+    </div>
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+    <div>
+      <?php
+      $servername = "mysql.server295.com";
+      $username = "assassin";
+      $password = "billiard gale seeing";
+      $dbname = "passingf_assassin";
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-echo "<h1>Senior Assassin Players</h1>";
+      // Create connection
+      $conn = new mysqli($servername, $username, $password, $dbname);
 
-$sql = "SELECT id, first_name, last_name, email FROM players ORDER BY last_name";
-$result = $conn->query($sql);
+      // Check connection
+      if ($conn->connect_error) {
+          die("Connection failed: " . $conn->connect_error);
+      }
 
-if ($result->num_rows > 0) {
-    echo "<table border='1'>";
-    echo "<tr><th>ID</th><th>Last Name</th><th>First Name</th><th>Email</th></tr>";
+      $sql = "SELECT id, first_name, last_name, email FROM players ORDER BY last_name";
+      $result = $conn->query($sql);
 
-    // output data of each row
-    while($row = $result->fetch_assoc()) {
-        echo "<tr>";
-        echo "<td>" . $row["id"] . "</td>";
-        echo "<td>" . $row["first_name"] . "</td>";
-        echo "<td>" . $row["last_name"] . "</td>";
-        echo "<td>" . $row["email"] . "</td>";
-        echo "</tr>";
-    }
+      if ($result->num_rows > 0) {
+          echo "<table id='resultsTable'>";
+          echo "<tr><th>ID</th><th>Last Name</th><th>First Name</th><th>Email</th></tr>";
 
-    echo "</table>";
-} else {
-    echo "0 results";
-}
-$conn->close();
-?>
+          // output data of each row
+          while($row = $result->fetch_assoc()) {
+              echo "<tr>";
+              echo "<td>" . $row["id"] . "</td>";
+              echo "<td>" . $row["first_name"] . "</td>";
+              echo "<td>" . $row["last_name"] . "</td>";
+              echo "<td>" . $row["email"] . "</td>";
+              echo "</tr>";
+          }
+
+          echo "</table>";
+      } else {
+          echo "0 results";
+      }
+      $conn->close();
+      ?>
+    </div>
+  </body>
+</html>
