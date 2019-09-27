@@ -44,3 +44,9 @@ body {
     font-family: arial;
     font-weight: bolder;
 }
+
+.label {
+    display: inline-block;
+    width: 80px;
+    margin-bottom: 5px;
+}
