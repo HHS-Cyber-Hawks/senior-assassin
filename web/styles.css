@@ -2,23 +2,47 @@
 
 body {
     margin-top: 50px;
-    background-color: red;
+    background-color: white;
 }
 
 
 #current {
-    background-color: blue;
-    border-color: blue;
+    background-color: #1772fc;
+    border-color: #1772fc;
     color: white;
 }
 
 #resultsTable {
   text-align: center;
   margin: auto;
-  border: 1px solid black;
+
+  border: 2px solid black;
 }
 
+th {
+  height: 50px;
+  width: 100px;
 
+
+}
+
+tr:nth-child(even){
+   background-color: #66a3ff;
+   font-family: arial;
+   color: white;
+   margin: 5px;
+   border: 2px solid black;
+}
+td{
+  margin: 5px;
+}
+tr:nth-child(odd){
+   background-color: #1772fc;
+   font-family: arial;
+   color: white;
+   margin: 5px;
+   border: 2px solid black;
+}
 
 .header {
     height: 150px;
@@ -31,17 +55,18 @@ body {
     margin-top: 0px;
     margin-bottom: 30px;
     font-family: arial;
-    color: blue;
+    color: #1772fc;
 }
 
 .button {
     width: 100px;
     height: 25px;
-    background-color: yellow;
+    background-color: #1772fc;
     border-style: solid;
-    border-color: yellow;
-    color: black;
+    border-color: #1772fc;
+    color: white;
     font-family: arial;
+    font-size: 12;
     font-weight: bolder;
 }
 
