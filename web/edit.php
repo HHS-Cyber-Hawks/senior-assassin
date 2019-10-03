@@ -30,7 +30,7 @@ if ($conn->connect_error) {
 $sql1 = <<<SQL
           SELECT id, first_name, last_name, email
           FROM players
-          WHERE id = $id;
+          WHERE player_id = $id;
 SQL;
 
 $result = $conn->query($sql1);
@@ -41,7 +41,7 @@ if ($result->num_rows > 0) {
              "<span class='label'>First Name:</span><input type='text' name='firstNameNew' value='" . $row["first_name"] . "' style='width: 200px;'/><br />" .
              "<span class='label'>Last Name</span><input type='text' name='lastNameNew' value='" . $row["last_name"] . "'  style='width: 200px;' /><br />" .
              "<span class='label'>Email</span><input type='text' name='emailNew' value='" . $row["email"] . "'  style='width: 200px;' /><br />" .
-             "<input type='hidden' name='id' value='" . $row["id"] . "'/><br />" .
+             "<input type='hidden' name='id' value='" . $row["player_id"] . "'/><br />" .
              "<button type='submit' name='submit'>Save</button>" .
              "</form>";
     }
@@ -80,7 +80,7 @@ $sql2 = <<<SQL
           SET first_name = "$firstNameNew",
           last_name = "$lastNameNew",
           email = "$emailNew"
-          WHERE id = $id;
+          WHERE player_id = $id;
 SQL;
 
 // Execute the query and display the results

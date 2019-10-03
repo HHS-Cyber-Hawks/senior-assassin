@@ -36,7 +36,7 @@ if ($conn->connect_error) {
 }
 
 $sql = <<<SQL
-          SELECT id, first_name, last_name, email
+          SELECT player_id, first_name, last_name, email
           FROM players
           ORDER BY last_name;
 SQL;
@@ -45,16 +45,16 @@ $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     echo "<table id='resultsTable'>";
-    echo "<tr><th>ID</th><th>Last Name</th><th>First Name</th><th>Email</th></tr>";
+    echo "<tr><th>ID</th><th>Last Name</th><th>First Name</th><th>Email</th><th>Edit/Delete</th></tr>";
 
     // output data of each row
     while($row = $result->fetch_assoc()) {
         echo "<tr>";
-        echo "<td>" . $row["id"] . "</td>";
+        echo "<td>" . $row["player_id"] . "</td>";
         echo "<td>" . $row["first_name"] . "</td>";
         echo "<td>" . $row["last_name"] . "</td>";
         echo "<td>" . $row["email"] . "</td>";
-        echo "<td><button onclick='deletePlayer(" . $row["id"] . ")'>Delete</button> <button onclick='editPlayer(" . $row["id"] . ")'>Edit</button></td>";
+        echo "<td><button onclick='deletePlayer(" . $row["player_id"] . ")'>Delete</button> <button onclick='editPlayer(" . $row["player_id"] . ")'>Edit</button></td>";
         echo "</tr>";
     }
 
@@ -66,7 +66,8 @@ if ($result->num_rows > 0) {
 $conn->close();
 ?>
       <div style="width: auto; text-align: center; margin: auto;">
-        <a href="add.php"><button class="button">Add Player</button></a>
+        <span> <a href="add.php"><button class="button">Add Player</button></a> </span>
+        <span> <a href="assign.php"><button class="button">Assignments</button></a> </span>
       </div>
     </div>
   </body>

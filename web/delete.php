@@ -15,7 +15,7 @@ if ($conn->connect_error) {
 }
 
 // sql to delete a record
-$sql = "DELETE FROM players WHERE id=" . $id;
+$sql = "DELETE FROM players WHERE player_id=" . $id;
 
 if ($conn->query($sql) === TRUE) {
     header('Location: index.php');
