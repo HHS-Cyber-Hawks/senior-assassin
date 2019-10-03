@@ -22,8 +22,6 @@ body {
 th {
   height: 50px;
   width: 100px;
-
-
 }
 
 tr:nth-child(even){
@@ -35,10 +33,12 @@ tr:nth-child(even){
    margin: 0px;
 
 }
+
 td{
   /*margin: 5px;
   */
 }
+
 tr:nth-child(odd){
    background-color: #1772fc;
    font-family: arial;
