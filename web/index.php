@@ -66,8 +66,8 @@ if ($result->num_rows > 0) {
 $conn->close();
 ?>
       <div style="width: auto; text-align: center; margin: auto;">
-        <span> <a href="add.php"><button class="button">Add Player</button></a> </span>
-        <span> <a href="assign.php"><button class="button">Assignments</button></a> </span>
+        <span> <a href="player_add.php"><button class="button">Add Player</button></a> </span>
+        <span> <a href="assignment_display.php"><button class="button">Assignments</button></a> </span>
       </div>
     </div>
   </body>

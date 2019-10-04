@@ -28,7 +28,7 @@ if ($conn->connect_error) {
 }
 
 $sql1 = <<<SQL
-          SELECT id, first_name, last_name, email
+          SELECT player_id, first_name, last_name, email
           FROM players
           WHERE player_id = $id;
 SQL;
@@ -37,7 +37,7 @@ $result = $conn->query($sql1);
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        echo "<form action='edit.php' method='post'>" .
+        echo "<form action='player_edit.php' method='post'>" .
              "<span class='label'>First Name:</span><input type='text' name='firstNameNew' value='" . $row["first_name"] . "' style='width: 200px;'/><br />" .
              "<span class='label'>Last Name</span><input type='text' name='lastNameNew' value='" . $row["last_name"] . "'  style='width: 200px;' /><br />" .
              "<span class='label'>Email</span><input type='text' name='emailNew' value='" . $row["email"] . "'  style='width: 200px;' /><br />" .
