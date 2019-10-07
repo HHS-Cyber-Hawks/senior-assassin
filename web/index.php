@@ -38,7 +38,7 @@ if ($conn->connect_error) {
 $sql = <<<SQL
           SELECT player_id, first_name, last_name, email
           FROM players
-          ORDER BY last_name;
+          ORDER BY player_id;
 SQL;
 
 $result = $conn->query($sql);
