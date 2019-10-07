@@ -21,13 +21,12 @@ if ($conn->connect_error) {
 }
 
 $sql = <<<SQL
-          SELECT assignments_id,
+          SELECT assignment_id,
           attackers.first_name as attacker_first_name,
           attackers.last_name as attacker_last_name,
           victims.first_name as victim_first_name,
           victims.last_name as victim_last_name,
           the_status
-
           FROM assignments
           JOIN players attackers ON attackers.player_id = attacker_id
           JOIN players victims ON victims.player_id = victim_id
@@ -44,7 +43,7 @@ if ($result->num_rows > 0) {
 
     while($row = $result->fetch_assoc()) {
         echo "<tr>";
-        echo "<td>" . $row["assignments_id"]      . "</td>";
+        echo "<td>" . $row["assignment_id"]      . "</td>";
         echo "<td>" . $row["attacker_first_name"] . " " . $row["attacker_last_name"] . "</td>";
         echo "<td>" . $row["victim_first_name"]   . " " . $row["victim_last_name"]   . "</td>";
         echo "<td>" . $row["the_status"]          . "</td>";
