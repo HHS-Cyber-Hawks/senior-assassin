@@ -44,7 +44,7 @@ SQL;
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
-    echo "<table id='resultsTable'>";
+    echo "<table id='resultsTable' >";
     echo "<tr><th>ID</th><th>Last Name</th><th>First Name</th><th>Email</th><th>Edit/Delete</th></tr>";
 
     // output data of each row
