@@ -1,6 +1,7 @@
 <?php
 
 extract($_REQUEST);
+
 if (!isset($submit)) {
 
 ?>
@@ -13,7 +14,7 @@ if (!isset($submit)) {
 
     <body>
         <h1> Add player </h1>
-        <form action="add.php" method="post" style="margin-bottom: 5px;">
+        <form action="player_add.php" method="post" style="margin-bottom: 5px;">
             <span class="label">First Name:</span><input type="text" name="firstName" style="width: 200px;"/>
             <br />
             <span class="label">Last Name:</span><input type="text" name="lastName" style="width: 200px;"/>
