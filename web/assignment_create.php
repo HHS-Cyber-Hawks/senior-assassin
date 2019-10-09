@@ -13,55 +13,85 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Queries database for the amount of player ids there are
+// Queries database for the player ids and load them into the attacker array
 $get_count = <<<SQL
-                SELECT count(player_id) as num_players
+                SELECT player_id
                 FROM players
                 ;
 SQL;
 
 $result = $conn->query($get_count);
-$row = $result->fetch_assoc();
 
-// Assigns num_players to the amount of players in the players table
-$num_players = $row["num_players"];
-
-// Makes the attacker array and fills it with the values 1 -> num_players
 $attacker_array = array();
-for($i = 1; $i <= $num_players; $i++)
+while($row = $result->fetch_assoc())
 {
-    array_push($attacker_array, $i);
+  array_push($attacker_array, $row['player_id']);
 }
 
-// Makes the victim array and sets it equal to the attacker array
-$victim_array = (new ArrayObject($attacker_array))->getArrayCopy();
-// Shuffles the victim array
-shuffle($victim_array);
-// Checks to make sure no attacker has themself as a target. If this does occur, the value is switched
-checkArray($attacker_array, $victim_array, $num_players);
+// Make a copy of the attacker array available for assignment
+$target_pool = (new ArrayObject($attacker_array))->getArrayCopy();
 
-// Checks all indices of both matrices and makes sure they aren't the same. Swaps values in victim_array if they are
-function checkArray($x, &$y, $num_players)
+echo "<pre>";
+
+
+// Assign Targets
+$target_array = array();
+foreach ($attacker_array as $attacker)
 {
-  for($i = 0; $i < $num_players; $i++)
+  // Select a random target from the pool
+  $random_index = rand(0, count($target_pool) - 1);
+  $potential_target = $target_pool[$random_index];
+
+  //  Remove the target from the pool so it can't be reused
+  array_splice($target_pool, $random_index, 1);
+
+  // Safety check: if the $potential_target is the same as the attacker in which case we need to do some more work
+  if ($potential_target == $attacker)
   {
-    if($x[$i] == $y[$i])
-    {
-      if($i == $num_players - 1)
+      if (count($target_pool) > 1) // If there are any other available targets, then pull another from the pool
       {
-        $temp = $y[$i];
-        $y[$i] = $y[$i - 1];
-        $y[$i - 1] = $temp;
+          $random_index = rand(0, count($target_pool) - 1);
+          $second_target = $target_pool[$random_index];
+
+          // Put the original target back in the pool
+          array_push($target_pool, $potential_target);
+
+          $potential_target = $second_target;
+
+          echo "*** COLLISION ***\n";
       }
-      else
+      else // We're on the last attacker and have to swap this potential target with something already in the target_array
       {
-        $temp = $y[$i];
-        $y[$i] = $y[$i + 1];
-        $y[$i + 1] = $temp;
+          $temp = $target_array[0];
+          $target_array[0] = $potential_target;
+          $potential_target = $temp;
+
+          echo "*** COLLISION ON FINAL ***\n";
       }
-    }
   }
+
+  // Add the target to the final array
+  array_push($target_array, $potential_target);
 }
+
+// TODO: REMOVE "DIRECT" CIRCULAR DEPENDENCY (Joe attacks Bill, Bill attacks Joe)
+
+echo "Attackers\n";
+print_r($attacker_array);
+echo "Targets\n";
+print_r($target_array);
+echo "</pre>";
+
+
+// Now insert the records into the database
+for ($c = 0; $c<count($target_array);$c++){
+  $sql = <<<SQL
+      INSERT INTO assignments (attacker_id, target_id, status)
+        VALUES ($attacker_array[$c], $target_array[$c], 0)
+SQL;
+  $conn->query($sql);
+}
+
 
 $conn->close();
 
