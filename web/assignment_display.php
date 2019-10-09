@@ -4,7 +4,11 @@
     <script src='scripts.js?<?php echo rand(); ?>'></script>
     <link rel="stylesheet" type="text/css" href="styles.css?<?php echo rand(); ?>" />
   </head>
-
+  <body>
+    <div class="header">
+      <a href="assignment_create.php"><button class="button" style="height: auto; margins: auto;">Create Assignments</button></a>
+    </div>
+    <br />
 <?php
 
 $servername = "mysql.server295.com";
@@ -58,5 +62,5 @@ if ($result->num_rows > 0) {
 
 $conn->close();
 ?>
-
+  </body>
 </html>

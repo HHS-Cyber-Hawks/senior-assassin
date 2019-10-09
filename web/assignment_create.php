@@ -1,3 +1,8 @@
+
+<html>
+  <body>
+
+
 <?php
 
 $servername = "mysql.server295.com";
@@ -20,6 +25,7 @@ $get_count = <<<SQL
                 ;
 SQL;
 
+// Gets results from query
 $result = $conn->query($get_count);
 
 $attacker_array = array();
@@ -32,7 +38,6 @@ while($row = $result->fetch_assoc())
 $target_pool = (new ArrayObject($attacker_array))->getArrayCopy();
 
 echo "<pre>";
-
 
 // Assign Targets
 $target_array = array();
@@ -95,4 +100,11 @@ SQL;
 
 $conn->close();
 
+//header('Location: assignment_display.php');
+
 ?>
+
+
+
+  </body>
+</html>
