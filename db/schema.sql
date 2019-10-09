@@ -13,7 +13,7 @@ DROP TABLE IF EXISTS assignments
 ;
 
 CREATE TABLE assignments (
-  assignments_id INT NOT NULL AUTO_INCREMENT,
+  assignment_id INT NOT NULL AUTO_INCREMENT,
   attacker_id    INT NOT NULL,
   victim_id      INT NOT NULL,
   status         INT 0,
