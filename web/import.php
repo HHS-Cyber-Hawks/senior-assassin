@@ -14,7 +14,7 @@ if ($conn->connect_error) {
 }
 
 $row = 1;
-if (($handle = fopen("class-of-2020.csv", "r")) !== FALSE) {
+if (($handle = fopen("class-of-2020-small.csv", "r")) !== FALSE) {
     while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
         // count finds how many values per row
         $num = count($data);
