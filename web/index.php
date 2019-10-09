@@ -12,7 +12,7 @@
         </span>
         &nbsp;
         <span>
-            <a href=".php"><button class="button">-----</button></a>
+            <a href="assignment_display.php"><button class="button">Assignments</button></a>
         </span>
         &nbsp;
         <span>
@@ -38,7 +38,7 @@ if ($conn->connect_error) {
 $sql = <<<SQL
           SELECT player_id, first_name, last_name, email
           FROM players
-          ORDER BY player_id;
+          ORDER BY last_name, first_name, player_id;
 SQL;
 
 $result = $conn->query($sql);
@@ -67,7 +67,7 @@ $conn->close();
 ?>
       <div style="width: auto; text-align: center; margin: auto;">
         <span> <a href="player_add.php"><button class="button">Add Player</button></a> </span>
-        <span> <a href="assignment_display.php"><button class="button">Assignments</button></a> </span>
+        <span> <a href="import.php"><button class="button">Import Players</button></a> </span>
       </div>
     </div>
   </body>
