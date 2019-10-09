@@ -24,12 +24,12 @@ $sql = <<<SQL
           SELECT assignment_id,
           attackers.first_name as attacker_first_name,
           attackers.last_name as attacker_last_name,
-          victims.first_name as victim_first_name,
-          victims.last_name as victim_last_name,
-          the_status
+          targets.first_name as target_first_name,
+          targets.last_name as target_last_name,
+          status
           FROM assignments
           JOIN players attackers ON attackers.player_id = attacker_id
-          JOIN players victims ON victims.player_id = victim_id
+          JOIN players targets ON targets.player_id = target_id
           ;
 SQL;
 
@@ -45,8 +45,8 @@ if ($result->num_rows > 0) {
         echo "<tr>";
         echo "<td>" . $row["assignment_id"]      . "</td>";
         echo "<td>" . $row["attacker_first_name"] . " " . $row["attacker_last_name"] . "</td>";
-        echo "<td>" . $row["victim_first_name"]   . " " . $row["victim_last_name"]   . "</td>";
-        echo "<td>" . $row["the_status"]          . "</td>";
+        echo "<td>" . $row["target_first_name"]   . " " . $row["target_last_name"]   . "</td>";
+        echo "<td>" . $row["status"]          . "</td>";
         echo "</tr>";
     }
 
