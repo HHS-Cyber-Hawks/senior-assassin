@@ -79,6 +79,9 @@ var_dump($target_array);
 
 
 
+
+
+// CHECKS GO IN HERE
 function contains(&$array, $to_check)
 {
   for ($i=0; $i < sizeof($array); $i++) {
