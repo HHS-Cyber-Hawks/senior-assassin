@@ -18,101 +18,85 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Gets rid of the assignments table if it currently exists
-$drop_table = <<<SQL
-                 DROP TABLE IF EXISTS assignments;
-SQL;
-
-$conn->query($drop_table);
-
-// Recreates the assignments table with no values inside of it
-$make_table = <<<SQL
-                  CREATE TABLE assignments (
-                  assignment_id  INT NOT NULL AUTO_INCREMENT,
-                  attacker_id    INT NOT NULL,
-                  target_id      INT NOT NULL,
-                  status         INT default 0,
-                  PRIMARY KEY (assignment_id))
-                  ;
-SQL;
-
-$conn->query($make_table);
-
-
-// Queries database for the amount of player ids there are
+// Queries database for the player ids and load them into the attacker array
 $get_count = <<<SQL
-                SELECT count(player_id) as num_players
+                SELECT player_id
                 FROM players
                 ;
 SQL;
 
 // Gets results from query
 $result = $conn->query($get_count);
-$row = $result->fetch_assoc();
 
-// Assigns num_players to the amount of players in the players table
-$num_players = $row["num_players"];
-
-// Makes the attacker array and fills it with the values 1 -> num_players
 $attacker_array = array();
-for($i = 1; $i <= $num_players; $i++)
+while($row = $result->fetch_assoc())
 {
-    array_push($attacker_array, $i);
+  array_push($attacker_array, $row['player_id']);
 }
 
+// Make a copy of the attacker array available for assignment
+$target_pool = (new ArrayObject($attacker_array))->getArrayCopy();
+
+echo "<pre>";
+
+// Assign Targets
 $target_array = array();
-$rand_num_array = array();
-
-while(sizeof($target_array) < $num_players)
+foreach ($attacker_array as $attacker)
 {
-  // to push
-  $rand_num = rand(0, $num_players - 1);
+  // Select a random target from the pool
+  $random_index = rand(0, count($target_pool) - 1);
+  $potential_target = $target_pool[$random_index];
 
-  if(!contains($rand_num_array, $rand_num))
+  //  Remove the target from the pool so it can't be reused
+  array_splice($target_pool, $random_index, 1);
+
+  // Safety check: if the $potential_target is the same as the attacker in which case we need to do some more work
+  if ($potential_target == $attacker)
   {
-    array_push($target_array, $rand_num);
-    array_push($rand_num_array, $rand_num);
+      if (count($target_pool) > 1) // If there are any other available targets, then pull another from the pool
+      {
+          $random_index = rand(0, count($target_pool) - 1);
+          $second_target = $target_pool[$random_index];
+
+          // Put the original target back in the pool
+          array_push($target_pool, $potential_target);
+
+          $potential_target = $second_target;
+
+          echo "*** COLLISION ***\n";
+      }
+      else // We're on the last attacker and have to swap this potential target with something already in the target_array
+      {
+          $temp = $target_array[0];
+          $target_array[0] = $potential_target;
+          $potential_target = $temp;
+
+          echo "*** COLLISION ON FINAL ***\n";
+      }
   }
+
+  // Add the target to the final array
+  array_push($target_array, $potential_target);
 }
 
-var_dump($target_array);
+// TODO: REMOVE "DIRECT" CIRCULAR DEPENDENCY (Joe attacks Bill, Bill attacks Joe)
+
+echo "Attackers\n";
+print_r($attacker_array);
+echo "Targets\n";
+print_r($target_array);
+echo "</pre>";
 
 
-
-
-
-// CHECKS GO IN HERE
-function contains(&$array, $to_check)
-{
-  for ($i=0; $i < sizeof($array); $i++) {
-    if($array[$i] == $to_check)
-    {
-      return true;
-    }
-  }
-  return false;
-}
-
-
-
-
-
-
-
-
-
-
-
-// Pushes the pairings into the assignments table
-for($i = 0; $i < $num_players; $i++)
-{
+// Now insert the records into the database
+for ($c = 0; $c<count($target_array);$c++){
   $sql = <<<SQL
-            INSERT INTO assignments (attacker_id, target_id, status)
-            VALUES ('$attacker_array[$i]', '$target_array[$i]', 0);
+      INSERT INTO assignments (attacker_id, target_id, status)
+        VALUES ($attacker_array[$c], $target_array[$c], 0)
 SQL;
-
   $conn->query($sql);
 }
+
 
 $conn->close();
 
