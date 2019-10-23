@@ -1,9 +1,12 @@
 <?php
 
-include("environment.php");
+$servername = "mysql.server295.com";
+$username = "assassin";
+$password = "billiard gale seeing";
+$dbname = "passingf_assassin";
 
 // Create connection
-$conn = create_connection();
+$conn = new mysqli($servername, $username, $password, $dbname);
 
 // Check connection
 if ($conn->connect_error) {
@@ -29,9 +32,7 @@ while($row = $result->fetch_assoc())
 // Make a copy of the attacker array available for assignment
 $target_pool = (new ArrayObject($attacker_array))->getArrayCopy();
 
-echo "<pre>";
-
- // Assign Targets
+// Assign Targets
 $target_array = array();
 foreach ($attacker_array as $attacker)
 {
@@ -54,16 +55,12 @@ foreach ($attacker_array as $attacker)
           array_push($target_pool, $potential_target);
 
           $potential_target = $second_target;
-
-          echo "*** COLLISION ***\n";
       }
       else // We're on the last attacker and have to swap this potential target with something already in the target_array
       {
           $temp = $target_array[0];
           $target_array[0] = $potential_target;
           $potential_target = $temp;
-
-          echo "*** COLLISION ON FINAL ***\n";
       }
   }
 
@@ -73,25 +70,16 @@ foreach ($attacker_array as $attacker)
 
 // TODO: REMOVE "DIRECT" CIRCULAR DEPENDENCY (Joe attacks Bill, Bill attacks Joe)
 
-echo "Attackers\n";
-print_r($attacker_array);
-echo "Targets\n";
-print_r($target_array);
-echo "</pre>";
-
-
 // Now insert the records into the database
-for ($c = 0; $c<count($target_array);$c++){
+for ($c = 0; $c < count($target_array); $c++) {
   $sql = <<<SQL
       INSERT INTO assignments (attacker_id, target_id, status)
         VALUES ($attacker_array[$c], $target_array[$c], 0)
 SQL;
+
   $conn->query($sql);
 }
-
 
 $conn->close();
 
 header('Location: assignment_display.php');
-
-?>
