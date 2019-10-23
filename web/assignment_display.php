@@ -7,7 +7,7 @@
   <body>
     <div class="header">
       <a href="assignment_create.php"><button class="button" style="height: auto; margins: auto;">Create Assignments</button></a>
-      <a href="index.php"><button class="button" style="height: auto; margins: auto;">Back to Assignments</button></a>
+      <a href="index.php"><button class="button" style="height: auto; margins: auto;">Back to Player List</button></a>
     </div>
     <br />
 <?php
