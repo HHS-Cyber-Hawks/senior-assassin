@@ -9,7 +9,7 @@
       <a href="assignment_create.php"><button class="button" style="height: auto; margins: auto;">Create Assignments</button></a>
     </div>
     <div class="header">
-      <button onClick = "clear();" class="button" style="height: auto; margins: auto;">Clear Assignments</button>
+      <a href="assignment_clear.php"><button class="button" style="height: auto; margins: auto;">Clear Assignments</button></a>
     </div>
     <br />
 <?php
@@ -64,6 +64,3 @@ if ($result->num_rows > 0) {
 }
 
 $conn->close();
-?>
-  </body>
-</html>

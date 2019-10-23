@@ -80,12 +80,6 @@ SQL;
   $conn->query($sql);
 }
 
-function clear() {
-  sql = "TRUNCATE TABLE assignments;";
-
-  $conn->query($sql);
-}
-
 $conn->close();
 
 header('Location: assignment_display.php');
