@@ -36,4 +36,5 @@ SQL;
 
     echo "Imported " . $row . " records";
 }
-?>
+
+header('Location: index.php');
