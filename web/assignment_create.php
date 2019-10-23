@@ -71,7 +71,7 @@ foreach ($attacker_array as $attacker)
 // TODO: REMOVE "DIRECT" CIRCULAR DEPENDENCY (Joe attacks Bill, Bill attacks Joe)
 
 // Now insert the records into the database
-for ($c = 0; $c<count($target_array);$c++){
+for ($c = 0; $c < count($target_array); $c++) {
   $sql = <<<SQL
       INSERT INTO assignments (attacker_id, target_id, status)
         VALUES ($attacker_array[$c], $target_array[$c], 0)
@@ -80,6 +80,11 @@ SQL;
   $conn->query($sql);
 }
 
+function clear() {
+  sql = "TRUNCATE TABLE assignments;";
+
+  $conn->query($sql);
+}
 
 $conn->close();
 

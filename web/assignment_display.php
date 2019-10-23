@@ -8,6 +8,9 @@
     <div class="header">
       <a href="assignment_create.php"><button class="button" style="height: auto; margins: auto;">Create Assignments</button></a>
     </div>
+    <div class="header">
+      <button onClick = "clear();" class="button" style="height: auto; margins: auto;">Clear Assignments</button>
+    </div>
     <br />
 <?php
 
