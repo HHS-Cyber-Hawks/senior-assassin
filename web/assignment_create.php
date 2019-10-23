@@ -92,6 +92,6 @@ SQL;
 
 $conn->close();
 
-//header('Location: assignment_display.php');
+header('Location: assignment_display.php');
 
 ?>

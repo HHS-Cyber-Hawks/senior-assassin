@@ -9,16 +9,13 @@
       <a href="assignment_create.php"><button class="button" style="height: auto; margins: auto;">Create Assignments</button></a>
       <a href="index.php"><button class="button" style="height: auto; margins: auto;">Back to Player List</button></a>
     </div>
-    <br />
+
 <?php
 
-$servername = "mysql.server295.com";
-$username = "assassin";
-$password = "billiard gale seeing";
-$dbname = "passingf_assassin";
+include("environment.php");
 
 // Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = create_connection();
 
 // Check connection
 if ($conn->connect_error) {
@@ -63,5 +60,6 @@ if ($result->num_rows > 0) {
 
 $conn->close();
 ?>
+
   </body>
 </html>
