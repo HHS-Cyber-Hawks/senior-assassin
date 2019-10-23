@@ -1,4 +1,3 @@
-
 <?php
 include("environment.php");
 
@@ -31,6 +30,6 @@ SQL;
 
     fclose($handle);
 
-    echo "Imported " . $row . " records";
 }
-?>
+
+header('Location: index.php');
