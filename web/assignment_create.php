@@ -83,15 +83,4 @@ SQL;
 
 $conn->close();
 
-<<<<<<< HEAD
-header('Location: assignment_display.php');
-
-?>
-
-
-
-  </body>
-</html>
-=======
-header('Location: assignment_display.php');
->>>>>>> a15cf405fe297a785c958e44298927d2ea6d4764
+// header('Location: assignment_display.php');
