@@ -31,5 +31,3 @@ SQL;
     fclose($handle);
 
 }
-
-header('Location: index.php');
