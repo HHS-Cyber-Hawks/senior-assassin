@@ -14,4 +14,4 @@ $conn->query("DELETE FROM players");
 
 $conn->close();
 
-header('Location: assignment_display.php');
+header('Location: index.php');

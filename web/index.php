@@ -16,7 +16,7 @@
         </span>
         &nbsp;
         <span>
-            <a href=".php"><button class="button">-----</button></a>
+            <a href="clear_players.php"><button class="button">Clear Players</button></a>
         </span>
     </div>
 
