@@ -31,9 +31,6 @@ SQL;
     fclose($handle);
 
 }
-<<<<<<< HEAD
 
 header("Location: index.php");
 ?>
-=======
->>>>>>> ebea430f88aaa00a7cc2ad76f415a0d8d3926ff4
