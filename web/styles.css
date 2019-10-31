@@ -50,7 +50,7 @@ td{
 
 
 .header {
-    height: 150px;
+    height: auto;
     width: 100%;
     text-align: center;
     margin: auto;
@@ -65,7 +65,7 @@ td{
 
 .button {
     width: 100px;
-    height: 25px;
+    height: 40px;
     background-color: #1772fc;
     border-style: solid;
     border-color: #1772fc;

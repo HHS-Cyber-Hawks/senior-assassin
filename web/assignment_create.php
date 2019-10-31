@@ -1,12 +1,9 @@
 <?php
 
-$servername = "mysql.server295.com";
-$username = "assassin";
-$password = "billiard gale seeing";
-$dbname = "passingf_assassin";
+include("environment.php");
 
 // Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = create_connection();
 
 // Check connection
 if ($conn->connect_error) {
@@ -24,7 +21,7 @@ SQL;
 $result = $conn->query($get_count);
 
 $attacker_array = array();
-while($row = $result->fetch_assoc())
+while ($row = $result->fetch_assoc())
 {
   array_push($attacker_array, $row['player_id']);
 }
@@ -63,18 +60,15 @@ foreach ($attacker_array as $attacker)
           $potential_target = $temp;
       }
   }
-
   // Add the target to the final array
   array_push($target_array, $potential_target);
 }
 
-// TODO: REMOVE "DIRECT" CIRCULAR DEPENDENCY (Joe attacks Bill, Bill attacks Joe)
-
 // Now insert the records into the database
 for ($c = 0; $c < count($target_array); $c++) {
   $sql = <<<SQL
-      INSERT INTO assignments (attacker_id, target_id, status)
-        VALUES ($attacker_array[$c], $target_array[$c], 0)
+      INSERT INTO assignments (attacker_id, target_id, assignment_status)
+      VALUES ($attacker_array[$c], $target_array[$c], 0)
 SQL;
 
   $conn->query($sql);

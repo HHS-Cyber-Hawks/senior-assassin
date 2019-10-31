@@ -20,6 +20,9 @@
         </span>
     </div>
 
+    <br />
+    <br />
+
     <div>
 <?php
 include("environment.php");
@@ -33,7 +36,7 @@ if ($conn->connect_error) {
 }
 
 $sql = <<<SQL
-          SELECT player_id, first_name, last_name, email
+          SELECT player_id, first_name, last_name, email, player_status
           FROM players
           ORDER BY last_name, first_name, player_id;
 SQL;
@@ -42,7 +45,7 @@ $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     echo "<table id='resultsTable' >";
-    echo "<tr><th>ID</th><th>Last Name</th><th>First Name</th><th>Email</th><th>Edit/Delete</th></tr>";
+    echo "<tr><th>ID</th><th>Last Name</th><th>First Name</th><th>Email</th><th>Status</th><th>Edit/Delete</th></tr>";
 
     // output data of each row
     while($row = $result->fetch_assoc()) {
@@ -51,6 +54,22 @@ if ($result->num_rows > 0) {
         echo "<td>" . $row["first_name"] . "</td>";
         echo "<td>" . $row["last_name"] . "</td>";
         echo "<td>" . $row["email"] . "</td>";
+        echo "<td>";
+
+        if ($row["player_status"] == -1)
+        {
+          echo "Out";
+        }
+        else if ($row["player_status"] == 0)
+        {
+          echo "Playing";
+        }
+        else if ($row["player_status"] == 1)
+        {
+          echo "Moving on";
+        }
+
+        echo "</td>";
         echo "<td><button onclick='deletePlayer(" . $row["player_id"] . ")'>Delete</button> <button onclick='editPlayer(" . $row["player_id"] . ")'>Edit</button></td>";
         echo "</tr>";
     }

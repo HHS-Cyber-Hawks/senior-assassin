@@ -12,17 +12,14 @@ if (!isset($submit)) {
     </head>
 
     <body>
-            <h1>Edit Player</h1>
+        <h1>Edit Player</h1>
 
 <?php
 
-$servername = "mysql.server295.com";
-$username = "assassin";
-$password = "billiard gale seeing";
-$dbname = "passingf_assassin";
+include("environment.php");
 
 // Connect to the database and make sure it was successful
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = create_connection();
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -59,13 +56,10 @@ if ($result->num_rows > 0) {
 else
 {
 
-  $servername = "mysql.server295.com";
-  $username = "assassin";
-  $password = "billiard gale seeing";
-  $dbname = "passingf_assassin";
+  include("environment.php");
 
 // Connect to the database and make sure it was successful
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = create_connection();
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }

@@ -8,3 +8,11 @@ function deletePlayer(id) {
 function editPlayer(id) {
     location.href = "player_edit.php?id=" + id;
 }
+
+function updateStatus(id, status) {
+    location.href = "assignment_update_status.php?id=" + id + "&status=" + status;
+}
+
+function newRound() {
+    location.href = "new_round.php";
+}

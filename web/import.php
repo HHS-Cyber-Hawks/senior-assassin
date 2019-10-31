@@ -11,7 +11,7 @@ if ($conn->connect_error) {
 }
 
 $row = 1;
-if (($handle = fopen("class-of-2020-small.csv", "r")) !== FALSE) {
+if (($handle = fopen("class-of-2020.csv", "r")) !== FALSE) {
     while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
         // count finds how many values per row
         $num = count($data);
@@ -22,8 +22,8 @@ if (($handle = fopen("class-of-2020-small.csv", "r")) !== FALSE) {
         $email = $conn->real_escape_string($data[2]);
 
         $sql = <<<SQL
-            INSERT INTO players (first_name, last_name, email)
-              VALUES ('$firstName', '$lastName', '$email')
+            INSERT INTO players (first_name, last_name, email, player_status)
+              VALUES ('$firstName', '$lastName', '$email', 0)
 SQL;
 
         $conn->query($sql);
@@ -33,4 +33,6 @@ SQL;
 
     echo "Imported " . $row . " records";
 }
+
+header("Location: index.php");
 ?>
