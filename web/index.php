@@ -83,7 +83,7 @@ $conn->close();
 ?>
       <div style="width: auto; text-align: center; margin: auto;">
         <span> <a href="player_add.php"><button class="button">Add Player</button></a> </span>
-        <span> <a href="import.php"><button class="button">Import Players</button></a> </span>
+        <span> <a href="uploadTest.php"><button class="button">Import Players</button></a> </span>
       </div>
     </div>
   </body>
