@@ -15,7 +15,7 @@
       <br />
       <br />
       <span>
-        <a href="clear_players.php"><button class="button">Clear Players</button></a>
+        <a href=""><button class="button"></button></a>
         <a href=""><button class="button"></button></a>
         <a href=""><button class="button"></button></a>
         <a href=""><button class="button"></button></a>
