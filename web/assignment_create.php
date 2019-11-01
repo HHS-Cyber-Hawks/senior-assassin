@@ -67,8 +67,8 @@ foreach ($attacker_array as $attacker)
 // Now insert the records into the database
 for ($c = 0; $c < count($target_array); $c++) {
   $sql = <<<SQL
-      INSERT INTO assignments (attacker_id, target_id, assignment_status)
-      VALUES ($attacker_array[$c], $target_array[$c], 0)
+      INSERT INTO assignments (attacker_id, target_id, assignment_status, assignment_round)
+      VALUES ($attacker_array[$c], $target_array[$c], 0, 1)
 SQL;
 
   $conn->query($sql);

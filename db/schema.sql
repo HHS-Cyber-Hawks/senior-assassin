@@ -17,5 +17,6 @@ CREATE TABLE assignments (
   attacker_id    INT NOT NULL,
   target_id      INT NOT NULL,
   status         INT DEFAULT 0,
+  round          INT DEFAULT 1,
   PRIMARY KEY (assignment_id))
 ;

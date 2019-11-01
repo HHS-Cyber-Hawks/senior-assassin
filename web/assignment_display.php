@@ -9,13 +9,17 @@
       <span>
         <a href="assignment_create.php"><button class="button">Create Assignments</button></a>
         <a href="assignment_clear.php"><button class="button">Clear Assignments</button></a>
-        <a href="new_round.php"><button class="button">Start Next Round</button></a>
+        <a href="new_round.php"><button class="button">Stage Next Round</button></a>
         <a href="index.php"><button class="button">Back to Player List</button></a>
       </span>
       <br />
       <br />
       <span>
+<<<<<<< HEAD
         <a href=""><button class="button"></button></a>
+=======
+        <a href="create_next_round_assignments.php"><button class="button">Start Next Round</button></a>
+>>>>>>> fe9ad5356b7b36ea39ff6c5fc7fc4fc51f154f43
         <a href=""><button class="button"></button></a>
         <a href=""><button class="button"></button></a>
         <a href=""><button class="button"></button></a>
@@ -43,7 +47,8 @@ $sql = <<<SQL
           attackers.last_name as attacker_last_name,
           targets.first_name as target_first_name,
           targets.last_name as target_last_name,
-          assignment_status
+          assignment_status,
+          assignment_round
           FROM assignments
           JOIN players attackers ON attackers.player_id = attacker_id
           JOIN players targets ON targets.player_id = target_id
@@ -57,7 +62,7 @@ if ($result->num_rows > 0)
 
 
     echo "<table id='resultsTable'>";
-    echo "<tr><th>Assignment ID</th><th>Attacker</th><th>Target</th><th>Status</th><th>Change Status</th></tr>";
+    echo "<tr><th>Assignment ID</th><th>Attacker</th><th>Target</th><th>Status</th><th>Round</th><th>Change Status</th></tr>";
 
     while ($row = $result->fetch_assoc())
     {
@@ -85,6 +90,7 @@ if ($result->num_rows > 0)
         }
 
         echo "</td>";
+                echo "<td>" . $row["assignment_round"]      . "</td>";
         echo "<td>
               <button style='width: 80px' onclick='updateStatus(" . $row["assignment_id"] . ", 0" . ")'>Open</button>
               <button style='width: 80px' onclick='updateStatus(" . $row["assignment_id"] . ", 1" . ")'>Disputed</button>
