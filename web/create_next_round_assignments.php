@@ -16,13 +16,10 @@ if ($conn->connect_error) {
 $sql = "SELECT count(player_id) from players";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
-$num_players = $row["count(assignment_id)"];
+$num_players = $row["count(player_id)"];
 
 // initializes players moving on array which will be a pool of players in the next round
 $players_moving_on = array();
-
-$sql = "SELECT player_status FROM players WHERE player_id =" . $i;
-
 
 for($i = 1; $i <= $num_players; $i++)
 {

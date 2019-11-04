@@ -41,7 +41,7 @@ for ($i = 1; $i <= $num_assignments; $i++)
     $result = $conn->query($get_id_when_target . $attacker_id);
     $row = $result->fetch_assoc();
     $as_target_id = $row["assignment_id"];
-    //TODO Figure out error here, I believe "assignment_id" that is passed in on the last line
+    //Figure out error here, I believe "assignment_id" that is passed in on the last line
 
     // $victim_status returns the status of the attacker when he is a target
     $result = $conn->query($get_status . $as_target_id);

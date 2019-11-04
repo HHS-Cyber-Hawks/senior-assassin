@@ -31,7 +31,7 @@ if ($status == 2)
 
   if ($attacker !== $new_target_id)
   {
-    // $conn->query("INSERT INTO assignments(attacker_id, target_id) VALUES(" . $attacker . ", " . $new_target_id . ")");
+    $conn->query("INSERT INTO assignments(attacker_id, target_id) VALUES(" . $attacker . ", " . $new_target_id . ")");
   }
 
   $sql5 = "UPDATE assignments SET assignment_status = 3 WHERE assignment_id=" . $obsolete_assignment;
