@@ -15,11 +15,7 @@
       <br />
       <br />
       <span>
-<<<<<<< HEAD
-        <a href=""><button class="button"></button></a>
-=======
         <a href="create_next_round_assignments.php"><button class="button">Start Next Round</button></a>
->>>>>>> fe9ad5356b7b36ea39ff6c5fc7fc4fc51f154f43
         <a href=""><button class="button"></button></a>
         <a href=""><button class="button"></button></a>
         <a href=""><button class="button"></button></a>
