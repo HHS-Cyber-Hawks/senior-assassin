@@ -76,7 +76,7 @@ if ($result->num_rows > 0) {
     echo "</table>";
     echo "<br />";
 } else {
-    echo "0 results";
+    echo "<p style='text-align: center;'>No Players</p>";
 }
 $conn->close();
 ?>

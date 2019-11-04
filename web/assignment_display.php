@@ -15,11 +15,7 @@
       <br />
       <br />
       <span>
-<<<<<<< HEAD
-        <a href=""><button class="button"></button></a>
-=======
         <a href="create_next_round_assignments.php"><button class="button">Start Next Round</button></a>
->>>>>>> fe9ad5356b7b36ea39ff6c5fc7fc4fc51f154f43
         <a href=""><button class="button"></button></a>
         <a href=""><button class="button"></button></a>
         <a href=""><button class="button"></button></a>
@@ -60,55 +56,51 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0)
 {
 
+  echo "<table id='resultsTable'>";
+  echo "<tr><th>Attacker</th><th>Target</th><th>Status</th><th>Round</th><th>Change Status</th></tr>";
 
-    echo "<table id='resultsTable'>";
-    echo "<tr><th>Assignment ID</th><th>Attacker</th><th>Target</th><th>Status</th><th>Round</th><th>Change Status</th></tr>";
+  while ($row = $result->fetch_assoc())
+  {
+      echo "<tr>";
+      echo "<td>" . $row["attacker_first_name"] . " " . $row["attacker_last_name"] . "</td>";
+      echo "<td>" . $row["target_first_name"]   . " " . $row["target_last_name"]   . "</td>";
+      echo "<td>";
 
-    while ($row = $result->fetch_assoc())
-    {
-        echo "<tr>";
-        echo "<td>" . $row["assignment_id"]      . "</td>";
-        echo "<td>" . $row["attacker_first_name"] . " " . $row["attacker_last_name"] . "</td>";
-        echo "<td>" . $row["target_first_name"]   . " " . $row["target_last_name"]   . "</td>";
-        echo "<td>";
+      if ($row["assignment_status"] == 0)
+      {
+        echo "Open";
+      }
+      else if ($row["assignment_status"] == 1)
+      {
+        echo "Disputed";
+      }
+      else if ($row["assignment_status"] == 2)
+      {
+        echo "Confirmed";
+      }
+      else if ($row["assignment_status"] == 3)
+      {
+        echo "Obsolete";
+      }
 
-        if ($row["assignment_status"] == 0)
-        {
-          echo "Open";
-        }
-        else if ($row["assignment_status"] == 1)
-        {
-          echo "Disputed";
-        }
-        else if ($row["assignment_status"] == 2)
-        {
-          echo "Confirmed";
-        }
-        else if ($row["assignment_status"] == 3)
-        {
-          echo "Obsolete";
-        }
+      echo "</td>";
+              echo "<td>" . $row["assignment_round"]      . "</td>";
+      echo "<td>
+            <button style='width: 80px' onclick='updateStatus(" . $row["assignment_id"] . ", 0" . ")'>Open</button>
+            <button style='width: 80px' onclick='updateStatus(" . $row["assignment_id"] . ", 1" . ")'>Disputed</button>
+            <button style='width: 80px' onclick='updateStatus(" . $row["assignment_id"] . ", 2" . ")'>Confirmed</button>
+            <button style='width: 80px' onclick='updateStatus(" . $row["assignment_id"] . ", 3" . ")'>Obsolete</button>
+            </td>";
+      echo "</tr>";
+  }
 
-        echo "</td>";
-                echo "<td>" . $row["assignment_round"]      . "</td>";
-        echo "<td>
-              <button style='width: 80px' onclick='updateStatus(" . $row["assignment_id"] . ", 0" . ")'>Open</button>
-              <button style='width: 80px' onclick='updateStatus(" . $row["assignment_id"] . ", 1" . ")'>Disputed</button>
-              <button style='width: 80px' onclick='updateStatus(" . $row["assignment_id"] . ", 2" . ")'>Confirmed</button>
-              <button style='width: 80px' onclick='updateStatus(" . $row["assignment_id"] . ", 3" . ")'>Obsolete</button>
-              </td>";
-        echo "</tr>";
-    }
-
-    echo "</table>";
-    echo "<br />";
-}
-else
-{
-    echo "<p style='text-align: center'>No Assignments</p>";
+  echo "</table>";
+  echo "<br />";
 }
 
 $conn->close();
+
+
 
 ?>
 
