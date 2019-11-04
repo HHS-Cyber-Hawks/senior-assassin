@@ -14,6 +14,7 @@ if ($conn->connect_error) {
 $get_count = <<<SQL
                 SELECT player_id
                 FROM players
+                ORDER BY player_id
                 ;
 SQL;
 
@@ -47,6 +48,9 @@ foreach ($attacker_array as $attacker)
       {
           $random_index = rand(0, count($target_pool) - 1);
           $second_target = $target_pool[$random_index];
+
+          //  Remove the target from the pool so it can't be reused
+          array_splice($target_pool, $random_index, 1);
 
           // Put the original target back in the pool
           array_push($target_pool, $potential_target);
