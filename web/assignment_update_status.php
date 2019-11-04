@@ -17,23 +17,30 @@ if ($status == 2)
 {
   echo $assignment_id . "<br />";
 
+  // The query to 
   $sql1 = "SELECT attacker_id FROM assignments WHERE assignment_id =" . $assignment_id;
   $attacker = get_value($sql1, "attacker_id");
 
+  // The query to get the target id from the original assignment whose status is being changed
   $sql2 = "SELECT target_id FROM assignments WHERE assignment_id =" . $assignment_id;
   $old_target_id = get_value($sql2, "target_id");
 
+  // The query to get the assignment id of the old assignemnt that will become obsolete
   $sql3 = "SELECT assignment_id FROM assignments WHERE attacker_id =" . $old_target_id;
   $obsolete_assignment = get_value($sql3, "assignment_id");
 
+  // The query to get the target id for the new assignemnt
   $sql4 = "SELECT target_id FROM assignments WHERE assignment_id =" . $obsolete_assignment;
   $new_target_id = get_value($sql4, "target_id");
 
+  // Checks to make sure that the new assignment is not a person attacking themselves
   if ($attacker !== $new_target_id)
   {
-    // $conn->query("INSERT INTO assignments(attacker_id, target_id) VALUES(" . $attacker . ", " . $new_target_id . ")");
+    // Makes the new assignment
+    $conn->query("INSERT INTO assignments(attacker_id, target_id) VALUES(" . $attacker . ", " . $new_target_id . ")");
   }
 
+  // Makes the old assignment obsolete
   $sql5 = "UPDATE assignments SET assignment_status = 3 WHERE assignment_id=" . $obsolete_assignment;
   $conn->query($sql5);
 }
@@ -47,11 +54,6 @@ $got_out = "UPDATE players SET player_status = -1 WHERE player_id = ";
 
 // The query for getting the id of the target
 $get_target_id = "SELECT target_id FROM assignments WHERE assignment_id =" . $assignment_id;
-
-
-// DOESNT MAKE NEW ASSIGNMENT
-
-
 
 // Sets $target_id equal to the result of the query
 $target_id = get_value($get_target_id, "target_id");

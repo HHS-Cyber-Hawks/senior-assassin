@@ -10,12 +10,12 @@
         <a href="assignment_create.php"><button class="button">Create Assignments</button></a>
         <a href="assignment_clear.php"><button class="button">Clear Assignments</button></a>
         <a href="new_round.php"><button class="button">Stage Next Round</button></a>
+        <a href="create_next_round_assignments.php"><button class="button">Start Next Round</button></a>
         <a href="index.php"><button class="button">Back to Player List</button></a>
       </span>
       <br />
       <br />
       <span>
-        <a href="create_next_round_assignments.php"><button class="button">Start Next Round</button></a>
         <a href=""><button class="button"></button></a>
         <a href=""><button class="button"></button></a>
         <a href=""><button class="button"></button></a>
@@ -85,7 +85,7 @@ if ($result->num_rows > 0)
 
       echo "</td>";
               echo "<td>" . $row["assignment_round"]      . "</td>";
-      echo "<td>
+      echo "<td style='width: 400px'>
             <button style='width: 80px' onclick='updateStatus(" . $row["assignment_id"] . ", 0" . ")'>Open</button>
             <button style='width: 80px' onclick='updateStatus(" . $row["assignment_id"] . ", 1" . ")'>Disputed</button>
             <button style='width: 80px' onclick='updateStatus(" . $row["assignment_id"] . ", 2" . ")'>Confirmed</button>

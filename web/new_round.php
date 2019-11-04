@@ -51,9 +51,9 @@ for ($i = 1; $i <= $num_assignments; $i++)
     //This if block prevents someone who has been eliminated to moving on to the next round
     if($victim_status != 2)
     {
-      //I changed from instead of removing the assignment ID to instead changing the status to obsolete.
+      // I changed from instead of removing the assignment ID to instead changing the status to obsolete.
       // $conn->query($remove_assignment . $assignment_id);
-      //$conn->query($change_to_obsolete . $assignment_id);
+      // $conn->query($change_to_obsolete . $assignment_id);
       $conn->query($moving_on . $attacker_id);
     }
   }
