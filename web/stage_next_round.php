@@ -88,22 +88,30 @@ for ($i = 1; $i <= $num_assignments; $i++)
 
 // returns the number of players
 $sql = "SELECT count(player_id) from players";
-$result = $conn->query($sql);
-$row = $result->fetch_assoc();
-$num_players = $row["count(player_id)"];
+$num_players = get_value($sql, "count(player_id)");
 
 // initializes players moving on array which will be a pool of players in the next round
 $players_moving_on = array();
 
-for($i = 1; $i <= $num_players; $i++)
+$sql = "SELECT player_id FROM players";
+$result = $conn->query($sql);
+$player_array = array();
+
+while($row = $result->fetch_assoc())
 {
+  array_push($player_array, $row["player_id"]);
+}
+
+for($i = 0; $i <= $num_players; $i++)
+{
+  $player = $player_array[$i];
   //gets the value to see if the player is actually going to move on
-  $sql = "SELECT player_status FROM players WHERE player_id =" . $i;
+  $sql = "SELECT player_status FROM players WHERE player_id =" . $player;
   $current_player_status = get_value($sql, "player_status");
 
   if($current_player_status == 1)
   {
-    array_push($players_moving_on, $i);
+    array_push($players_moving_on, $player);
   }
 }
 
@@ -168,5 +176,4 @@ foreach ($players_moving_on as $player) {
   $conn->query($change_player_to_player . $player);
 }
 
-
- header("Location: assignment_display.php");
+// header("Location: assignment_display.php");

@@ -10,7 +10,6 @@
         <a href="assignment_create.php"><button class="button">Create Assignments</button></a>
         <a href="assignment_clear.php"><button class="button">Clear Assignments</button></a>
         <a href="stage_next_round.php"><button class="button">Stage Next Round</button></a>
-        <a href="assignments_create_next_round.php"><button class="button">Start Next Round</button></a>
         <a href="index.php"><button class="button">Back to Player List</button></a>
       </span>
     </div>
@@ -41,6 +40,7 @@ $sql = <<<SQL
           FROM assignments
           JOIN players attackers ON attackers.player_id = attacker_id
           JOIN players targets ON targets.player_id = target_id
+          WHERE assignment_round = $CURRENT_ROUND
           ;
 SQL;
 
