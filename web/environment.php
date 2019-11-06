@@ -3,7 +3,6 @@
   # -1  = out
   # 0 = playing
   # 1 = can move on
-  # 2 = moving on
 
   // ASSIGNMENT STATUS KEY
   # 0 = open

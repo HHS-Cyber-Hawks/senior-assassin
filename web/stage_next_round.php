@@ -70,9 +70,22 @@ for ($i = 1; $i <= $num_assignments; $i++)
   }
 }
 
-<<<<<<< HEAD
-header("Location: assignment_display.php");
-=======
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // returns the number of players
 $sql = "SELECT count(player_id) from players";
 $result = $conn->query($sql);
@@ -93,9 +106,6 @@ for($i = 1; $i <= $num_players; $i++)
     array_push($players_moving_on, $i);
   }
 }
-
-echo var_dump($players_moving_on);
-header("Location: assignment_display.php");
 
 $CURRENT_ROUND++;
 
@@ -160,4 +170,3 @@ foreach ($players_moving_on as $player) {
 
 
  header("Location: assignment_display.php");
->>>>>>> a00205e10b894fd195392e398a325d43d52b189a
