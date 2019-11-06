@@ -5,22 +5,21 @@
     <link rel="stylesheet" type="text/css" href="styles.css?<?php echo rand(); ?>" />
   </head>
   <body>
-    <div class="header">
-      <span>
+    <div class="button-header">
+      <div>
         <a href="assignment_create.php"><button class="button">Create Assignments</button></a>
         <a href="assignment_clear.php"><button class="button">Clear Assignments</button></a>
         <a href="new_round.php"><button class="button">Stage Next Round</button></a>
         <a href="index.php"><button class="button">Back to Player List</button></a>
-      </span>
-      <br />
-      <br />
-      <span>
+      </div>
+      <div>
         <a href="create_next_round_assignments.php"><button class="button">Start Next Round</button></a>
-        <a href=""><button class="button"></button></a>
-        <a href=""><button class="button"></button></a>
-        <a href=""><button class="button"></button></a>
-        <a href=""><button class="button"></button></a>
-      </span>
+        <a href="assignment_display.php"><button class="button">Testing Button with 3 full entire lines</button></a>
+        <a href="create_next_round_assignments.php"><button class="button">Start Next Round</button></a>
+        <a href="assignment_display.php"><button class="button">Testing Button</button></a>
+        <a href="assignment_display.php"><button class="button">Testing Button</button></a>
+        <a href="assignment_display.php"><button class="button">Testing Button</button></a>
+      </div>
     </div>
     <br />
     <br />

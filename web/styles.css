@@ -56,6 +56,10 @@ td{
     margin: auto;
 }
 
+.button-header {
+  text-align: center;
+}
+
 .title {
     margin-top: 0px;
     margin-bottom: 30px;
@@ -64,8 +68,10 @@ td{
 }
 
 .button {
+    margin-top:5px;
     width: 100px;
-    height: 40px;
+    height: 60px;
+    border-radius: 4px;
     background-color: #1772fc;
     border-style: solid;
     border-color: #1772fc;
@@ -73,6 +79,14 @@ td{
     font-family: arial;
     font-size: 12;
     font-weight: bolder;
+}
+
+.button:hover {
+    transition-duration: 0.4s;
+    background-color: white;
+    border-style: solid;
+    border-color: #1772fc;
+    color: #1772fc;
 }
 
 .label {
