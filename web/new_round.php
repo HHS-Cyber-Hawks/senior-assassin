@@ -41,6 +41,8 @@ for ($i = 1; $i <= $num_assignments; $i++)
     $result = $conn->query($get_id_when_target . $attacker_id);
     $row = $result->fetch_assoc();
     $as_target_id = $row["assignment_id"];
+
+    // get_value($get_id_when_target . $attacker_id, "assignment_id");
     //Figure out error here, I believe "assignment_id" that is passed in on the last line
 
     // $victim_status returns the status of the attacker when he is a target
@@ -53,8 +55,9 @@ for ($i = 1; $i <= $num_assignments; $i++)
     {
       //I changed from instead of removing the assignment ID to instead changing the status to obsolete.
       // $conn->query($remove_assignment . $assignment_id);
-      //$conn->query($change_to_obsolete . $assignment_id);
+      //$conn->query($chang e_to_obsolete . $assignment_id);
       $conn->query($moving_on . $attacker_id);
+      echo "it went in!"
     }
   }
   else
