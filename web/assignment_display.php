@@ -10,7 +10,7 @@
         <a href="assignment_create.php"><button class="button">Create Assignments</button></a>
         <a href="assignment_clear.php"><button class="button">Clear Assignments</button></a>
         <a href="new_round.php"><button class="button">Stage Next Round</button></a>
-        <a href="create_next_round_assignments.php"><button class="button">Start Next Round</button></a>
+        <a href="assignments_create_next_round.php"><button class="button">Start Next Round</button></a>
         <a href="index.php"><button class="button">Back to Player List</button></a>
       </span>
       <br />

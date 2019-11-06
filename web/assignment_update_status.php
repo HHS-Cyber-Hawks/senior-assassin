@@ -17,7 +17,7 @@ if ($status == 2)
 {
   echo $assignment_id . "<br />";
 
-  // The query to 
+  // The query to get the attacker id given the assignment_id
   $sql1 = "SELECT attacker_id FROM assignments WHERE assignment_id =" . $assignment_id;
   $attacker = get_value($sql1, "attacker_id");
 
@@ -34,7 +34,7 @@ if ($status == 2)
   $new_target_id = get_value($sql4, "target_id");
 
   // Checks to make sure that the new assignment is not a person attacking themselves
-  if ($attacker !== $new_target_id)
+  if ($attacker != $new_target_id)
   {
     // Makes the new assignment
     $conn->query("INSERT INTO assignments(attacker_id, target_id) VALUES(" . $attacker . ", " . $new_target_id . ")");
