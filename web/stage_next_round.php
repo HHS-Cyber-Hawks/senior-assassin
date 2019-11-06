@@ -63,4 +63,90 @@ for ($i = 1; $i <= $num_assignments; $i++)
   }
 }
 
+// returns the number of players
+$sql = "SELECT count(player_id) from players";
+$result = $conn->query($sql);
+$row = $result->fetch_assoc();
+$num_players = $row["count(player_id)"];
+
+// initializes players moving on array which will be a pool of players in the next round
+$players_moving_on = array();
+
+for($i = 1; $i <= $num_players; $i++)
+{
+  //gets the value to see if the player is actually going to move on
+  $sql = "SELECT player_status FROM players WHERE player_id =" . $i;
+  $current_player_status = get_value($sql, "player_status");
+
+  if($current_player_status == 1)
+  {
+    array_push($players_moving_on, $i);
+  }
+}
+
+echo var_dump($players_moving_on);
+header("Location: assignment_display.php");
+
+$CURRENT_ROUND++;
+
+
+$attacker_array = $players_moving_on;
+
+// Make a copy of the attacker array available for assignment
+$target_pool = (new ArrayObject($attacker_array))->getArrayCopy();
+
+// Assign Targets
+$target_array = array();
+foreach ($attacker_array as $attacker)
+{
+  // Select a random target from the pool
+  $random_index = rand(0, count($target_pool) - 1);
+  $potential_target = $target_pool[$random_index];
+
+  //  Remove the target from the pool so it can't be reused
+  array_splice($target_pool, $random_index, 1);
+
+  // Safety check: if the $potential_target is the same as the attacker in which case we need to do some more work
+  if ($potential_target == $attacker)
+  {
+      if (count($target_pool) > 1) // If there are any other available targets, then pull another from the pool
+      {
+          $random_index = rand(0, count($target_pool) - 1);
+          $second_target = $target_pool[$random_index];
+
+          //  Remove the target from the pool so it can't be reused
+          array_splice($target_pool, $random_index, 1);
+
+          // Put the original target back in the pool
+          array_push($target_pool, $potential_target);
+
+          $potential_target = $second_target;
+      }
+      else // We're on the last attacker and have to swap this potential target with something already in the target_array
+      {
+          $temp = $target_array[0];
+          $target_array[0] = $potential_target;
+          $potential_target = $temp;
+      }
+  }
+  // Add the target to the final array
+  array_push($target_array, $potential_target);
+}
+
+// Now insert the records into the database
+for ($c = 0; $c < count($target_array); $c++) {
+  $sql = <<<SQL
+      INSERT INTO assignments (attacker_id, target_id, assignment_status, assignment_round)
+      VALUES ($attacker_array[$c], $target_array[$c], 0, $CURRENT_ROUND)
+SQL;
+
+  $conn->query($sql);
+}
+
+$change_player_to_playing = "UPDATE players SET player_status = 0 WHERE assignment_id = ";
+foreach ($players_moving_on as $player) {
+  $conn->query($change_player_to_player . $player);
+}
+
+
  header("Location: assignment_display.php");
