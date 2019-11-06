@@ -43,8 +43,15 @@ for ($i = 1; $i <= $num_assignments; $i++)
   if ($status == 2)
   {
     // $as_target_id returns the assignment id of where the current index is the target
+<<<<<<< HEAD
     $as_target_id = get_value($get_id_when_target . $attacker_id, "assignment_id");
     //TODO Figure out error here, I believe "assignment_id" that is passed in on the last line
+=======
+    $result = $conn->query($get_id_when_target . $attacker_id);
+    $row = $result->fetch_assoc();
+    $as_target_id = $row["assignment_id"];
+    //Figure out error here, I believe "assignment_id" that is passed in on the last line
+>>>>>>> febea57d61ccf148f3101a20777daa13456ad4f4
 
     // $victim_status returns the status of the attacker when he is a target
     $victim_status = get_value($get_player_status . $as_target_id, "player_status");

@@ -36,7 +36,10 @@ if ($status == 2)
   // Checks to make sure that the new assignment is not a person attacking themselves
   if ($attacker != $new_target_id)
   {
+<<<<<<< HEAD
     // Makes the new assignment
+=======
+>>>>>>> febea57d61ccf148f3101a20777daa13456ad4f4
     $conn->query("INSERT INTO assignments(attacker_id, target_id) VALUES(" . $attacker . ", " . $new_target_id . ")");
   }
 
