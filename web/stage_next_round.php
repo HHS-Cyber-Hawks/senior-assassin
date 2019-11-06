@@ -37,21 +37,14 @@ for ($i = 1; $i <= $num_assignments; $i++)
 {
   $assignment_id = $i;
 
+  // Sets status equal to the status of the assignment
   $status = get_value($get_assignment_status . $assignment_id, "assignment_status");
   $attacker_id = get_value($get_attacker_id . $assignment_id, "attacker_id");
 
   if ($status == 2)
   {
     // $as_target_id returns the assignment id of where the current index is the target
-<<<<<<< HEAD
     $as_target_id = get_value($get_id_when_target . $attacker_id, "assignment_id");
-    //TODO Figure out error here, I believe "assignment_id" that is passed in on the last line
-=======
-    $result = $conn->query($get_id_when_target . $attacker_id);
-    $row = $result->fetch_assoc();
-    $as_target_id = $row["assignment_id"];
-    //Figure out error here, I believe "assignment_id" that is passed in on the last line
->>>>>>> febea57d61ccf148f3101a20777daa13456ad4f4
 
     // $victim_status returns the status of the attacker when he is a target
     $victim_status = get_value($get_player_status . $as_target_id, "player_status");
@@ -60,8 +53,6 @@ for ($i = 1; $i <= $num_assignments; $i++)
     if($victim_status != 2)
     {
       echo "SOMEONE MOVING ON <br />";
-      // I changed from instead of removing the assignment ID to instead changing the status to obsolete.
-      // $conn->query($change_to_obsolete . $assignment_id);
       $conn->query($moving_on . $attacker_id);
     }
   }
@@ -72,4 +63,4 @@ for ($i = 1; $i <= $num_assignments; $i++)
   }
 }
 
- // header("Location: assignment_display.php");
+ header("Location: assignment_display.php");
