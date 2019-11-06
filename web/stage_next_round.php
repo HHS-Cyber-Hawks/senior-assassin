@@ -9,16 +9,20 @@ if ($conn->connect_error)
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT count(assignment_id) from assignments";
+// Gets the number of assignments
+$sql = "SELECT count(assignment_id) FROM assignments";
 $num_assignments = get_value($sql, "count(assignment_id)");
 
-// Gets the status of the assignement given the assignment id
+// Makes an array of the assignment ids
+$assignment_array = get_value("SELECT assignment_id FROM assignments", "assignment_id");
+
+// Gets the status of the assignment given the assignment id
 $get_assignment_status = "SELECT assignment_status FROM assignments WHERE assignment_id = ";
 
 // Gets the player status given the player id
 $get_player_status = "SELECT player_status FROM players WHERE player_id = ";
 
-// Gets the assignement id given the target id
+// Gets the assignment id given the target id
 $get_id_when_target = "SELECT assignment_id FROM assignments WHERE target_id = ";
 
 // Sets the assignment_status to "3" (obsolete) given the assignement id
@@ -52,15 +56,18 @@ for ($i = 1; $i <= $num_assignments; $i++)
     //This if block prevents someone who has been eliminated to moving on to the next round
     if($victim_status != 2)
     {
-      echo "SOMEONE MOVING ON <br />";
       $conn->query($moving_on . $attacker_id);
     }
   }
   else
   {
-    $conn->query($did_not_eliminate . $attacker_id);
+    $player_status = get_value($get_player_status . $attacker_id, "player_status");
+    if ($player_status != 1)
+    {
+      $conn->query($did_not_eliminate . $attacker_id);
+    }
     $conn->query($change_to_obsolete . $assignment_id);
   }
 }
 
- header("Location: assignment_display.php");
+header("Location: assignment_display.php");

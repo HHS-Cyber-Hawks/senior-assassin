@@ -10,6 +10,9 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+$id = $conn->real_escape_string($id);
+$status = $conn->real_escape_string($status);
+
 $assignment_id = $id;
 
 // If the status of assignment was set to confirmed, make a new assignment that makes the target the target of the person who was eliminated
@@ -43,23 +46,29 @@ if ($status == 2)
   // Makes the old assignment obsolete
   $sql5 = "UPDATE assignments SET assignment_status = 3 WHERE assignment_id=" . $obsolete_assignment;
   $conn->query($sql5);
+
+  // The query to show that a player has gotten at least one of their targets out
+  $can_move_on = "UPDATE players SET player_status = 1 WHERE player_id = ";
+
+  // The query for getting the id of the target
+  $get_target_id = "SELECT target_id FROM assignments WHERE assignment_id = " . $assignment_id;
+
+  // Sets $target_id equal to the result of the query
+  $target_id = get_value($get_target_id, "target_id");
+
+  // The query to make a player's status "out" on index page
+  $got_out = "UPDATE players SET player_status = -1 WHERE player_id = ";
+
+  // Executes the $got_out query
+  $conn->query($got_out . $target_id);
+
+  // Executes the $can_move_on query
+  $conn->query($can_move_on . $attacker);
 }
 
 // Makes the table show the new status that was selected
 $sql = "UPDATE assignments SET assignment_status = $status WHERE assignment_id=" . $assignment_id;
 $conn->query($sql);
-
-// The query to make a player's status "out" on index page
-$got_out = "UPDATE players SET player_status = -1 WHERE player_id = ";
-
-// The query for getting the id of the target
-$get_target_id = "SELECT target_id FROM assignments WHERE assignment_id =" . $assignment_id;
-
-// Sets $target_id equal to the result of the query
-$target_id = get_value($get_target_id, "target_id");
-
-// Executes the $got_out query
-$conn->query($got_out . $target_id);
 
 $conn->close();
 

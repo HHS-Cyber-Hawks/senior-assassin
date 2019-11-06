@@ -65,6 +65,10 @@ if ($result->num_rows > 0) {
         }
         else if ($row["player_status"] == 1)
         {
+          echo "Can move on";
+        }
+        else if ($row["player_status"] == 2)
+        {
           echo "Moving on";
         }
 

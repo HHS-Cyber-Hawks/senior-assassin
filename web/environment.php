@@ -1,4 +1,19 @@
 <?php
+  // PLAYER STATUS KEY
+  # -1  = out
+  # 0 = playing
+  # 1 = can move on
+  # 2 = moving on
+
+  // ASSIGNMENT STATUS KEY
+  # 0 = open
+  # 1 = disputed
+  # 3 = confirmed
+  # 4 = obsolete
+
+
+
+
   function create_connection() {
     $servername = "mysql.server295.com";
     $username = "assassin";
