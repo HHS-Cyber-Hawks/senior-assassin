@@ -12,7 +12,7 @@
         </span>
         &nbsp;
         <span>
-            <a href="assignment_display.php"><button class="button">Assignments</button></a>
+            <a href="assignment_display.php?round=1"><button class="button">Assignments</button></a>
         </span>
         &nbsp;
         <span>

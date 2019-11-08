@@ -1,33 +1,34 @@
-<html>
-  <head>
-    <title>Assignments</title>
-    <script src='scripts.js?<?php echo rand(); ?>'></script>
-    <link rel="stylesheet" type="text/css" href="styles.css?<?php echo rand(); ?>" />
-  </head>
-  <body>
-    <div class="header">
-      <span>
-        <a href="assignment_create.php"><button class="button">Create Assignments</button></a>
-        <a href="assignment_clear.php"><button class="button">Clear Assignments</button></a>
-        <a href="start_next_round.php"><button class="button">Start Next Round</button></a>
-        <a href="index.php"><button class="button">Back to Player List</button></a>
-      </span>
-    </div>
-    <br />
-    <br />
-
 <?php
+
+extract($_REQUEST);
 
 include("environment.php");
 
 // Create connection
 $conn = create_connection();
 
-// Check connection
-if ($conn->connect_error)
-{
-    die("Connection failed: " . $conn->connect_error);
-}
+$round = $conn->real_escape_string($round);
+
+echo "
+<html>
+  <head>
+    <title>Assignments</title>
+    <script src='scripts.js?<?php echo rand(); ?>'></script>
+    <link rel='stylesheet' type='text/css' href='styles.css?<?php echo rand(); ?>' />
+  </head>
+  <body>
+    <div class='header'>
+      <span>
+        <a href='assignment_create.php'><button class='button'>Create Assignments</button></a>
+        <a href='assignment_clear.php'><button class='button'>Clear Assignments</button></a>
+        <a href='start_next_round.php?round=$round'><button class='button'>Start Next Round</button></a>
+        <a href='index.php'><button class='button'>Back to Player List</button></a>
+      </span>
+    </div>
+    <br />
+    <br />";
+
+echo "<h1 style='text-align: center;'>ROUND $round</h1>";
 
 $sql = <<<SQL
           SELECT assignment_id,
@@ -40,7 +41,7 @@ $sql = <<<SQL
           FROM assignments
           JOIN players attackers ON attackers.player_id = attacker_id
           JOIN players targets ON targets.player_id = target_id
-          WHERE assignment_round = $CURRENT_ROUND
+          WHERE assignment_round = $round
           ;
 SQL;
 
@@ -50,11 +51,12 @@ if ($result->num_rows > 0)
 {
 
   echo "<table id='resultsTable'>";
-  echo "<tr><th>Attacker</th><th>Target</th><th>Status</th><th>Round</th><th>Change Status</th></tr>";
+  echo "<tr> <th>ID</th> <th>Attacker</th> <th>Target</th> <th>Status</th> <th>Change Status</th> </tr>";
 
   while ($row = $result->fetch_assoc())
   {
       echo "<tr>";
+      echo "<td>" . $row["assignment_id"] . "</td>";
       echo "<td>" . $row["attacker_first_name"] . " " . $row["attacker_last_name"] . "</td>";
       echo "<td>" . $row["target_first_name"]   . " " . $row["target_last_name"]   . "</td>";
       echo "<td style='background-color: ";
@@ -77,12 +79,12 @@ if ($result->num_rows > 0)
       }
 
       echo "</td>";
-              echo "<td>" . $row["assignment_round"]      . "</td>";
+
       echo "<td style='width: 400px'>
-            <button style='width: 80px' onclick='updateStatus(" . $row["assignment_id"] . ", 0" . ")'>Open</button>
-            <button style='width: 80px' onclick='updateStatus(" . $row["assignment_id"] . ", 1" . ")'>Disputed</button>
-            <button style='width: 80px' onclick='updateStatus(" . $row["assignment_id"] . ", 2" . ")'>Confirmed</button>
-            <button style='width: 80px' onclick='updateStatus(" . $row["assignment_id"] . ", 3" . ")'>Obsolete</button>
+            <button style='width: 80px' onclick='updateStatus(" . $row["assignment_id"] . ", 0" . ", " . $round . ")'>Open</button>
+            <button style='width: 80px' onclick='updateStatus(" . $row["assignment_id"] . ", 1" . ", " . $round . ")'>Disputed</button>
+            <button style='width: 80px' onclick='updateStatus(" . $row["assignment_id"] . ", 2" . ", " . $round . ")'>Confirmed</button>
+            <button style='width: 80px' onclick='updateStatus(" . $row["assignment_id"] . ", 3" . ", " . $round . ")'>Obsolete</button>
             </td>";
       echo "</tr>";
   }
