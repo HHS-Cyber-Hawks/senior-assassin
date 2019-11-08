@@ -18,6 +18,10 @@
         <span>
             <a href="clear_players.php"><button class="button">Clear Players</button></a>
         </span>
+        &nbsp;
+        <span>
+            <a href="reset_players.php"><button class="button">Reset Players</button></a>
+        </span>
     </div>
 
     <br />
@@ -38,7 +42,7 @@ if ($conn->connect_error) {
 $sql = <<<SQL
           SELECT player_id, first_name, last_name, email, player_status
           FROM players
-          ORDER BY last_name, first_name, player_id;
+          ORDER BY player_status DESC, last_name, first_name;
 SQL;
 
 $result = $conn->query($sql);

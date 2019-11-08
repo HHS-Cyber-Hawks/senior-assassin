@@ -9,7 +9,7 @@
       <span>
         <a href="assignment_create.php"><button class="button">Create Assignments</button></a>
         <a href="assignment_clear.php"><button class="button">Clear Assignments</button></a>
-        <a href="stage_next_round.php"><button class="button">Stage Next Round</button></a>
+        <a href="start_next_round.php"><button class="button">Start Next Round</button></a>
         <a href="index.php"><button class="button">Back to Player List</button></a>
       </span>
     </div>
@@ -57,23 +57,23 @@ if ($result->num_rows > 0)
       echo "<tr>";
       echo "<td>" . $row["attacker_first_name"] . " " . $row["attacker_last_name"] . "</td>";
       echo "<td>" . $row["target_first_name"]   . " " . $row["target_last_name"]   . "</td>";
-      echo "<td>";
+      echo "<td style='background-color: ";
 
       if ($row["assignment_status"] == 0)
       {
-        echo "Open";
+        echo "'>Open";
       }
       else if ($row["assignment_status"] == 1)
       {
-        echo "Disputed";
+        echo "'>Disputed";
       }
       else if ($row["assignment_status"] == 2)
       {
-        echo "Confirmed";
+        echo "green'>Confirmed";
       }
       else if ($row["assignment_status"] == 3)
       {
-        echo "Obsolete";
+        echo "black'>Obsolete";
       }
 
       echo "</td>";

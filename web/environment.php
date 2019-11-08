@@ -28,7 +28,7 @@
     $conn = create_connection();
     $result = $conn->query($query);
     $row = $result->fetch_assoc();
-    return $row["$value"];
+    return $row[$value];
   }
 
   $CURRENT_ROUND = 1;

@@ -97,12 +97,15 @@ $sql = "SELECT player_id FROM players";
 $result = $conn->query($sql);
 $player_array = array();
 
+// Make an array of all of the player ids
 while($row = $result->fetch_assoc())
 {
   array_push($player_array, $row["player_id"]);
 }
 
-for($i = 0; $i <= $num_players; $i++)
+echo var_dump($player_array);
+
+for($i = 0; $i < $num_players; $i++)
 {
   $player = $player_array[$i];
   //gets the value to see if the player is actually going to move on
@@ -114,6 +117,8 @@ for($i = 0; $i <= $num_players; $i++)
     array_push($players_moving_on, $player);
   }
 }
+
+echo var_dump($players_moving_on);
 
 $CURRENT_ROUND++;
 
@@ -173,7 +178,7 @@ SQL;
 
 $change_player_to_playing = "UPDATE players SET player_status = 0 WHERE assignment_id = ";
 foreach ($players_moving_on as $player) {
-  $conn->query($change_player_to_player . $player);
+  $conn->query($change_player_to_playing . $player);
 }
 
 // header("Location: assignment_display.php");
