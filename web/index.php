@@ -12,11 +12,15 @@
         </span>
         &nbsp;
         <span>
-            <a href="assignment_display.php"><button class="button">Assignments</button></a>
+            <a href="assignment_display.php?round=1"><button class="button">Assignments</button></a>
         </span>
         &nbsp;
         <span>
             <a href="clear_players.php"><button class="button">Clear Players</button></a>
+        </span>
+        &nbsp;
+        <span>
+            <a href="reset_players.php"><button class="button">Reset Players</button></a>
         </span>
     </div>
 
@@ -38,7 +42,7 @@ if ($conn->connect_error) {
 $sql = <<<SQL
           SELECT player_id, first_name, last_name, email, player_status
           FROM players
-          ORDER BY last_name, first_name, player_id;
+          ORDER BY player_status DESC, last_name, first_name;
 SQL;
 
 $result = $conn->query($sql);

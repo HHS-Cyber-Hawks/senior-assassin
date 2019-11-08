@@ -1,5 +1,6 @@
 <?php
 
+extract($_REQUEST);
 include("environment.php");
 
 $conn = create_connection();
@@ -9,12 +10,20 @@ if ($conn->connect_error)
     die("Connection failed: " . $conn->connect_error);
 }
 
+$round = $conn->real_escape_string($round);
+
 // Gets the number of assignments
 $sql = "SELECT count(assignment_id) FROM assignments";
 $num_assignments = get_value($sql, "count(assignment_id)");
 
 // Makes an array of the assignment ids
-$assignment_array = get_value("SELECT assignment_id FROM assignments", "assignment_id");
+$sql = "SELECT assignment_id FROM assignments";
+$result = $conn->query($sql);
+$assignment_array = array();
+while($row = $result->fetch_assoc())
+{
+  array_push($assignment_array, $row["assignment_id"]);
+}
 
 // Gets the status of the assignment given the assignment id
 $get_assignment_status = "SELECT assignment_status FROM assignments WHERE assignment_id = ";
@@ -23,7 +32,7 @@ $get_assignment_status = "SELECT assignment_status FROM assignments WHERE assign
 $get_player_status = "SELECT player_status FROM players WHERE player_id = ";
 
 // Gets the assignment id given the target id
-$get_id_when_target = "SELECT assignment_id FROM assignments WHERE target_id = ";
+$get_id_when_target = "SELECT assignment_id FROM assignments WHERE assignment_round = $round AND target_id = ";
 
 // Sets the assignment_status to "3" (obsolete) given the assignement id
 $change_to_obsolete = "UPDATE assignments SET assignment_status = 3 WHERE assignment_id = ";
@@ -37,24 +46,32 @@ $moving_on = "UPDATE players SET player_status = 1 WHERE player_id = ";
 // Sets the player status to "-1" (out) given the player id
 $did_not_eliminate = "UPDATE players SET player_status = -1 WHERE player_id = ";
 
-for ($i = 1; $i <= $num_assignments; $i++)
+// Gets the round of the given assignment id
+$get_round = "SELECT assignment_round FROM assignments WHERE assignment_id = ";
+
+for ($i = 0; $i < $num_assignments; $i++)
 {
-  $assignment_id = $i;
+  $assignment_id = $assignment_array[$i];
 
   // Sets status equal to the status of the assignment
   $status = get_value($get_assignment_status . $assignment_id, "assignment_status");
   $attacker_id = get_value($get_attacker_id . $assignment_id, "attacker_id");
 
-  if ($status == 2)
+  // echo "i: $i <br />";
+  // echo "ATTACKER ID: $attacker_id <br />";
+  // echo "ASSIGNMENT ID: $assignment_id <br />";
+  $assignment_round = get_value($get_round . $assignment_id, "assignment_round");
+
+  if ($status == 2 && $assignment_round == $round)
   {
     // $as_target_id returns the assignment id of where the current index is the target
     $as_target_id = get_value($get_id_when_target . $attacker_id, "assignment_id");
 
-    // $victim_status returns the status of the attacker when he is a target
-    $victim_status = get_value($get_player_status . $as_target_id, "player_status");
+    // $target_status returns the status of the attacker when he is a target
+    $target_status = get_value($get_player_status . $as_target_id, "player_status");
 
     //This if block prevents someone who has been eliminated to moving on to the next round
-    if($victim_status != 2)
+    if($target_status != 2)
     {
       $conn->query($moving_on . $attacker_id);
     }
@@ -62,12 +79,15 @@ for ($i = 1; $i <= $num_assignments; $i++)
   else
   {
     $player_status = get_value($get_player_status . $attacker_id, "player_status");
+
     if ($player_status != 1)
     {
       $conn->query($did_not_eliminate . $attacker_id);
     }
     $conn->query($change_to_obsolete . $assignment_id);
   }
+
+  // echo "<br />";
 }
 
 
@@ -88,28 +108,45 @@ for ($i = 1; $i <= $num_assignments; $i++)
 
 // returns the number of players
 $sql = "SELECT count(player_id) from players";
-$result = $conn->query($sql);
-$row = $result->fetch_assoc();
-$num_players = $row["count(player_id)"];
+$num_players = get_value($sql, "count(player_id)");
 
 // initializes players moving on array which will be a pool of players in the next round
 $players_moving_on = array();
 
-for($i = 1; $i <= $num_players; $i++)
+$sql = "SELECT player_id FROM players";
+$result = $conn->query($sql);
+$player_array = array();
+
+// Make an array of all of the player ids
+while($row = $result->fetch_assoc())
 {
-  //gets the value to see if the player is actually going to move on
-  $sql = "SELECT player_status FROM players WHERE player_id =" . $i;
+  array_push($player_array, $row["player_id"]);
+}
+
+// Makes the array of players that are moving on to the next round
+$make_playing = "UPDATE players SET player_status = 0 WHERE player_id = ";
+for($i = 0; $i < $num_players; $i++)
+{
+  $player = $player_array[$i];
+  // Gets the value to see if the player is actually going to move on
+  $sql = "SELECT player_status FROM players WHERE player_id = " . $player;
   $current_player_status = get_value($sql, "player_status");
   echo $current_player_status;
 
+  // echo "PLAYER STATUS: $current_player_status <br />";
+
+  // If the player can move on then they get added to the player array for the next round
   if($current_player_status == 1)
   {
-    array_push($players_moving_on, $i);
+    array_push($players_moving_on, $player);
+    $conn->query($make_playing . $player);
   }
 }
-var_dump($players_moving_on);
-$CURRENT_ROUND++;
 
+echo "PLAYERS MOVING ON: ";
+echo var_dump($players_moving_on);
+
+$round++;
 
 $attacker_array = $players_moving_on;
 
@@ -154,20 +191,18 @@ foreach ($attacker_array as $attacker)
   array_push($target_array, $potential_target);
 }
 
+// echo "TARGET ARRAY: ";
+// echo var_dump($target_array);
+
 // Now insert the records into the database
 for ($c = 0; $c < count($target_array); $c++) {
-  $sql = <<<SQL
-      INSERT INTO assignments (attacker_id, target_id, assignment_status, assignment_round)
-      VALUES ($attacker_array[$c], $target_array[$c], 0, $CURRENT_ROUND)
-SQL;
-
+  $sql = "INSERT INTO assignments (attacker_id, target_id, assignment_status, assignment_round) VALUES ($attacker_array[$c], $target_array[$c], 0, $round)";
   $conn->query($sql);
 }
 
 $change_player_to_playing = "UPDATE players SET player_status = 0 WHERE assignment_id = ";
 foreach ($players_moving_on as $player) {
-  $conn->query($change_player_to_player . $player);
+  $conn->query($change_player_to_playing . $player);
 }
 
-
- //header("Location: assignment_display.php");
+header("Location: assignment_display.php?round=" . $round);
