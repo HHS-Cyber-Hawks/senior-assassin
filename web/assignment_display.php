@@ -69,12 +69,18 @@ if ($result->num_rows > 0)
 {
 
   echo "<table id='resultsTable'>";
-  echo "<tr> <th>ID</th> <th>Attacker</th> <th>Target</th> <th>Status</th> <th>Change Status</th> </tr>";
+  echo "<tr>" .
+        // "<th>ID</th>" .
+        "<th>Attacker</th>" .
+        "<th>Target</th>" .
+        "<th>Status</th>" .
+        "<th>Change Status</th>" .
+        "</tr>";
 
   while ($row = $result->fetch_assoc())
   {
       echo "<tr>";
-      echo "<td>" . $row["assignment_id"] . "</td>";
+      // echo "<td>" . $row["assignment_id"] . "</td>";
       echo "<td>" . $row["attacker_first_name"] . " " . $row["attacker_last_name"] . "</td>";
       echo "<td>" . $row["target_first_name"]   . " " . $row["target_last_name"]   . "</td>";
       echo "<td style='background-color: ";
