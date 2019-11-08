@@ -17,31 +17,13 @@ echo "
     <link rel='stylesheet' type='text/css' href='styles.css?<?php echo rand(); ?>' />
   </head>
   <body>
-<<<<<<< HEAD
-    <div class="button-header">
-      <div>
-        <a href="assignment_create.php"><button class="button">Create Assignments</button></a>
-        <a href="assignment_clear.php"><button class="button">Clear Assignments</button></a>
-        <a href="new_round.php"><button class="button">Stage Next Round</button></a>
-        <a href="index.php"><button class="button">Back to Player List</button></a>
-      </div>
-      <div>
-        <a href="create_next_round_assignments.php"><button class="button">Start Next Round</button></a>
-        <a href="assignment_display.php"><button class="button">Testing Button with 3 full entire lines</button></a>
-        <a href="create_next_round_assignments.php"><button class="button">Start Next Round</button></a>
-        <a href="assignment_display.php"><button class="button">Testing Button</button></a>
-        <a href="assignment_display.php"><button class="button">Testing Button</button></a>
-        <a href="assignment_display.php"><button class="button">Testing Button</button></a>
-      </div>
-=======
-    <div class='header'>
+    <div class='button-header'>
       <span>
         <a href='assignment_create.php'><button class='button'>Create Assignments</button></a>
         <a href='assignment_clear.php'><button class='button'>Clear Assignments</button></a>
         <a href='start_next_round.php?round=$round'><button class='button'>Start Next Round</button></a>
         <a href='index.php'><button class='button'>Back to Player List</button></a>
       </span>
->>>>>>> 0f2de984a4c89e6f71ec9e5283dc7db485369f3e
     </div>
     <br />
     <br />";
@@ -69,18 +51,12 @@ if ($result->num_rows > 0)
 {
 
   echo "<table id='resultsTable'>";
-  echo "<tr>" .
-        // "<th>ID</th>" .
-        "<th>Attacker</th>" .
-        "<th>Target</th>" .
-        "<th>Status</th>" .
-        "<th>Change Status</th>" .
-        "</tr>";
+  echo "<tr> <th>ID</th> <th>Attacker</th> <th>Target</th> <th>Status</th> <th>Change Status</th> </tr>";
 
   while ($row = $result->fetch_assoc())
   {
       echo "<tr>";
-      // echo "<td>" . $row["assignment_id"] . "</td>";
+      echo "<td>" . $row["assignment_id"] . "</td>";
       echo "<td>" . $row["attacker_first_name"] . " " . $row["attacker_last_name"] . "</td>";
       echo "<td>" . $row["target_first_name"]   . " " . $row["target_last_name"]   . "</td>";
       echo "<td style='background-color: ";

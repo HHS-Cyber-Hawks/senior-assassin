@@ -68,19 +68,15 @@ td{
 }
 
 .button {
-<<<<<<< HEAD
     margin-top:5px;
     width: 100px;
     height: 60px;
     border-radius: 4px;
-=======
-    width: 150px;
-    height: 40px;
->>>>>>> 0f2de984a4c89e6f71ec9e5283dc7db485369f3e
     background-color: #1772fc;
     border-style: solid;
     border-color: #1772fc;
     color: white;
+    cursor: hand;
     font-family: arial;
     font-size: 12;
     font-weight: bolder;
