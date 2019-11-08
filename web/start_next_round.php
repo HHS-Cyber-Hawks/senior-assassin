@@ -138,11 +138,16 @@ while($row = $result->fetch_assoc())
   array_push($player_array, $row["player_id"]);
 }
 
+echo "PLAYER ARRAY: " . var_dump($player_array) . "<br />";
+
 // Makes the array of players that are moving on to the next round
 $make_playing = "UPDATE players SET player_status = 0 WHERE player_id = ";
 for($i = 0; $i < $num_players; $i++)
 {
   $player = $player_array[$i];
+
+  echo "i: $i <br />";
+
   // Gets the value to see if the player is actually going to move on
   $sql = "SELECT player_status FROM players WHERE player_id = $player";
   $current_player_status = get_value($sql, "player_status");
@@ -156,6 +161,8 @@ for($i = 0; $i < $num_players; $i++)
     array_push($players_moving_on, $player);
     $conn->query($make_playing . $player);
   }
+
+  echo "<br />";
 }
 
 echo "PLAYERS MOVING ON: ";
