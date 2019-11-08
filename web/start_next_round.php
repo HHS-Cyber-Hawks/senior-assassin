@@ -53,22 +53,37 @@ for ($i = 0; $i < $num_assignments; $i++)
 {
   $assignment_id = $assignment_array[$i];
 
-  // Sets status equal to the status of the assignment
+  // Gets the status of the assignment
   $status = get_value($get_assignment_status . $assignment_id, "assignment_status");
   $attacker_id = get_value($get_attacker_id . $assignment_id, "attacker_id");
+  // echo "ATTACKER ID: $attacker_id <br />";
 
   // echo "i: $i <br />";
   // echo "ATTACKER ID: $attacker_id <br />";
   // echo "ASSIGNMENT ID: $assignment_id <br />";
+
+  // Gets the round on the assignment
   $assignment_round = get_value($get_round . $assignment_id, "assignment_round");
 
   if ($status == 2 && $assignment_round == $round)
   {
     // $as_target_id returns the assignment id of where the current index is the target
     $as_target_id = get_value($get_id_when_target . $attacker_id, "assignment_id");
+    // $sql = "SELECT target_id FROM assignments WHERE assignment_id = $as_target_id";
+    // $id1 = get_value($sql, "target_id");
+
 
     // $target_status returns the status of the attacker when he is a target
     $target_status = get_value($get_player_status . $as_target_id, "player_status");
+
+
+    // echo "ASSIGNMENT ID: $assignment_id <br />";
+    //
+    // $sql = "SELECT first_name FROM players WHERE player_id = $id1";
+    // $name = get_value($sql, "first_name");
+    // echo "TARGET NAME: $name <br />";
+    // echo "TARGET STATUS: $target_status <br />";
+    // echo "<br />";
 
     //This if block prevents someone who has been eliminated to moving on to the next round
     if($target_status != 2)
@@ -96,7 +111,7 @@ for ($i = 0; $i < $num_assignments; $i++)
 
 
 
-
+// TODO Occasionally when there are only 2 people left it screws up making both assignments
 
 
 
@@ -129,15 +144,16 @@ for($i = 0; $i < $num_players; $i++)
 {
   $player = $player_array[$i];
   // Gets the value to see if the player is actually going to move on
-  $sql = "SELECT player_status FROM players WHERE player_id = " . $player;
+  $sql = "SELECT player_status FROM players WHERE player_id = $player";
   $current_player_status = get_value($sql, "player_status");
   echo $current_player_status;
 
-  // echo "PLAYER STATUS: $current_player_status <br />";
+  echo "PLAYER STATUS: $current_player_status <br />";
 
   // If the player can move on then they get added to the player array for the next round
   if($current_player_status == 1)
   {
+    echo "$player MOVING ON <br />";
     array_push($players_moving_on, $player);
     $conn->query($make_playing . $player);
   }
@@ -205,4 +221,4 @@ foreach ($players_moving_on as $player) {
   $conn->query($change_player_to_playing . $player);
 }
 
-header("Location: assignment_display.php?round=" . $round);
+// header("Location: assignment_display.php?round=" . $round);
