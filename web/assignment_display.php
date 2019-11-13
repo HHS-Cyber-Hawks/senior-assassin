@@ -13,22 +13,28 @@ echo "
 <html>
   <head>
     <title>Assignments</title>
-    <script src='scripts.js?<?php echo rand(); ?>'></script>
+    <script src='scripts.js? rand(); '></script>
     <link rel='stylesheet' type='text/css' href='styles.css?<?php echo rand(); ?>' />
   </head>
   <body>
+    <div class='header'>
+      <h1 class='title'>Hanover Senior Assassin</h1>
+    </div>
     <div class='button-header'>
-      <span>
-        <a href='assignment_create.php'><button class='button'>Create Assignments</button></a>
-        <a href='assignment_clear.php'><button class='button'>Clear Assignments</button></a>
-        <a href='start_next_round.php?round=$round'><button class='button'>Start Next Round</button></a>
-        <a href='index.php'><button class='button'>Back to Player List</button></a>
-      </span>
+      <div>
+        <a href='index.php'><button class='button'>Player List</button></a>
+        <a href=''><button class='current-button'>Assignments</button></a>
+      </div>
+      <div>
+        <a href='assignment_create.php'><button class='lower-button'>Create Assignments</button></a>
+        <a href='assignment_clear.php'><button class='lower-button'>Clear Assignments</button></a>
+        <a href='start_next_round.php?round=$round'><button class='lower-button'>Start Next Round</button></a>
+      </div>
     </div>
     <br />
     <br />";
 
-echo "<h1 style='text-align: center;'>ROUND $round</h1>";
+echo "<h1 class='title' style='text-align: center;'>ROUND $round</h1>";
 
 $sql = <<<SQL
           SELECT assignment_id,
@@ -51,12 +57,11 @@ if ($result->num_rows > 0)
 {
 
   echo "<table id='resultsTable'>";
-  echo "<tr> <th>ID</th> <th>Attacker</th> <th>Target</th> <th>Status</th> <th>Change Status</th> </tr>";
+  echo "<tr> <th>Attacker</th> <th>Target</th> <th>Status</th> <th>Change Status</th> </tr>";
 
   while ($row = $result->fetch_assoc())
   {
       echo "<tr>";
-      echo "<td>" . $row["assignment_id"] . "</td>";
       echo "<td>" . $row["attacker_first_name"] . " " . $row["attacker_last_name"] . "</td>";
       echo "<td>" . $row["target_first_name"]   . " " . $row["target_last_name"]   . "</td>";
       echo "<td style='background-color: ";
