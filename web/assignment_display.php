@@ -67,7 +67,7 @@ if ($result->num_rows > 0)
       }
       else if ($row["assignment_status"] == 1)
       {
-        echo "'>Disputed";
+        echo "'>Pending";
       }
       else if ($row["assignment_status"] == 2)
       {

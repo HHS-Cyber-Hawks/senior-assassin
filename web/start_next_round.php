@@ -216,6 +216,8 @@ foreach ($attacker_array as $attacker)
 // echo "TARGET ARRAY: ";
 // echo var_dump($target_array);
 
+
+echo "count(target_array): " . count($target_array) . " <br />";
 // Now insert the records into the database
 for ($c = 0; $c < count($target_array); $c++) {
   $sql = "INSERT INTO assignments (attacker_id, target_id, assignment_status, assignment_round) VALUES ($attacker_array[$c], $target_array[$c], 0, $round)";

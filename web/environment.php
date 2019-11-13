@@ -6,7 +6,7 @@
 
   // ASSIGNMENT STATUS KEY
   # 0 = open
-  # 1 = disputed
+  # 1 = pending
   # 3 = confirmed
   # 4 = obsolete
 
