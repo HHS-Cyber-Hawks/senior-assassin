@@ -221,4 +221,4 @@ foreach ($players_moving_on as $player) {
   $conn->query($change_player_to_playing . $player);
 }
 
-// header("Location: assignment_display.php?round=" . $round);
+header("Location: assignment_display.php?round=" . $round);

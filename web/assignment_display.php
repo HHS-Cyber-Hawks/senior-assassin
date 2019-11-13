@@ -13,7 +13,7 @@ echo "
 <html>
   <head>
     <title>Assignments</title>
-    <script src='scripts.js?<?php echo rand(); ?>'></script>
+    <script src='scripts.js? rand(); '></script>
     <link rel='stylesheet' type='text/css' href='styles.css?<?php echo rand(); ?>' />
   </head>
   <body>
