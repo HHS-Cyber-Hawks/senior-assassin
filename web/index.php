@@ -7,27 +7,24 @@
   <body>
     <div class="header">
         <h1 class="title">Hanover Senior Assassin</h1>
+    </div>
+    <div class="button-header">
+      <div>
         <span>
-            <button class="button" id="current">Home</button>
-        </span>
-        &nbsp;
-        <span>
+            <button class="current-button">Player List</button>
             <a href="assignment_display.php?round=1"><button class="button">Assignments</button></a>
         </span>
-        &nbsp;
+      </div>
+      <div>
         <span>
-            <a href="clear_players.php"><button class="button">Clear Players</button></a>
+            <a href="clear_players.php"><button class="lower-button">Clear Players</button></a>
+            <a href="reset_players.php"><button class="lower-button">Reset Players</button></a>
         </span>
-        &nbsp;
-        <span>
-            <a href="reset_players.php"><button class="button">Reset Players</button></a>
-        </span>
+      </div>
     </div>
-
     <br />
     <br />
 
-    <div>
 <?php
 include("environment.php");
 
@@ -77,7 +74,7 @@ if ($result->num_rows > 0) {
         }
 
         echo "</td>";
-        echo "<td><button onclick='deletePlayer(" . $row["player_id"] . ")'>Delete</button> <button onclick='editPlayer(" . $row["player_id"] . ")'>Edit</button></td>";
+        echo "<td><button onclick='deletePlayer(" . $row["player_id"] . ")'>Delete</button> <button onclick='editPlayer(" . $row["player_id"] . ")'>Edit</button></td></div>";
         echo "</tr>";
     }
 
