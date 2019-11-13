@@ -1,12 +1,12 @@
 @CHARSET "UTF-8";
 
 body {
-    margin-top: 50px;
+    margin-top: 20px;
     background-color: white;
 }
 
 th {
-  height: 50px;
+  height: 40px;
   width: 100px;
 }
 
@@ -27,16 +27,11 @@ tr:nth-child(odd){
 td{
   margin: 0px;
   padding: 0px;
-  height: 50px;
+  height: 40px;
 }
 
 
 
-#current {
-    background-color: #1772fc;
-    border-color: #1772fc;
-    color: white;
-}
 
 #resultsTable {
   text-align: center;
@@ -47,8 +42,6 @@ td{
 
 }
 
-
-
 .header {
     height: auto;
     width: 100%;
@@ -58,8 +51,43 @@ td{
 
 .button-header {
   text-align: center;
+  position: sticky;
+  top: 0px;
+  width: 100%
+}
+
+.tab {
+  background-color: white;
+  opacity:90%;
+  height: 50px;
+}
+
+.lower-button {
+  opacity:100%;
+  text-align: center;
+  margin-top:5px;
+  width: 100px;
+  height: 40px;
+  border-radius: 4px;
+  border-width: 3px;
+  background-color: #66a3ff;
   border-style: solid;
-  border-color: black;
+  border-color: white;
+  color: white;
+  cursor: hand;
+  font-family: arial;
+  font-size: 12;
+  font-weight: bolder;
+}
+
+.lower-button:hover {
+    opacity:100%;
+    transition-duration: 0.4s;
+    background-color: white;
+    border-width: 3px;
+    border-style: solid;
+    border-color: #66a3ff;
+    color: #66a3ff;
 }
 
 .title {
@@ -70,13 +98,15 @@ td{
 }
 
 .button {
+    opacity:100%;
     margin-top:5px;
     width: 100px;
-    height: 60px;
+    height: 40px;
     border-radius: 4px;
+    border-width: 3px;
     background-color: #1772fc;
     border-style: solid;
-    border-color: #1772fc;
+    border-color: white;
     color: white;
     cursor: hand;
     font-family: arial;
@@ -84,7 +114,26 @@ td{
     font-weight: bolder;
 }
 
+.current-button {
+    opacity:100%;
+    margin-top:5px;
+    width: 100px;
+    height: 40px;
+    border-radius: 4px;
+    border-width: 3px;
+    background-color: white;
+    border-style: solid;
+    border-color: #1772fc;
+    color: #1772fc;
+    cursor: hand;
+    font-family: arial;
+    font-size: 12;
+    font-weight: bolder;
+}
+
+
 .button:hover {
+    opacity:100%;
     transition-duration: 0.4s;
     background-color: white;
     border-style: solid;
