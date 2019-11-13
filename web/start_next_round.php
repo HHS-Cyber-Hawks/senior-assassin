@@ -146,6 +146,7 @@ for($i = 0; $i < $num_players; $i++)
   // Gets the value to see if the player is actually going to move on
   $sql = "SELECT player_status FROM players WHERE player_id = $player";
   $current_player_status = get_value($sql, "player_status");
+  echo $current_player_status;
 
   echo "PLAYER STATUS: $current_player_status <br />";
 
@@ -220,4 +221,4 @@ foreach ($players_moving_on as $player) {
   $conn->query($change_player_to_playing . $player);
 }
 
-// header("Location: assignment_display.php?round=" . $round);
+header("Location: assignment_display.php?round=" . $round);
