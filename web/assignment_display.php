@@ -9,7 +9,8 @@ $conn = create_connection();
 
 $round = $conn->real_escape_string($round);
 
-echo "
+?>
+
 <html>
   <head>
     <title>Assignments</title>
@@ -28,11 +29,13 @@ echo "
       <div>
         <a href='assignment_create.php'><button class='lower-button'>Create Assignments</button></a>
         <a href='assignment_clear.php'><button class='lower-button'>Clear Assignments</button></a>
-        <a href='start_next_round.php?round=$round'><button class='lower-button'>Start Next Round</button></a>
+        <a href='start_next_round.php?round=<?php echo $round; ?>'><button class='lower-button'>Start Next Round</button></a>
       </div>
     </div>
     <br />
-    <br />";
+    <br />
+
+<?php
 
 echo "<h1 class='title' style='text-align: center;'>ROUND $round</h1>";
 

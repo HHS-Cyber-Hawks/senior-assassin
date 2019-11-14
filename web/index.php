@@ -21,6 +21,12 @@
             <a href="reset_players.php"><button class="lower-button">Reset Players</button></a>
         </span>
       </div>
+      <div>
+        <span>
+          <a href="player_add.php"><button class="button">Add Player</button></a>
+          <a href="uploadTest.php"><button class="button">Import File</button></a>
+        </span>
+      </div>
     </div>
     <br />
     <br />
@@ -85,10 +91,7 @@ if ($result->num_rows > 0) {
 }
 $conn->close();
 ?>
-      <div style="width: auto; text-align: center; margin: auto;">
-        <span> <a href="player_add.php"><button class="button">Add Player</button></a> </span>
-        <span> <a href="uploadTest.php"><button class="button">Import Players</button></a> </span>
-      </div>
+
     </div>
   </body>
 </html>

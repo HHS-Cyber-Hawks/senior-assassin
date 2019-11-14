@@ -39,14 +39,13 @@ td{
   height: 30px;
   border: 0px solid #AAAAAA;
   padding: 1px 0px;
-
 }
 
 .header {
-    height: auto;
-    width: 100%;
-    text-align: center;
-    margin: auto;
+  height: auto;
+  width: 100%;
+  text-align: center;
+  margin: auto;
 }
 
 .button-header {
