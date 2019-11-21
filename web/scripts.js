@@ -5,12 +5,13 @@ function deletePlayer(id) {
     }
 }
 
-function editPlayer(id) {
-    location.href = "player_edit.php?id=" + id;
+function editPlayer(id, round) {
+    location.href = "player_edit.php?id=" + id + "&round=" + round;
 }
 
 function updateStatus(id, status, round) {
-    location.href = "assignment_update_status.php?id=" + id + "&status=" + status + "&round=" + round;
+    var timestamp = Date.now();
+    location.href = "assignment_update_status.php?id=" + id + "&status=" + status + "&round=" + round + "&time=" + timestamp;
 }
 
 function newRound() {

@@ -23,7 +23,7 @@ $round = $conn->real_escape_string($round);
     </div>
     <div class='button-header'>
       <div>
-        <a href='index.php'><button class='button'>Player List</button></a>
+        <a href='index.php?round=<?php echo $round; ?>'><button class='button'>Player List</button></a>
         <a href=''><button class='current-button'>Assignments</button></a>
       </div>
       <div>
@@ -90,7 +90,7 @@ if ($result->num_rows > 0)
 
       echo "<td style='width: 400px'>
             <button style='width: 80px' onclick='updateStatus(" . $row["assignment_id"] . ", 0" . ", " . $round . ")'>Open</button>
-            <button style='width: 80px' onclick='updateStatus(" . $row["assignment_id"] . ", 1" . ", " . $round . ")'>Disputed</button>
+            <button style='width: 80px' onclick='updateStatus(" . $row["assignment_id"] . ", 1" . ", " . $round . ")'>Pending</button>
             <button style='width: 80px' onclick='updateStatus(" . $row["assignment_id"] . ", 2" . ", " . $round . ")'>Confirmed</button>
             <button style='width: 80px' onclick='updateStatus(" . $row["assignment_id"] . ", 3" . ", " . $round . ")'>Obsolete</button>
             </td>";

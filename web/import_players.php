@@ -1,6 +1,10 @@
 <?php
   include("environment.php");
 
+  extract($_REQUEST);
+  $conn = create_connection();
+  $round = $conn->real_escape_string($round);
+
   if (isset($_POST["import"])) {
 
       $conn = create_connection();
@@ -21,7 +25,7 @@
               $result = mysqli_query($conn, $sqlInsert);
           }
 
-          header('Location: index.php');
+          header("Location: index.php?round=$round");
       }
   }
   else
@@ -34,8 +38,7 @@
       <div class="input-row">
           <label class="col-md-4 control-label">Select a CSV File</label> <input
               type="file" name="file" id="file" accept=".csv">
-          <button type="submit" id="submit" name="import"
-              class="btn-submit">Import File</button>
+          <button type="submit" id="submit" name="import" class="btn-submit">Import File</button>
           <br />
 
       </div>

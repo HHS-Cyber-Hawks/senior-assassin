@@ -1,3 +1,19 @@
+<?php
+include("environment.php");
+
+extract($_REQUEST);
+
+// Create connection
+$conn = create_connection();
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$round = $conn->real_escape_string($round);
+?>
+
 <html>
   <head>
     <title>Senior Assassin</title>
@@ -12,19 +28,30 @@
       <div>
         <span>
             <button class="current-button">Player List</button>
-            <a href="assignment_display.php?round=1"><button class="button">Assignments</button></a>
+            <a href="assignment_display.php?round=<?php echo $round; ?>"><button class="button">Assignments</button></a>
         </span>
       </div>
       <div>
         <span>
-            <a href="clear_players.php"><button class="lower-button">Clear Players</button></a>
-            <a href="reset_players.php"><button class="lower-button">Reset Players</button></a>
+            <a href="clear_players.php?round=<?php echo $round; ?>"><button class="lower-button">Clear Players</button></a>
+            <a href="reset_players.php?round=<?php echo $round; ?>"><button class="lower-button">Reset Players</button></a>
         </span>
       </div>
       <div>
         <span>
-          <a href="player_add.php"><button class="button">Add Player</button></a>
-          <a href="uploadTest.php"><button class="button">Import File</button></a>
+          <a href="player_add.php?round=<?php echo $round; ?>"><button class="button">Add Player</button></a>
+          <?php
+            $sql = "SELECT count(player_id) FROM players";
+            $num_records = get_value($sql, "count(player_id)");
+            if ($num_records > 1)
+            {
+              echo "<button class='button'>Import File</button>";
+            }
+            else
+            {
+              echo "<a href='import_players.php?round=$round'><button class='button'>Import File</button></a>";
+            }
+          ?>
         </span>
       </div>
     </div>
@@ -32,15 +59,6 @@
     <br />
 
 <?php
-include("environment.php");
-
-// Create connection
-$conn = create_connection();
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
 $sql = <<<SQL
           SELECT player_id, first_name, last_name, email, player_status
@@ -80,7 +98,7 @@ if ($result->num_rows > 0) {
         }
 
         echo "</td>";
-        echo "<td><button onclick='deletePlayer(" . $row["player_id"] . ")'>Delete</button> <button onclick='editPlayer(" . $row["player_id"] . ")'>Edit</button></td></div>";
+        echo "<td><button onclick='deletePlayer(" . $row["player_id"] . ")'>Delete</button> <button onclick='editPlayer(" . $row["player_id"] . ", $round)'>Edit</button></td></div>";
         echo "</tr>";
     }
 

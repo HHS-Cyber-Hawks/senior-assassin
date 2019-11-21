@@ -2,6 +2,16 @@
 
 extract($_REQUEST);
 
+include("environment.php");
+
+// Connect to the database and make sure it was successful
+$conn = create_connection();
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$round = $conn->real_escape_string($round);
+
 if (!isset($submit)) {
 
 ?>
@@ -25,7 +35,7 @@ if (!isset($submit)) {
             <button type="submit" name="submit">Save</button>
         </form>
 
-        <button onclick="location.href = 'index.php'">Cancel</button>
+        <button onclick="location.href = 'index.php?<?php echo $round; ?>'">Cancel</button>
     </body>
 </html>
 
@@ -34,14 +44,6 @@ if (!isset($submit)) {
 }
 else
 {
-
-    include("environment.php");
-
-    // Connect to the database and make sure it was successful
-    $conn = create_connection();
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
 
     // Sanitize all input values to prevent SQL injection exploits
     $firstName = $conn->real_escape_string($firstName);
@@ -57,7 +59,7 @@ SQL;
     // Execute the query and display the results
     if ($conn->query($sql) === TRUE) {
         //echo "New company created successfully";
-        header('Location: index.php');
+        header("Location: index.php?round=$round");
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
