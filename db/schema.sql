@@ -20,3 +20,15 @@ CREATE TABLE assignments (
   round          INT DEFAULT 1,
   PRIMARY KEY (assignment_id))
 ;
+
+// This is for the security and keeps track of user
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `display_name` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email_UNIQUE` (`email`),
+  UNIQUE KEY `id_UNIQUE` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;

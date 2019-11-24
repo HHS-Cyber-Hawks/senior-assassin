@@ -32,4 +32,30 @@
   }
 
   $CURRENT_ROUND = 1;
+
+  function verify_authentication()
+  {
+      global $config, $content, $unauthenticatedContents, $unauthenticatedScripts;
+
+      $scriptRoot = $config['general']['script_root'];
+      $scriptName = substr($_SERVER['PHP_SELF'], strlen($scriptRoot));
+
+      if (!(($scriptName == 'index.php' && in_array($content, $unauthenticatedContents)) ||
+            in_array($scriptName, $unauthenticatedScripts)))
+      {
+          session_start();
+
+          if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated'])
+          {
+              session_unset();
+              session_destroy();
+
+              header('Location: index.php');
+
+              exit();
+          }
+
+          session_write_close();
+      }
+    }
  ?>
