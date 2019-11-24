@@ -1,6 +1,11 @@
 <?php
 
+include("environment.php");
 extract($_REQUEST);
+
+$conn = create_connection();
+$round = $conn->real_escape_string($round);
+
 if (!isset($submit)) {
 
 ?>
@@ -15,8 +20,6 @@ if (!isset($submit)) {
         <h1>Edit Player</h1>
 
 <?php
-
-include("environment.php");
 
 // Connect to the database and make sure it was successful
 $conn = create_connection();
@@ -56,10 +59,7 @@ if ($result->num_rows > 0) {
 else
 {
 
-  include("environment.php");
-
 // Connect to the database and make sure it was successful
-$conn = create_connection();
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -80,7 +80,7 @@ SQL;
 // Execute the query and display the results
 if ($conn->query($sql2) === TRUE) {
     //echo "Company edited successfully";
-    header('Location: index.php');
+    header('Location: index.php?round=$round');
 } else {
     echo "Error: " . $sql2 . "<br>" . $conn->error;
 }

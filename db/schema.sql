@@ -21,13 +21,12 @@ CREATE TABLE assignments (
   PRIMARY KEY (assignment_id))
 ;
 
-// This is for the security and keeps track of user
-
-CREATE TABLE `user` (
+CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `display_name` varchar(100) NOT NULL,
+  `is_admin` int(0),
   PRIMARY KEY (`id`),
   UNIQUE KEY `email_UNIQUE` (`email`),
   UNIQUE KEY `id_UNIQUE` (`id`)
