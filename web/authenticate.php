@@ -17,7 +17,7 @@
  * - 401 if the credentials could not be authenticated
  *************************************************************************************************/
 
-require_once 'environment.php';
+include 'environment.php';
 
 $email = mysqli_real_escape_string($dbh, $email);
 $password = mysqli_real_escape_string($dbh, $password);

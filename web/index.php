@@ -2,7 +2,10 @@
 include("environment.php");
 
 extract($_REQUEST);
-
+if(!isset($round))
+{
+  $round = 1;
+}
 // Create connection
 $conn = create_connection();
 

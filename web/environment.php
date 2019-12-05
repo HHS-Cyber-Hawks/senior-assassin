@@ -11,8 +11,6 @@
   # 4 = obsolete
 
 
-
-
   function create_connection() {
     $servername = "mysql.server295.com";
     $username = "assassin";
@@ -58,4 +56,6 @@
           session_write_close();
       }
     }
+
+
  ?>
