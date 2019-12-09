@@ -1,4 +1,26 @@
+<<<<<<< HEAD
 <?php include("environment.php"); echo isAdmin()?>
+=======
+<?php
+include("environment.php");
+
+extract($_REQUEST);
+if(!isset($round))
+{
+  $round = 1;
+}
+// Create connection
+$conn = create_connection();
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$round = $conn->real_escape_string($round);
+?>
+
+>>>>>>> 0e291f96326367acf0a004f23ef81273862087f9
 <html>
   <head>
     <title>Senior Assassin</title>
@@ -13,22 +35,37 @@
       <div>
         <span>
             <button class="current-button">Player List</button>
+<<<<<<< HEAD
             <?php if(isAdmin()){ ?>
             <a href="assignment_display.php?round=1"><button class="button">Assignments</button></a>
             <?php } //End if(isAdmin()) ?>
+=======
+            <a href="assignment_display.php?round=<?php echo $round; ?>"><button class="button">Assignments</button></a>
+>>>>>>> 0e291f96326367acf0a004f23ef81273862087f9
         </span>
       </div>
       <?php if(isAdmin()){ ?>
       <div>
         <span>
-            <a href="clear_players.php"><button class="lower-button">Clear Players</button></a>
-            <a href="reset_players.php"><button class="lower-button">Reset Players</button></a>
+            <a href="clear_players.php?round=<?php echo $round; ?>"><button class="lower-button">Clear Players</button></a>
+            <a href="reset_players.php?round=<?php echo $round; ?>"><button class="lower-button">Reset Players</button></a>
         </span>
       </div>
       <div>
         <span>
-          <a href="player_add.php"><button class="button">Add Player</button></a>
-          <a href="uploadTest.php"><button class="button">Import File</button></a>
+          <a href="player_add.php?round=<?php echo $round; ?>"><button class="button">Add Player</button></a>
+          <?php
+            $sql = "SELECT count(player_id) FROM players";
+            $num_records = get_value($sql, "count(player_id)");
+            if ($num_records > 1)
+            {
+              echo "<button class='button'>Import File</button>";
+            }
+            else
+            {
+              echo "<a href='import_players.php?round=$round'><button class='button'>Import File</button></a>";
+            }
+          ?>
         </span>
       </div>
     <?php } //End if(isAdmin()) ?>
@@ -38,6 +75,7 @@
     <br />
 
 <?php
+<<<<<<< HEAD
 
 // Create connection
 $conn = create_connection();
@@ -46,6 +84,8 @@ $conn = create_connection();
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+=======
+>>>>>>> 0e291f96326367acf0a004f23ef81273862087f9
 
 if(isAdmin())
 {
@@ -56,6 +96,7 @@ if(isAdmin())
             ORDER BY player_status DESC, last_name, first_name;
 SQL;
 
+<<<<<<< HEAD
   $result = $conn->query($sql);
 
   if ($result->num_rows > 0) {
@@ -98,6 +139,43 @@ SQL;
   } else {
       echo "<p style='text-align: center;'>No Players</p>";
   }
+=======
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    echo "<table id='resultsTable' >";
+    echo "<tr><th>Last Name</th><th>First Name</th><th>Email</th><th>Status</th><th>Edit/Delete</th></tr>";
+
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        echo "<tr>";
+        echo "<td>" . $row["first_name"] . "</td>";
+        echo "<td>" . $row["last_name"] . "</td>";
+        echo "<td>" . $row["email"] . "</td>";
+        echo "<td>";
+
+        if ($row["player_status"] == -1)
+        {
+          echo "Out";
+        }
+        else if ($row["player_status"] == 0)
+        {
+          echo "Playing";
+        }
+        else if ($row["player_status"] == 1)
+        {
+          echo "Can move on";
+        }
+        else if ($row["player_status"] == 2)
+        {
+          echo "Moving on";
+        }
+
+        echo "</td>";
+        echo "<td><button onclick='deletePlayer(" . $row["player_id"] . ")'>Delete</button> <button onclick='editPlayer(" . $row["player_id"] . ", $round)'>Edit</button></td></div>";
+        echo "</tr>";
+    }
+>>>>>>> 0e291f96326367acf0a004f23ef81273862087f9
 
 } else {
 

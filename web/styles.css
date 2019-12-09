@@ -30,9 +30,6 @@ td{
   height: 40px;
 }
 
-
-
-
 #resultsTable {
   text-align: center;
   margin: auto;
@@ -135,7 +132,6 @@ td{
     font-size: 12;
     font-weight: bolder;
 }
-
 
 .button:hover {
     opacity:100%;

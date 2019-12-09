@@ -14,6 +14,7 @@
   session_start();
   $_SESSION["admin"] = true;
 
+<<<<<<< HEAD
   function isAdmin()
   {
     return $_SESSION["admin"];
@@ -21,6 +22,9 @@
 
   function create_connection()
   {
+=======
+  function create_connection() {
+>>>>>>> 0e291f96326367acf0a004f23ef81273862087f9
     $servername = "mysql.server295.com";
     $username = "assassin";
     $password = "billiard gale seeing";
@@ -39,4 +43,32 @@
   }
 
   $CURRENT_ROUND = 1;
+
+  function verify_authentication()
+  {
+      global $config, $content, $unauthenticatedContents, $unauthenticatedScripts;
+
+      $scriptRoot = $config['general']['script_root'];
+      $scriptName = substr($_SERVER['PHP_SELF'], strlen($scriptRoot));
+
+      if (!(($scriptName == 'index.php' && in_array($content, $unauthenticatedContents)) ||
+            in_array($scriptName, $unauthenticatedScripts)))
+      {
+          session_start();
+
+          if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated'])
+          {
+              session_unset();
+              session_destroy();
+
+              header('Location: index.php');
+
+              exit();
+          }
+
+          session_write_close();
+      }
+    }
+
+
  ?>

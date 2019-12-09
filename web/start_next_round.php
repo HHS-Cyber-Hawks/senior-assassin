@@ -50,7 +50,8 @@ while($row = $result->fetch_assoc())
   {
       $sql = "SELECT player_status FROM players WHERE player_id = " . $row['attacker_id'];
       $player_status = get_value($sql, "player_status");
-      echo "PLAYER STATUS INSIDE IF: " . $player_status . "<br />";
+      // echo "PLAYER STATUS INSIDE IF: " . $player_status . "<br />";
+
       //This if block prevents someone who has been eliminated to moving on to the next round
       if($player_status == 1)
       {
@@ -70,22 +71,6 @@ while($row = $result->fetch_assoc())
       $conn->query($change_to_obsolete . $assignment_id);
     }
 }
-
-
-
-
-
-
-
-// TODO Occasionally when there are only 2 people left it screws up making both assignments
-
-
-
-
-
-
-
-
 
 // returns the number of players
 $sql = "SELECT count(player_id) FROM players";
@@ -108,8 +93,8 @@ while($row = $result->fetch_assoc())
 
   // Gets the value to see if the player is actually going to move on
   $current_player_status = $row["player_status"];
-  echo "PLAYER NAME: $fname " . $lname . "<br />";
-  echo "PLAYER STATUS: " . $current_player_status . "<br /><br />";
+  // echo "PLAYER NAME: $fname " . $lname . "<br />";
+  // echo "PLAYER STATUS: " . $current_player_status . "<br /><br />";
 
   // If the player can move on then they get added to the player array for the next round
   if($current_player_status == 1)
@@ -175,4 +160,11 @@ foreach ($players_moving_on as $player) {
   $conn->query($change_player_to_playing . $player);
 }
 
-header("Location: assignment_display.php?round=" . $round);
+$num_assignments = get_value("SELECT count(assignment_id) FROM assignments WHERE assignment_round = $round", "count(assignment_id)");
+$num_players_left = get_value("SELECT count(*) FROM players WHERE player_status = 0", "count(*)");
+if ($num_assignments == 1 && $num_players_left == 2)
+{
+  echo "Two players, one assignment";
+}
+
+// header("Location: assignment_display.php?round=" . $round);
