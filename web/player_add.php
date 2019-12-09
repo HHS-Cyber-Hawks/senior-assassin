@@ -38,11 +38,7 @@ if (!isset($submit)) {
             <button class ='button' type="submit" name="submit">Save</button>
         </form>
 
-<<<<<<< HEAD
-        <button class = 'lower-button' onclick="location.href = 'index.php'">Cancel</button>
-=======
         <button onclick="location.href = 'index.php?<?php echo $round; ?>'">Cancel</button>
->>>>>>> 0e291f96326367acf0a004f23ef81273862087f9
     </body>
 </html>
 

@@ -14,7 +14,6 @@
   session_start();
   $_SESSION["admin"] = true;
 
-<<<<<<< HEAD
   function isAdmin()
   {
     return $_SESSION["admin"];
@@ -22,9 +21,6 @@
 
   function create_connection()
   {
-=======
-  function create_connection() {
->>>>>>> 0e291f96326367acf0a004f23ef81273862087f9
     $servername = "mysql.server295.com";
     $username = "assassin";
     $password = "billiard gale seeing";
