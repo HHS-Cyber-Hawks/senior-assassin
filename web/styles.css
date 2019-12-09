@@ -41,6 +41,12 @@ td{
   padding: 1px 0px;
 }
 
+.text {
+  color: #1772fc
+  font-family: arial;
+  font-size: 12;
+}
+
 .header {
   height: auto;
   width: 100%;
