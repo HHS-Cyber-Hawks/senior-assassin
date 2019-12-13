@@ -41,8 +41,8 @@ $round = $conn->real_escape_string($round);
       <?php if(isAdmin()){ ?>
       <div>
         <span>
-            <a href="clear_players.php?round=<?php echo $round; ?>"><button class="lower-button">Clear Players</button></a>
-            <a href="reset_players.php?round=<?php echo $round; ?>"><button class="lower-button">Reset Players</button></a>
+            <a href="players_clear.php?round=<?php echo $round; ?>"><button class="lower-button">Clear Players</button></a>
+            <a href="players_reset.php?round=<?php echo $round; ?>"><button class="lower-button">Reset Players</button></a>
         </span>
       </div>
       <div>
@@ -87,48 +87,42 @@ if(isAdmin())
             ORDER BY player_status DESC, last_name, first_name;
 SQL;
 
-  $result = $conn->query($sql);
+$result = $conn->query($sql);
 
-  if ($result->num_rows > 0) {
-      echo "<table id='resultsTable' >";
-      echo "<tr><th>Last Name</th><th>First Name</th><th>Email</th><th>Status</th><th>Edit/Delete</th></tr>";
+if ($result->num_rows > 0) {
+    echo "<table id='resultsTable' >";
+    echo "<tr><th>Last Name</th><th>First Name</th><th>Email</th><th>Status</th><th>Edit/Delete</th><th>Player History</th></tr>";
 
-      //output data of each row
-      while($row = $result->fetch_assoc()) {
-           echo "<tr>";
-           echo "<td>" . $row["first_name"] . "</td>";
-           echo "<td>" . $row["last_name"] . "</td>";
-           echo "<td>" . $row["email"] . "</td>";
-           echo "<td>";
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        echo "<tr>";
+        echo "<td>" . $row["first_name"] . "</td>";
+        echo "<td>" . $row["last_name"] . "</td>";
+        echo "<td>" . $row["email"] . "</td>";
+        echo "<td>";
 
-           if ($row["player_status"] == -1)
-           {
-             echo "Out";
-           }
-           else if ($row["player_status"] == 0)
-           {
-             echo "Playing";
-           }
-           else if ($row["player_status"] == 1)
-           {
-           echo "Can move on";
-           }
-           else if ($row["player_status"] == 2)
-           {
-             echo "Moving on";
-           }
+        if ($row["player_status"] == -1)
+        {
+          echo "Out";
+        }
+        else if ($row["player_status"] == 0)
+        {
+          echo "Playing";
+        }
+        else if ($row["player_status"] == 1)
+        {
+          echo "Can move on";
+        }
+        else if ($row["player_status"] == 2)
+        {
+          echo "Moving on";
+        }
 
-           echo "</td>";
-           echo "<td><button onclick='deletePlayer(" . $row["player_id"] . ")'>Delete</button> <button onclick='editPlayer(" . $row["player_id"] . ")'>Edit</button></td></div>";
-           echo "</tr>";
-       }
-
-      echo "</table>";
-      echo "<br />";
-
-  } else {
-      echo "<p style='text-align: center;'>No Players</p>";
-  }
+        echo "</td>";
+        echo "<td><button onclick='deletePlayer(" . $row["player_id"] . ")'>Delete</button> <button onclick='editPlayer(" . $row["player_id"] . ", $round)'>Edit</button></td></div>";
+        echo "<td><button onclick='showStats(" . $row["player_id"] . ", $round)'>View History</button>";
+        echo "</tr>";
+    }
 
 } else {
 

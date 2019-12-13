@@ -167,4 +167,4 @@ if ($num_assignments == 1 && $num_players_left == 2)
   echo "Two players, one assignment";
 }
 
-// header("Location: assignment_display.php?round=" . $round);
+header("Location: assignment_display.php?round=" . $round);
