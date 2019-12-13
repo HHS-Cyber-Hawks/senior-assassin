@@ -10,8 +10,17 @@
   # 3 = confirmed
   # 4 = obsolete
 
+  //Set info on user session (player is admin?)
+  session_start();
+  $_SESSION["admin"] = true;
 
-  function create_connection() {
+  function isAdmin()
+  {
+    return $_SESSION["admin"];
+  }
+
+  function create_connection()
+  {
     $servername = "mysql.server295.com";
     $username = "assassin";
     $password = "billiard gale seeing";
