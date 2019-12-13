@@ -36,8 +36,8 @@ $round = $conn->real_escape_string($round);
       </div>
       <div>
         <span>
-            <a href="clear_players.php?round=<?php echo $round; ?>"><button class="lower-button">Clear Players</button></a>
-            <a href="reset_players.php?round=<?php echo $round; ?>"><button class="lower-button">Reset Players</button></a>
+            <a href="players_clear.php?round=<?php echo $round; ?>"><button class="lower-button">Clear Players</button></a>
+            <a href="players_reset.php?round=<?php echo $round; ?>"><button class="lower-button">Reset Players</button></a>
         </span>
       </div>
       <div>
@@ -73,7 +73,7 @@ $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     echo "<table id='resultsTable' >";
-    echo "<tr><th>Last Name</th><th>First Name</th><th>Email</th><th>Status</th><th>Edit/Delete</th></tr>";
+    echo "<tr><th>Last Name</th><th>First Name</th><th>Email</th><th>Status</th><th>Edit/Delete</th><th>Player History</th></tr>";
 
     // output data of each row
     while($row = $result->fetch_assoc()) {
@@ -102,6 +102,7 @@ if ($result->num_rows > 0) {
 
         echo "</td>";
         echo "<td><button onclick='deletePlayer(" . $row["player_id"] . ")'>Delete</button> <button onclick='editPlayer(" . $row["player_id"] . ", $round)'>Edit</button></td></div>";
+        echo "<td><button onclick='showStats(" . $row["player_id"] . ", $round)'>View History</button>";
         echo "</tr>";
     }
 

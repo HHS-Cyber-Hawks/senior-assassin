@@ -29,8 +29,6 @@
     return $row["$value"];
   }
 
-  $CURRENT_ROUND = 1;
-
   function verify_authentication()
   {
       global $config, $content, $unauthenticatedContents, $unauthenticatedScripts;
