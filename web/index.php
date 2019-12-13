@@ -78,9 +78,6 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-if(isAdmin())
-{
-
   $sql = <<<SQL
             SELECT player_id, first_name, last_name, email, player_status
             FROM players
@@ -91,14 +88,22 @@ $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     echo "<table id='resultsTable' >";
-    echo "<tr><th>Last Name</th><th>First Name</th><th>Email</th><th>Status</th><th>Edit/Delete</th><th>Player History</th></tr>";
+    echo "<tr><th>Last Name</th><th>First Name</th>";
+    if(isAdmin())
+    {
+      echo "<th>Email</th><th>Status</th><th>Edit/Delete</th><th>Player History</th>";
+    }
+    echo "</tr>";
 
     // output data of each row
     while($row = $result->fetch_assoc()) {
         echo "<tr>";
         echo "<td>" . $row["first_name"] . "</td>";
         echo "<td>" . $row["last_name"] . "</td>";
-        echo "<td>" . $row["email"] . "</td>";
+        if(isAdmin())
+        {
+          echo "<td>" . $row["email"] . "</td>";
+        }
         echo "<td>";
 
         if ($row["player_status"] == -1)
@@ -117,59 +122,17 @@ if ($result->num_rows > 0) {
         {
           echo "Moving on";
         }
-
-        echo "</td>";
-        echo "<td><button onclick='deletePlayer(" . $row["player_id"] . ")'>Delete</button> <button onclick='editPlayer(" . $row["player_id"] . ", $round)'>Edit</button></td></div>";
+        if(isAdmin())
+        {
+          echo "</td>";
+          echo "<td><button onclick='deletePlayer(" . $row["player_id"] . ")'>Delete</button> <button onclick='editPlayer(" . $row["player_id"] . ", $round)'>Edit</button></td></div>";
+        }
         echo "<td><button onclick='showStats(" . $row["player_id"] . ", $round)'>View History</button>";
         echo "</tr>";
-    }
-
-} else {
-
-  $sql = <<<SQL
-            SELECT player_id, first_name, last_name, player_status
-            FROM players
-            ORDER BY player_status DESC, last_name, first_name;
-SQL;
-
-  $result = $conn->query($sql);
-
-  if ($result->num_rows > 0) {
-      echo "<table id='resultsTable' >";
-      echo "<tr><th>Last Name</th><th>First Name</th><th>Status</th></tr>";
-
-      // output data of each row
-      while($row = $result->fetch_assoc()) {
-          echo "<tr>";
-          echo "<td>" . $row["first_name"] . "</td>";
-          echo "<td>" . $row["last_name"] . "</td>";
-          echo "<td>";
-
-          if ($row["player_status"] == -1)
-          {
-            echo "Out";
-          }
-          else if ($row["player_status"] == 0)
-          {
-            echo "Playing";
-          }
-          else if ($row["player_status"] == 1)
-          {
-            echo "Can move on";
-          }
-          else if ($row["player_status"] == 2)
-          {
-            echo "Moving on";
-          }
-
-      }
-
-      echo "</table>";
-      echo "<br />";
 
     }
 }
-
+  
 $conn->close();
 ?>
 
