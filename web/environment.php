@@ -9,7 +9,8 @@
   # 1 = pending
   # 3 = confirmed
   # 4 = obsolete
-
+  
+  extract($_REQUEST);
 
   function create_connection() {
     $servername = "mysql.server295.com";
