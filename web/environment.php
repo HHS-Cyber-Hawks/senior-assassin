@@ -7,8 +7,8 @@
   // ASSIGNMENT STATUS KEY
   # 0 = open
   # 1 = pending
-  # 3 = confirmed
-  # 4 = obsolete
+  # 2 = confirmed
+  # 3 = obsolete
 
   extract($_REQUEST);
 
