@@ -10,9 +10,7 @@
   # 2 = confirmed
   # 3 = obsolete
 
-  //Set info on user session (player is admin?)
-  session_start();
-  $_SESSION["admin"] = true;
+  extract($_REQUEST);
 
   function isAdmin()
   {
