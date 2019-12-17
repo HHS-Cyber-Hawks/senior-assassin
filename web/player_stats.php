@@ -18,7 +18,7 @@ $sql = <<<SQL
           FROM assignments
           JOIN players attackers ON attackers.player_id = attacker_id
           JOIN players targets ON targets.player_id = target_id
-          WHERE (attacker_id = $id OR target_id = $id) AND assignment_status <> 0
+          WHERE (attacker_id = $id OR target_id = $id) AND (assignment_status = 2)
           ORDER BY assignment_round;
 SQL;
 $result = $conn->query($sql);
