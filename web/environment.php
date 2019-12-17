@@ -9,10 +9,16 @@
   # 1 = pending
   # 3 = confirmed
   # 4 = obsolete
-  
+
   extract($_REQUEST);
 
-  function create_connection() {
+  function isAdmin()
+  {
+    return $_SESSION["admin"];
+  }
+
+  function create_connection()
+  {
     $servername = "mysql.server295.com";
     $username = "assassin";
     $password = "billiard gale seeing";
@@ -29,8 +35,6 @@
     $row = $result->fetch_assoc();
     return $row["$value"];
   }
-
-  $CURRENT_ROUND = 1;
 
   function verify_authentication()
   {

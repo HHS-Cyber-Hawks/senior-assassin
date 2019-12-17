@@ -1,5 +1,7 @@
 <?php
 
+include("environment.php");
+
 extract($_REQUEST);
 
 include("environment.php");
@@ -16,6 +18,7 @@ if (!isset($submit)) {
 
 ?>
 
+
 <html>
     <head>
         <title>Add Player</title>
@@ -23,16 +26,16 @@ if (!isset($submit)) {
     </head>
 
     <body>
-        <h1> Add player </h1>
+        <h1 class = 'title'> Add player </h1>
         <form action="player_add.php" method="post" style="margin-bottom: 5px;">
-            <span class="label">First Name:</span><input type="text" name="firstName" style="width: 200px;"/>
+            <span class="text">First Name:</span><input type="text" name="firstName" style="width: 200px;"/>
             <br />
-            <span class="label">Last Name:</span><input type="text" name="lastName" style="width: 200px;"/>
+            <span class="text">Last Name:</span><input type="text" name="lastName" style="width: 200px;"/>
             <br />
-            <span class="label">Email:</span><input type="text" name="email" style="width: 200px;"/>
+            <span class="text">Email:</span><input type="text" name="email" style="width: 200px;"/>
             <br />
             <br />
-            <button type="submit" name="submit">Save</button>
+            <button class ='button' type="submit" name="submit">Save</button>
         </form>
 
         <button onclick="location.href = 'index.php?<?php echo $round; ?>'">Cancel</button>
