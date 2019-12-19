@@ -11,6 +11,7 @@
   # 3 = obsolete
 
   extract($_REQUEST);
+  session_start();
 
   function isAdmin()
   {
