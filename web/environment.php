@@ -12,6 +12,10 @@
 
   extract($_REQUEST);
   session_start();
+<<<<<<< HEAD
+
+=======
+>>>>>>> e8414baaeced755efa8affe47f20a4bf472e03aa
   function isAdmin()
   {
     return true;

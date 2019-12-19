@@ -32,8 +32,7 @@ SELECT id
 SQL;
 
 $result = $dbh->query($sql);
-echo $sql;
-print_r($result);
+
 $count = $result->num_rows;
 if ($count == 0)
 {
@@ -42,7 +41,7 @@ if ($count == 0)
     VALUES ('{$email}', PASSWORD('{$password}'), '{$displayName}')
 SQL;
 
-    if (mysqli_query($dbh, $sql))
+    if ($dbh->query($sql))
     {
         http_response_code(200);
     }
