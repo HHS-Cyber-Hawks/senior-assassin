@@ -3,9 +3,7 @@
 
 include("environment.php");
 $conn = create_connection();
-extract($_REQUEST);
-$id = $conn->real_escape_string($id);
-$round = $conn->real_escape_string($round);
+$id =  $_SESSION['userId']// $conn->real_escape_string($id);
 
 $sql = <<<SQL
           SELECT assignment_id,
@@ -14,7 +12,6 @@ $sql = <<<SQL
           targets.first_name as target_first_name,
           targets.last_name as target_last_name,
           assignment_status,
-          assignment_round
           FROM assignments
           JOIN players attackers ON attackers.player_id = attacker_id
           JOIN players targets ON targets.player_id = target_id

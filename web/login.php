@@ -74,7 +74,6 @@ function login() {
             window.location.replace('index.php');
         }).fail(function(response) {
           alert(response);
-          debugger;
             showAlert('danger', 'Invalid Login!', 'Check your email address and password and try again.');
         }).always(function() {
             $('#loginButton').prop('disabled', false);

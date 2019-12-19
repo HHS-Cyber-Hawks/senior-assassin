@@ -12,14 +12,9 @@
 
   extract($_REQUEST);
   session_start();
-<<<<<<< HEAD
-
-=======
->>>>>>> e8414baaeced755efa8affe47f20a4bf472e03aa
   function isAdmin()
   {
-    return true;
-    //return $_SESSION["admin"];
+    return $_SESSION["admin"];
   }
 
   function create_connection()
