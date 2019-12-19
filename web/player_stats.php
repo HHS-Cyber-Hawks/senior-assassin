@@ -18,7 +18,11 @@ $sql = <<<SQL
           FROM assignments
           JOIN players attackers ON attackers.player_id = attacker_id
           JOIN players targets ON targets.player_id = target_id
+<<<<<<< HEAD
+          WHERE (attacker_id = $id OR target_id = $id) AND assignment_status = 2
+=======
           WHERE (attacker_id = $id OR target_id = $id) AND (assignment_status = 2)
+>>>>>>> b9e1b6056d97a00bff88e1d8b2dbb28bfe39447e
           ORDER BY assignment_round;
 SQL;
 $result = $conn->query($sql);
@@ -38,34 +42,13 @@ echo "<h1 style='text-align: center;'>" . $name . "</h1>";
 echo "<a href='index.php?round=$round' style='text-align: center;'><p>back</p></a>";
 if ($result->num_rows > 0) {
     echo "<table id='resultsTable' style='td{ width: 100px; }'>";
-    echo "<tr><th>Attacker</th><th>Target</th><th>Status</th><th>Round</th></tr>";
+    echo "<tr><th>Attacker</th><th>Target</th><th>Round</th></tr>";
 
     // output data of each row
     while($row = $result->fetch_assoc()) {
         echo "<tr>";
         echo "<td>" . $row["attacker_first_name"] . " " . $row["attacker_last_name"] . "</td>";
         echo "<td>" . $row["target_first_name"]   . " " . $row["target_last_name"]   . "</td>";
-        echo "<td style='background-color: ";
-
-        if ($row["assignment_status"] == 0)
-        {
-          echo "'>Open";
-        }
-        else if ($row["assignment_status"] == 1)
-        {
-          echo "'>Pending";
-        }
-        else if ($row["assignment_status"] == 2)
-        {
-          echo "green'>Confirmed";
-        }
-        else if ($row["assignment_status"] == 3)
-        {
-          echo "black'>Obsolete";
-        }
-
-        echo "</td>";
-
         echo "<td>" . $row["assignment_round"] . "</td>";
 
         echo "</tr>";
