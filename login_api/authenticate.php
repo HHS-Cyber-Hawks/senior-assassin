@@ -17,24 +17,26 @@
  * - 401 if the credentials could not be authenticated
  *************************************************************************************************/
 
-require_once 'environment.php';
+require_once '../web/environment.php';
+$dbh = create_connection();
 
 $email = mysqli_real_escape_string($dbh, $email);
 $password = mysqli_real_escape_string($dbh, $password);
 
 $sql = <<<SQL
 SELECT id, display_name
-  FROM user
+  FROM users
  WHERE email = '{$email}'
    AND password = PASSWORD('{$password}')
 SQL;
 
-$result = mysqli_query($dbh, $sql);
 
-$count = mysqli_num_rows($result);
+$result = $dbh->query($sql);
+
+$count = $result->num_rows;
 if ($count == 1)
 {
-    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+    $row = $result->fetch_assoc();
 
     session_start();
 
@@ -43,10 +45,11 @@ if ($count == 1)
     $_SESSION['authenticated'] = true;
 
     session_write_close();
-
+    echo"folks,....";
     http_response_code(200);
 }
 else
 {
+    echo "fail";
     http_response_code(401);
 }

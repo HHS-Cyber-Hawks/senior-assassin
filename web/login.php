@@ -18,10 +18,11 @@ extract($_REQUEST);
 
    <!-- Bootstrap CSS -->
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
    <title>Hello, world!</title>
  </head>
  <body>
+
       <div class="jumbotron col-md-8 col-md-offset-2">
           <h2>Welcome to Senior Assassin!</h2>
           <form class="form-horizontal" action="javascript:void(0);">
@@ -59,7 +60,7 @@ function login() {
     } else {
         var settings = {
             'async': true,
-            'url': 'api/authenticate.php?email=' + $('#email').val() + '&password=' + $('#password').val(),
+            'url': '../login_api/authenticate.php?email=' + $('#email').val() + '&password=' + $('#password').val(),
             'method': 'POST',
             'headers': {
                 'Cache-Control': 'no-cache'
@@ -69,8 +70,11 @@ function login() {
         $('#loginButton').prop('disabled', true);
 
         $.ajax(settings).done(function(response) {
-            window.location.replace('index.php?content=menu');
-        }).fail(function() {
+            alert(response);
+            window.location.replace('index.php');
+        }).fail(function(response) {
+          alert(response);
+          debugger;
             showAlert('danger', 'Invalid Login!', 'Check your email address and password and try again.');
         }).always(function() {
             $('#loginButton').prop('disabled', false);
