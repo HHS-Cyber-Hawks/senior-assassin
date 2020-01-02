@@ -70,11 +70,10 @@ function login() {
         $('#loginButton').prop('disabled', true);
 
         $.ajax(settings).done(function(response) {
-            alert(response);
+            alert('Login Successful');
             window.location.replace('index.php');
         }).fail(function(response) {
-          alert(response);
-          debugger;
+          alert('Mission Failed. You\'ll get em\' next time');
             showAlert('danger', 'Invalid Login!', 'Check your email address and password and try again.');
         }).always(function() {
             $('#loginButton').prop('disabled', false);
