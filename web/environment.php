@@ -12,7 +12,10 @@
 
   extract($_REQUEST);
   session_start();
+<<<<<<< HEAD
 
+=======
+>>>>>>> 94e864304de2faedb7b224446d02d07ea0ea5f6e
   function isAdmin()
   {
     return $_SESSION["admin"];
