@@ -1,7 +1,6 @@
 <?php
   include("environment.php");
 
-  extract($_REQUEST);
   $conn = create_connection();
   $round = $conn->real_escape_string($round);
 

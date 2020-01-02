@@ -8,7 +8,6 @@
  * Login page content. This page is intended to be included in index.php.
  *************************************************************************************************/
 include("environment.php");
-extract($_REQUEST);
 
 ?>
 <head>
@@ -73,7 +72,11 @@ function login() {
             alert('Login Successful');
             window.location.replace('index.php');
         }).fail(function(response) {
+<<<<<<< HEAD
           alert('Mission Failed. You\'ll get em\' next time');
+=======
+          alert(response);
+>>>>>>> 1487ce3c458f0d53df10584eefb2ee1c1ea15f11
             showAlert('danger', 'Invalid Login!', 'Check your email address and password and try again.');
         }).always(function() {
             $('#loginButton').prop('disabled', false);
