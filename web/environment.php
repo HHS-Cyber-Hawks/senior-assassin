@@ -10,6 +10,8 @@
   # 3 = confirmed
   # 4 = obsolete
 
+  extract($_REQUEST);
+
   //Set info on user session (player is admin?)
   session_start();
   $_SESSION["admin"] = true;

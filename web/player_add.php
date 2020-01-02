@@ -2,10 +2,6 @@
 
 include("environment.php");
 
-extract($_REQUEST);
-
-include("environment.php");
-
 // Connect to the database and make sure it was successful
 $conn = create_connection();
 if ($conn->connect_error) {

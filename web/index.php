@@ -1,7 +1,6 @@
 <?php
 include("environment.php");
 
-extract($_REQUEST);
 if(!isset($round))
 {
   $round = 1;
@@ -132,7 +131,7 @@ if ($result->num_rows > 0) {
 
     }
 }
-  
+
 $conn->close();
 ?>
 
