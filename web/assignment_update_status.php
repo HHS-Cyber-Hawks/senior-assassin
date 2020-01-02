@@ -17,6 +17,10 @@ $assignment_id = $id;
 // If the status of assignment was set to confirmed, make a new assignment that makes the target the target of the person who was eliminated
 if ($status == 2)
 {
+  $date = date('Y-m-d H:i:s');
+  $sql0 = "INSERT INTO assignemnt (assignment_timestamp) VALUES ($date)";
+  $conn->query($sql0);
+
   // The query to get the attacker id given the assignment_id
   $sql1 = "SELECT attacker_id FROM assignments WHERE assignment_id = $assignment_id AND assignment_round = $round";
   $attacker = get_value($sql1, "attacker_id");
