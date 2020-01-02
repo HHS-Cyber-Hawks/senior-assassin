@@ -1,7 +1,5 @@
 <?php
 
-extract($_REQUEST);
-
 include("environment.php");
 
 // Connect to the database and make sure it was successful

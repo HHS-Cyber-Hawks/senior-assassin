@@ -3,7 +3,6 @@
 //// TODO: Figure out css of the register button
 include("environment.php");
 
-
 $conn = create_connection();
 
 // Check connection

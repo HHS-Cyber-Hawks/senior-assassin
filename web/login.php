@@ -8,7 +8,6 @@
  * Login page content. This page is intended to be included in index.php.
  *************************************************************************************************/
 include("environment.php");
-extract($_REQUEST);
 
 ?>
 <head>
