@@ -79,7 +79,7 @@ if ($conn->connect_error) {
           } else {
               var settings = {
                   'async': true,
-                  'url': '../login_api/createAccount.php?email=' + $('#email').val() + '&password=' + $('#password').val() + '&displayName=' + $('#displayName').val(),
+                  'url': '../login_api/createAccount.php?email=' + $('#email').val() + '&password=' + $('#password').val() + '&displayName=' + $('#displayName').val() + '&is_admin=0',
                   'method': 'POST',
                   'headers': {
                       'Cache-Control': 'no-cache'

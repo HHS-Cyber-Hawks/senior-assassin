@@ -46,11 +46,9 @@ if ($count == 1)
     $_SESSION['admin'] = $row[is_admin];
 
     session_write_close();
-    echo"folks,....";
     http_response_code(200);
 }
 else
 {
-    echo "fail";
     http_response_code(401);
 }
