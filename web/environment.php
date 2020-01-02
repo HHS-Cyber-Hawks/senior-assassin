@@ -7,14 +7,16 @@
   // ASSIGNMENT STATUS KEY
   # 0 = open
   # 1 = pending
-  # 3 = confirmed
-  # 4 = obsolete
+  # 2 = confirmed
+  # 3 = obsolete
 
   extract($_REQUEST);
+<<<<<<< HEAD
 
   //Set info on user session (player is admin?)
+=======
+>>>>>>> ba463320ca566a6571d94689379a5bdcf96ebb6d
   session_start();
-  $_SESSION["admin"] = true;
 
   function isAdmin()
   {

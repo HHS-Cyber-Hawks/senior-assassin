@@ -1,7 +1,5 @@
 <?php
 
-extract($_REQUEST);
-
 include("environment.php");
 
 $conn = create_connection();
