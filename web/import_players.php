@@ -22,6 +22,13 @@
               $sqlInsert = "INSERT INTO players (first_name, last_name, email)
                      VALUES ('" . $column[0] . "','" . $column[1] . "','" . $column[2] . "')";
               $result = mysqli_query($conn, $sqlInsert);
+            $sqlInsert = "INSERT INTO users (first_name, last_name, email) " .
+                   "VALUES ('" . $column[0] . "','" . $column[1] . "','" . $column[2] . "')";
+            $result = mysqli_query($conn, $sqlInsert);
+            $userId = mysqli_insert_id($conn);
+            $sqlInsert = "INSERT INTO players (user_id, first_name, last_name, email) " .
+                     "VALUES (" . $userId . ", '" . $column[0] . "','" . $column[1] . "','" . $column[2] . "')";
+            $result = mysqli_query($conn, $sqlInsert);
           }
 
           header("Location: index.php?round=$round");

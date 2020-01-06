@@ -43,7 +43,7 @@ if ($count == 1)
     $_SESSION['userId'] = $row['id'];
     $_SESSION['displayName'] = $row['display_name'];
     $_SESSION['authenticated'] = true;
-    $_SESSION['admin'] = $row[is_admin];
+    $_SESSION['admin'] = $row[is_admin] == 1;
 
     session_write_close();
     http_response_code(200);

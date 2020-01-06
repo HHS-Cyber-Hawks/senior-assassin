@@ -15,7 +15,7 @@
 
   function isAdmin()
   {
-    return $_SESSION["admin"];
+    return $_SESSION["admin"] == 1;
   }
 
   function create_connection()
