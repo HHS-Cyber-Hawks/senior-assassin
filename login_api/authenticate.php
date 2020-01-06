@@ -24,7 +24,7 @@ $email = mysqli_real_escape_string($dbh, $email);
 $password = mysqli_real_escape_string($dbh, $password);
 
 $sql = <<<SQL
-SELECT id, display_name, is_admin
+SELECT id, display_name, is_admin, email
   FROM users
  WHERE email = '{$email}'
    AND password = PASSWORD('{$password}')
@@ -42,6 +42,7 @@ if ($count == 1)
 
     $_SESSION['userId'] = $row['id'];
     $_SESSION['displayName'] = $row['display_name'];
+    $_SESSION['email'] = $row['email'];
     $_SESSION['authenticated'] = true;
     $_SESSION['admin'] = $row[is_admin];
 
