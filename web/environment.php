@@ -11,16 +11,11 @@
   # 3 = obsolete
 
   extract($_REQUEST);
-<<<<<<< HEAD
-
-  //Set info on user session (player is admin?)
-=======
->>>>>>> ba463320ca566a6571d94689379a5bdcf96ebb6d
   session_start();
 
   function isAdmin()
   {
-    return $_SESSION["admin"] == 1;
+    return $_SESSION["admin"];
   }
 
   function create_connection()

@@ -4,6 +4,7 @@
 include("environment.php");
 $conn = create_connection();
 $id =  $_SESSION['userId'];// $conn->real_escape_string($id);
+
 echo $id;
 $sql = <<<SQL
           SELECT assignment_id,
@@ -23,7 +24,7 @@ $result = $conn->query($sql);
 $fname = "SELECT first_name FROM players WHERE player_id = $id";
 $lname = "SELECT last_name FROM players WHERE player_id = $id";
 $name = get_value($fname, "first_name") . " " . get_value($lname, "last_name");
-
+echo $name;
 echo "<html>";
 echo "<head>" .
       "<script src='scripts.js?" . rand() . "'></script>" .

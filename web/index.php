@@ -96,7 +96,7 @@ $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     echo "<table id='resultsTable' >";
-    echo "<tr><th>Last Name</th><th>First Name</th>";
+    echo "<tr><th>Name</th>";
     if(isAdmin())
     {
       echo "<th>Email</th>";
@@ -111,8 +111,7 @@ if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
         echo "<tr>";
-        echo "<td>" . $row["first_name"] . "</td>";
-        echo "<td>" . $row["last_name"] . "</td>";
+        echo "<td>" . $row["first_name"] . " ". $row["last_name"] . "</td>";
         if(isAdmin())
         {
           echo "<td>" . $row["email"] . "</td>";
