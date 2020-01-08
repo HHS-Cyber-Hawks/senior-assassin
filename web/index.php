@@ -51,6 +51,7 @@ $round = $conn->real_escape_string($round);
         <span>
             <a href="players_clear.php?round=<?php echo $round; ?>"><button class="lower-button">Clear Players</button></a>
             <a href="players_reset.php?round=<?php echo $round; ?>"><button class="lower-button">Reset Players</button></a>
+            <a href="rules.php?round=<?php echo $round; ?>"><button class="lower-button">Add Rules</button></a>
         </span>
       </div>
       <div>

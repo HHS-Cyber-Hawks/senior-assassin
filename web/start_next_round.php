@@ -1,6 +1,5 @@
 <?php
 
-extract($_REQUEST);
 include("environment.php");
 
 $conn = create_connection();
@@ -11,8 +10,6 @@ if ($conn->connect_error)
 }
 
 $round = $conn->real_escape_string($round);
-
-
 
 // Gets the player status given the player id
 $get_player_status = "SELECT player_status FROM players WHERE player_id = ";
@@ -68,7 +65,10 @@ while($row = $result->fetch_assoc())
         $conn->query($did_not_eliminate . $attacker_id);
       }
 
-      $conn->query($change_to_obsolete . $assignment_id);
+      if ($assignment_round == $round)
+      {
+        $conn->query($change_to_obsolete . $assignment_id);
+      }
     }
 }
 

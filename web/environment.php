@@ -10,7 +10,13 @@
   # 2 = confirmed
   # 3 = obsolete
 
+  //EMAIl STUFF
+  # email - seniorassassinemail@gmail.
+  # password - seniorassassin!
   extract($_REQUEST);
+
+  //Set info on user session (player is admin?)
+  
   session_start();
 
   function isAdmin()
