@@ -38,9 +38,10 @@ $round = $conn->real_escape_string($round);
       <div>
         <span>
             <button class="current-button">Player List</button>
+            <a href="login.php"><button class="button">Log In</button></a>
             <?php if(isAdmin()){ ?>
             <a href="assignment_display.php?round=1"><button class="button">Assignments</button></a>
-          <?php } else {  //End if(isAdmin()) ?>
+            <?php } else {  //if(isAdmin()) ?>
             <a href="see_target.php"><button class="button">My Target</button></a>
             <?php }  //End if(isAdmin()) ?>
         </span>
@@ -96,18 +97,22 @@ $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     echo "<table id='resultsTable' >";
-    echo "<tr><th>Last Name</th><th>First Name</th>";
+    echo "<tr><th>Name</th>";
     if(isAdmin())
     {
-      echo "<th>Email</th><th>Status</th><th>Edit/Delete</th><th>Player History</th>";
+      echo "<th>Email</th>";
     }
-    echo "</tr>";
+    echo "<th>Status</th>";
+    if(isAdmin())
+    {
+      echo "<th>Edit/Delete</th>";
+    }
+    echo "<th>Player History</th></tr>";
 
     // output data of each row
     while($row = $result->fetch_assoc()) {
         echo "<tr>";
-        echo "<td>" . $row["first_name"] . "</td>";
-        echo "<td>" . $row["last_name"] . "</td>";
+        echo "<td>" . $row["first_name"] . " ". $row["last_name"] . "</td>";
         if(isAdmin())
         {
           echo "<td>" . $row["email"] . "</td>";
