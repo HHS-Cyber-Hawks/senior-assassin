@@ -13,7 +13,8 @@ $sql = <<<SQL
           targets.first_name as target_first_name,
           targets.last_name as target_last_name,
           assignment_status,
-          assignment_round
+          assignment_round,
+          assignment_timestamp
           FROM assignments
           JOIN players attackers ON attackers.player_id = attacker_id
           JOIN players targets ON targets.player_id = target_id
@@ -37,7 +38,7 @@ echo "<h1 style='text-align: center;'>" . $name . "</h1>";
 echo "<a href='index.php?round=$round' style='text-align: center;'><p>back</p></a>";
 if ($result->num_rows > 0) {
     echo "<table id='resultsTable' style='td{ width: 100px; }'>";
-    echo "<tr><th>Attacker</th><th>Target</th><th>Round</th></tr>";
+    echo "<tr><th>Attacker</th><th>Target</th><th>Round</th><th>Timestamp</th></tr>";
 
     // output data of each row
     while($row = $result->fetch_assoc()) {
@@ -45,6 +46,7 @@ if ($result->num_rows > 0) {
         echo "<td>" . $row["attacker_first_name"] . " " . $row["attacker_last_name"] . "</td>";
         echo "<td>" . $row["target_first_name"]   . " " . $row["target_last_name"]   . "</td>";
         echo "<td>" . $row["assignment_round"] . "</td>";
+        echo "<td>" . $row["assignment_timestamp"] . "</td>";
 
         echo "</tr>";
     }
