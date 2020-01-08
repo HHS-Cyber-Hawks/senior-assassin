@@ -29,6 +29,16 @@ $round = $conn->real_escape_string($round);
         <a href='assignment_clear.php'><button class='lower-button'>Clear Assignments</button></a>
         <a href='start_next_round.php?round=<?php echo $round; ?>'><button class='lower-button'>Start Next Round</button></a>
       </div>
+      <div>
+        <?php
+          $sql = "SELECT MAX(assignment_round) FROM assignments";
+          $max_round = get_value($sql, "MAX(assignment_round)");
+          for ($i = 1; $i <= $max_round; $i++)
+          {
+            echo "<a href='assignment_display?round=$i'><button>Round $i</button></a>";
+          }
+        ?>
+      </div>
     </div>
     <br />
     <br />
