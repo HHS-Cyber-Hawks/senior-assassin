@@ -10,7 +10,12 @@
   # 2 = confirmed
   # 3 = obsolete
 
+  //EMAIl STUFF
+  # email - seniorassassinemail@gmail.
+  # password - seniorassassin!
   extract($_REQUEST);
+
+  //Set info on user session (player is admin?)
 
   session_start();
 
@@ -62,6 +67,33 @@
 
           session_write_close();
       }
+    }
+
+    function send_email($recipient, $subject, $message)
+    {
+        global $config;
+
+        $mail = new PHPMailer;
+        $mail->isSMTP();
+
+        $mail->SMTPDebug = 0;
+        $mail->Debugoutput = 'html';
+
+        $mail->Host = 'smtp.gmail.com';
+        $mail->Port = 587;
+        $mail->SMTPSecure = 'tls';
+        $mail->SMTPAuth = true;
+
+        $mail->Username = 'jheyl20@hanoverstudents.org';
+        $mail->Password = '905-3064';
+
+        $mail->setFrom($config['gmail']['email'], $config['gmail']['name']);
+
+        $mail->addAddress($recipient);
+        $mail->Subject = $subject;
+        $mail->msgHTML($message);
+
+        $mail->send();
     }
 
 
