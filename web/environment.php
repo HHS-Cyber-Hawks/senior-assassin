@@ -17,7 +17,10 @@
 
   //Set info on user session (player is admin?)
 
+<<<<<<< HEAD
 >>>>>>> 62af4e48706e5fe39aac5dc8f68615a462d67514
+=======
+>>>>>>> 2b58c27067c0ffd736a109c0b16bbca5c87696f4
   session_start();
 
   function isAdmin()
