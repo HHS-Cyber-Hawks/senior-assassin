@@ -38,7 +38,7 @@ $round = $conn->real_escape_string($round);
       <div>
         <span>
             <button class="current-button">Player List</button>
-            <a href="login.php"><button class="button">Log In</button></a>
+            <a href="logout.php"><button class="button">Log Out</button></a>
             <?php if(isAdmin()){ ?>
             <a href="assignment_display.php?round=1"><button class="button">Assignments</button></a>
             <?php } else {  //if(isAdmin()) ?>
