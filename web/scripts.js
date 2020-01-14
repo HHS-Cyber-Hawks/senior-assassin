@@ -14,8 +14,8 @@ function updateStatus(id, status, round) {
     location.href = "assignment_update_status.php?id=" + id + "&status=" + status + "&round=" + round + "&time=" + timestamp;
 }
 
-function showStats(id, round) {
-    location.href = "player_stats.php?id=" + id + "&round=" + round;
+function showHistory(id, round) {
+    location.href = "player_history.php?id=" + id + "&round=" + round;
 }
 
 function newRound() {
