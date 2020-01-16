@@ -76,7 +76,6 @@ foreach ($attacker_array as $attacker)
   $sql = "SELECT last_name from players where player_id = $potential_target";
   $last = get_value($sql, "last_name");
 
-  echo $player . ", Your Target is: " . $first . " " . $last . "\n";
   send_email($player, "Your Assignment", "Your Target is: " . $first . " " . $last);
 }
 
@@ -92,4 +91,4 @@ SQL;
 
 $conn->close();
 
-//header('Location: assignment_display.php?round=1');
+header('Location: assignment_display.php?round=1');
