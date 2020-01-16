@@ -66,6 +66,18 @@ foreach ($attacker_array as $attacker)
   }
   // Add the target to the final array
   array_push($target_array, $potential_target);
+
+  $sql = "SELECT email from players where player_id = $attacker";
+  $player = get_value($sql, "email");
+
+  $sql = "SELECT first_name from players where player_id = $potential_target";
+  $first = get_value($sql, "first_name");
+
+  $sql = "SELECT last_name from players where player_id = $potential_target";
+  $last = get_value($sql, "last_name");
+
+  echo $player . ", Your Target is: " . $first . " " . $last . "\n";
+  send_email($player, "Your Assignment", "Your Target is: " . $first . " " . $last);
 }
 
 // Now insert the records into the database
@@ -80,4 +92,4 @@ SQL;
 
 $conn->close();
 
-header('Location: assignment_display.php?round=1');
+//header('Location: assignment_display.php?round=1');
