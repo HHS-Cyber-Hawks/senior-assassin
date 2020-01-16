@@ -19,9 +19,6 @@
           $file = fopen($fileName, "r");
 
           while (($column = fgetcsv($file, 10000, ",")) !== FALSE) {
-              $sqlInsert = "INSERT INTO players (first_name, last_name, email)
-                     VALUES ('" . $column[0] . "','" . $column[1] . "','" . $column[2] . "')";
-              $result = mysqli_query($conn, $sqlInsert);
             $sqlInsert = "INSERT INTO users (first_name, last_name, email) " .
                    "VALUES ('" . $column[0] . "','" . $column[1] . "','" . $column[2] . "')";
             $result = mysqli_query($conn, $sqlInsert);

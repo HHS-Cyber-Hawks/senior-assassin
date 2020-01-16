@@ -21,6 +21,13 @@
   extract($_REQUEST);
 
   //Set info on user session (player is admin?)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3e92b5f39bda97b82bcd42d6cabc252f9d5ae3c3
+>>>>>>> 0eebcf251185677dd20fa763180263bd494097ae
   session_start();
 
   function isAdmin()
