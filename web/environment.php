@@ -13,10 +13,21 @@
   //EMAIl STUFF
   # email - seniorassassinemail@gmail.
   # password - seniorassassin!
+  require 'vendor/autoload.php';
+
+  use PHPMailer\PHPMailer\PHPMailer;
+  use PHPMailer\PHPMailer\Exception;
+
   extract($_REQUEST);
 
   //Set info on user session (player is admin?)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
 
+>>>>>>> 3e92b5f39bda97b82bcd42d6cabc252f9d5ae3c3
+>>>>>>> 0eebcf251185677dd20fa763180263bd494097ae
   session_start();
 
   function isAdmin()
@@ -71,8 +82,6 @@
 
     function send_email($recipient, $subject, $message)
     {
-        global $config;
-
         $mail = new PHPMailer;
         $mail->isSMTP();
 
@@ -84,14 +93,16 @@
         $mail->SMTPSecure = 'tls';
         $mail->SMTPAuth = true;
 
-        $mail->Username = 'jheyl20@hanoverstudents.org';
-        $mail->Password = '905-3064';
+        $mail->Username = 'seniorassassinemail@gmail';
+        $mail->Password = 'seniorassassin!';
 
-        $mail->setFrom($config['gmail']['email'], $config['gmail']['name']);
+        $mail->setFrom( 'seniorassassinemail@gmail', 'Senior Assassin No-Reply');
 
-        $mail->addAddress($recipient);
+        //$mail->addAddress($recipient);
+        $mail->addAddress('jheyl20@hanoverstudents.org');
         $mail->Subject = $subject;
         $mail->msgHTML($message);
+
 
         $mail->send();
     }

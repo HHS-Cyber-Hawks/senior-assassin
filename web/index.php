@@ -139,7 +139,7 @@ if ($result->num_rows > 0) {
           echo "</td>";
           echo "<td><button onclick='deletePlayer(" . $row["player_id"] . ")'>Delete</button> <button onclick='editPlayer(" . $row["player_id"] . ", $round)'>Edit</button></td></div>";
         }
-        echo "<td><button onclick='showStats(" . $row["player_id"] . ", $round)'>View History</button>";
+        echo "<td><button onclick='showHistory(" . $row["player_id"] . ", $round)'>View History</button>";
         echo "</tr>";
 
     }
