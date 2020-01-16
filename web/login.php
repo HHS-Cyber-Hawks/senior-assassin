@@ -1,5 +1,4 @@
 <?php
-// TODO: Focus on the sign up botton. Make a new PHP file that allows players to sign up and insert into the users table
 /*************************************************************************************************
  * login.php
  *

@@ -31,6 +31,7 @@ SELECT id, display_name, is_admin, email
 SQL;
 
 
+
 $result = $dbh->query($sql);
 
 $count = $result->num_rows;
