@@ -15,26 +15,31 @@ include("environment.php");
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-   <!-- Bootstrap CSS -->
+   <!-- Bootstrap CSS
+ STILL MUST CENTER THE LABEL OVER THE INPUT BLOCKS -->
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
    <title>Hello, world!</title>
  </head>
  <body>
 
-      <div class="jumbotron col-md-8 col-md-offset-2">
-          <h2>Welcome to Senior Assassin!</h2>
-          <form class="form-horizontal" action="javascript:void(0);">
+      <div class="jumbotron">
+          <h2 style="text-align: center">Welcome to Senior Assassin!</h2>
+          <form class="justify-content-center" action="javascript:void(0);">
               <div class="col-xs-12" style="height:20px;"></div>
               <div class="form-group">
-                  <label class="col-sm-3 control-label" for="email">Email:</label>
-                  <div class="col-sm-9">
+                  <div class = "row">
+                    <label class="col-sm-8 mx-auto" for="email">Email:</label>
+                  </div>
+                  <div class="col-sm-8 mx-auto">
                       <input type="text" class="form-control" id="email" name="email" placeholder="Email" autofocus />
                   </div>
               </div>
               <div class="form-group">
-                  <label class="col-sm-3 control-label" for="password">Password:</label>
-                  <div class="col-sm-9">
+                  <div class = "row">
+                    <label class="col-sm-8 mx-auto" for="password">Password:</label>
+                  </div>
+                  <div class="col-sm-8 mx-auto">
                       <input type="password" class="form-control" id="password" name="password" placeholder="Password" />
                   </div>
               </div>
@@ -42,7 +47,7 @@ include("environment.php");
                   <input type="submit" id="loginButton" class="btn btn-primary btn-block" value="Log In" onclick="login()" />
               </div>
               <div class="col-xs-12" style="height:10px;"></div>
-              <div class="container col-md-6 col-md-offset-3">
+              <div class= "text-center">
                   Don't have an account? <a class="btn btn-link" href="register.php" role="button">Sign Up</a>
               </div>
           </form>

@@ -24,34 +24,42 @@ if ($conn->connect_error) {
  <body>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-      <div class="jumbotron col-md-8 col-md-offset-2">
-          <h2>Registration</h2>
+      <div class="jumbotron">
+          <h2 style="text-align: center">Registration</h2>
 
-          <p>Enter the information below to create your account.</p>
+          <p style="text-align: center">Enter the information below to create your account.</p>
 
           <form class="form-horizontal" action="javascript:void(0)">
               <div class="col-xs-12" style="height:20px;"></div>
               <div class="form-group">
-                  <label class="col-sm-3 control-label" for="email">Email:</label>
-                  <div class="col-sm-9">
+                <div class = "row">
+                  <label class="col-sm-8 mx-auto" for="email">Email:</label>
+                </div>
+                  <div class="col-sm-8 mx-auto">
                       <input type="text" class="form-control" id="email" name="email" placeholder="Email" autofocus />
                   </div>
               </div>
               <div class="form-group">
-                  <label class="col-sm-3 control-label" for="password">Password:</label>
-                  <div class="col-sm-9">
+                <div class = "row">
+                  <label class="col-sm-8 mx-auto" for="password">Password:</label>
+                </div>
+                  <div class="col-sm-8 mx-auto">
                       <input type="password" class="form-control" id="password" name="password" placeholder="Password" />
                   </div>
               </div>
               <div class="form-group">
-                  <label class="col-sm-3 control-label" from="confirmPassword">Confirm Password:</label>
-                  <div class="col-sm-9">
+                <div class = "row">
+                  <label class="col-sm-8 mx-auto" from="confirmPassword">Confirm Password:</label>
+                </div>
+                  <div class="col-sm-8 mx-auto">
                       <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password">
                   </div>
               </div>
               <div class="form-group">
-                  <label class="col-sm-3 control-label" for="displayName">Display Name:</label>
-                  <div class="col-sm-9">
+                <div class = "row">
+                  <label class="col-sm-8 mx-auto" for="displayName">Display Name:</label>
+                </div>
+                  <div class="col-sm-8 mx-auto">
                       <input type="text" class="form-control" id="displayName" name="displayName" placeholder="Display Name" />
                   </div>
               </div>
@@ -59,8 +67,8 @@ if ($conn->connect_error) {
                   <input type="button" id="registerButton" class="btn btn-primary btn-block" value="Create Account" onclick="register()" />
               </div>
               <div class="col-xs-12" style="height:30px;"></div>
-              <div class="container col-md-6 col-md-offset-3">
-                  <a  href="index.php?content=login" role="button">Return to the login page</a>
+              <div class="text-center">
+                  <a  href="login.php?" role="button">Return to the login page</a>
               </div>
           </form>
       </div>
@@ -89,7 +97,7 @@ if ($conn->connect_error) {
               $('#registerButton').prop('disabled', true);
 
               $.ajax(settings).done(function(response) {
-                  showAlert('success', 'Account Registered!', 'Continue to the <a href="index.php?content=login">login page</a> to get started.');
+                  showAlert('success', 'Account Registered!', 'Continue to the login page to get started.');
                   setTimeout(function() { window.location.replace('index.php?content=login'); }, 5000);
               }).fail(function(jqXHR) {
                   if (jqXHR.status == 400) {
