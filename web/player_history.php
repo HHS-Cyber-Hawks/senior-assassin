@@ -27,20 +27,31 @@ $fname = "SELECT first_name FROM players WHERE player_id = $id";
 $lname = "SELECT last_name FROM players WHERE player_id = $id";
 $name = get_value($fname, "first_name") . " " . get_value($lname, "last_name");
 
-echo "<html>";
-echo "<head>" .
-      "<script src='scripts.js?" . rand() . "'></script>" .
-      "<link rel='stylesheet' type='text/css' href='styles.css?'" . rand() . "' />" .
-      "</head>";
+?>
 
-echo "<body>";
-echo "<h1 style='text-align: center;'>" . $name . "</h1>";
-echo "<a href='index.php?round=$round' style='text-align: center;'><p>back</p></a>";
+<html>
+  <head>
+      <script src='scripts.js? <?php echo rand(); ?> '></script>
+      <link rel='stylesheet' type='text/css' href='styles.css? <?php echo rand() ?> '/>
+  </head>
+
+  <body>
+    <h1 style='text-align: center; font-family: arial; color: #1772fc;'> <?php echo $name; ?> </h1>
+    <div class="button-header">
+      <div>
+        <span>
+          <a href='index.php?round= <?php echo $round; ?>'><button class="lower-button">Back</button></a>
+        </span>
+      </div>
+    </div>
+    <br />
+    <br />
+
+<?php
 if ($result->num_rows > 0) {
     echo "<table id='resultsTable' style='td{ width: 100px; }'>";
     echo "<tr><th>Attacker</th><th>Target</th><th>Round</th><th>Timestamp</th></tr>";
 
-    // output data of each row
     while($row = $result->fetch_assoc()) {
         echo "<tr>";
         echo "<td>" . $row["attacker_first_name"] . " " . $row["attacker_last_name"] . "</td>";
@@ -56,6 +67,8 @@ if ($result->num_rows > 0) {
 }
 else
 {
-  echo "<p style='text-align: center;'>No Player History</p>";
+  echo "<p class='text' style='text-align: center;'>No Player History</p>";
 }
-echo "</body>";
+?>
+
+</body>

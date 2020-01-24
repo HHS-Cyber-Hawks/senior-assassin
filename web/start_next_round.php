@@ -162,9 +162,32 @@ foreach ($players_moving_on as $player) {
 
 $num_assignments = get_value("SELECT count(assignment_id) FROM assignments WHERE assignment_round = $round", "count(assignment_id)");
 $num_players_left = get_value("SELECT count(*) FROM players WHERE player_status = 0", "count(*)");
-if ($num_assignments == 1 && $num_players_left == 2)
+
+// FIX THIS
+
+if ($num_players_left == 2)
 {
-  echo "Two players, one assignment";
+  echo "HERE $round</br>";
+
+  $sql = "SELECT player_id FROM players WHERE player_status = 0";
+  $result = $conn->query($sql);
+  $array = [];
+  while ($row = $result->fetch_assoc())
+  {
+    array_push($array, $row["player_id"]);
+  }
+
+  $player1ID = $array[0];
+  $player2ID = $array[1];
+
+  $conn->query("DELETE FROM assignments WHERE assignment_round = $round");
+  $conn->query("INSERT INTO assignments (attacker_id, target_id, assignment_status, assignment_round) VALUES ($player1ID, $player2ID, 0, $round)");
+  $conn->query("INSERT INTO assignments (attacker_id, target_id, assignment_status, assignment_round) VALUES ($player2ID, $player1ID, 0, $round)");
+}
+
+if ($num_players_left == 1)
+{
+  $conn->query("DELETE FROM assignments WHERE assignment_round = $round");
 }
 
 header("Location: assignment_display.php?round=" . $round);
