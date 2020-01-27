@@ -18,7 +18,7 @@ $assignment_id = $id;
 if ($status == 2)
 {
   $date = date('Y-m-d H:i:s');
-  $sql0 = "INSERT INTO assignemnt (assignment_timestamp) VALUES ($date)";
+  $sql0 = "INSERT INTO assignment (assignment_timestamp) VALUES ($date)";
   $conn->query($sql0);
 
   // The query to get the attacker id given the assignment_id
