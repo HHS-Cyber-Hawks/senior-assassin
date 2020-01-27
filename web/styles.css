@@ -211,3 +211,10 @@ form:before {
     z-index: -1;
     border-radius: 10px;
 }
+
+.rules {
+  background-color: light-gray;
+}
+.topRule {
+  font-size: 1000px;
+}
