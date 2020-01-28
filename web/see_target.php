@@ -3,20 +3,28 @@
 //copy of player history, but only showing attacker's target currently open
 include("environment.php");
 $conn = create_connection();
-$id =  $_SESSION['userId'];// $conn->real_escape_string($id);
+$email =  strval($_SESSION['email']);
 
-echo $id;
+$sql = "SELECT player_id FROM players WHERE email = '$email'";
+$result = $conn->query($sql);
+$temp = [];
+while($row = $result->fetch_assoc())
+{
+  array_push($temp, $row['player_id']);
+}
+$id = $temp[0];
+
 $sql = <<<SQL
           SELECT assignment_id,
           attackers.first_name as attacker_first_name,
           attackers.last_name as attacker_last_name,
           targets.first_name as target_first_name,
           targets.last_name as target_last_name,
-          assignment_status
+          assignment_status, assignment_round
           FROM assignments
           JOIN players attackers ON attackers.player_id = attacker_id
           JOIN players targets ON targets.player_id = target_id
-          WHERE attacker_id = $id AND assignment_status = 0
+          WHERE attacker_id = $id AND assignment_status = 0 AND assignment_round = $max_round
           ORDER BY assignment_round;
 SQL;
 $result = $conn->query($sql);
@@ -24,7 +32,6 @@ $result = $conn->query($sql);
 $fname = "SELECT first_name FROM players WHERE player_id = $id";
 $lname = "SELECT last_name FROM players WHERE player_id = $id";
 $name = get_value($fname, "first_name") . " " . get_value($lname, "last_name");
-echo $name;
 echo "<html>";
 echo "<head>" .
       "<script src='scripts.js?" . rand() . "'></script>" .
@@ -53,6 +60,6 @@ if ($result->num_rows > 0) {
 }
 else
 {
-  echo "<p style='text-align: center;'>No Player History</p>";
+  echo "<p style='text-align: center;'>No target</p>";
 }
 echo "</body>";

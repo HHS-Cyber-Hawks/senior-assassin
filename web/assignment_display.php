@@ -31,8 +31,6 @@ $round = $conn->real_escape_string($round);
       </div>
       <div>
         <?php
-          $sql = "SELECT MAX(assignment_round) FROM assignments";
-          $max_round = get_value($sql, "MAX(assignment_round)");
           if ($max_round != 1)
           {
             for ($i = 1; $i <= $max_round; $i++)

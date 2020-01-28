@@ -98,7 +98,7 @@ if ($conn->connect_error) {
 
               $.ajax(settings).done(function(response) {
                   showAlert('success', 'Account Registered!', 'Continue to the login page to get started.');
-                  setTimeout(function() { window.location.replace('index.php?content=login'); }, 5000);
+                  setTimeout(function() { window.location.replace('login.php'); }, 5000);
               }).fail(function(jqXHR) {
                   if (jqXHR.status == 400) {
                       showAlert('danger', 'Email Taken!', 'This email address has been used already. Do you need to <a href="index.php?content=passwordRecovery">reset the password</a>?');
