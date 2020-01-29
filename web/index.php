@@ -14,6 +14,9 @@ if ($conn->connect_error) {
 }
 
 $round = $conn->real_escape_string($round);
+
+// var_dump($_SESSION);
+
 ?>
 
 <html>
