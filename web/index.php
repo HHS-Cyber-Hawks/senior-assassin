@@ -41,7 +41,7 @@ $round = $conn->real_escape_string($round);
             <?php if(isAdmin()){ ?>
             <a href="assignment_display.php?round=1"><button class="button">Assignments</button></a>
             <?php } else {  //if(isAdmin()) ?>
-            <a href="see_target.php"><button class="button">My Target</button></a>
+            <a href="see_target.php?round= <?php echo $round; ?>"><button class="button">My Target</button></a>
             <?php }  //End if(isAdmin()) ?>
         </span>
       </div>

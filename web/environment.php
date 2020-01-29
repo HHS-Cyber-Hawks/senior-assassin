@@ -90,7 +90,7 @@
         $mail->Username = 'seniorassassinemail@gmail.com';
         $mail->Password = 'seniorassassin!';
 
-        $mail->setFrom( 'seniorassassinemail@gmail.com', 'Senior Assassin No-Reply');
+        $mail->setFrom('seniorassassinemail@gmail.com', 'Senior Assassin No-Reply');
 
         //$mail->addAddress($recipient);
         $mail->addAddress('jheyl20@hanoverstudents.org');
