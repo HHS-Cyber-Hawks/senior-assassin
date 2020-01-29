@@ -2,14 +2,6 @@
 
 include("environment.php");
 
-// Create connection
-$conn = create_connection();
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
 // Queries database for the player ids and load them into the attacker array
 $get_count = <<<SQL
                 SELECT player_id

@@ -2,13 +2,6 @@
 
 include("environment.php");
 
-$conn = create_connection();
-
-if ($conn->connect_error)
-{
-    die("Connection failed: " . $conn->connect_error);
-}
-
 $round = $conn->real_escape_string($round);
 
 // Gets the player status given the player id

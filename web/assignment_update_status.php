@@ -2,12 +2,6 @@
 
 include("environment.php");
 
-$conn = create_connection();
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
 $id = $conn->real_escape_string($id);
 $status = $conn->real_escape_string($status);
 $round = $conn->real_escape_string($round);

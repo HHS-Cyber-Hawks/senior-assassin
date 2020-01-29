@@ -2,13 +2,6 @@
 
 include("environment.php");
 
-// Connect to the database and make sure it was successful
-$conn = create_connection();
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
 $round = $conn->real_escape_string($round);
 
 // sql to delete a record

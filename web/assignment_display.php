@@ -2,9 +2,6 @@
 
 include("environment.php");
 
-// Create connection
-$conn = create_connection();
-
 $round = $conn->real_escape_string($round);
 
 ?>

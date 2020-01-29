@@ -2,7 +2,7 @@
 <?php
 //copy of player history, but only showing attacker's target currently open
 include("environment.php");
-$conn = create_connection();
+
 $email =  strval($_SESSION['email']);
 
 $sql = "SELECT player_id FROM players WHERE email = '$email'";

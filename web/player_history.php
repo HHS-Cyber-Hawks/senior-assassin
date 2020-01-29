@@ -1,7 +1,7 @@
 <?php
 
 include("environment.php");
-$conn = create_connection();
+
 extract($_REQUEST);
 $id = $conn->real_escape_string($id);
 $round = $conn->real_escape_string($round);
