@@ -13,6 +13,13 @@ $round = $conn->real_escape_string($round);
     <link rel='stylesheet' type='text/css' href='styles.css?<?php echo rand(); ?>' />
   </head>
   <body>
+    <div class="dropdown">
+      <button class="dropbtn"><?php echo $_SESSION['displayName'] ?></button>
+      <div class="dropdown-content">
+        <p><?php echo $_SESSION['email'] ?></p>
+        <a href="logout.php">Log out</a>
+      </div>
+    </div>
     <div class='header'>
       <h1 class='title'>Hanover Senior Assassin</h1>
     </div>

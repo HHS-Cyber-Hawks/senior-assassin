@@ -17,6 +17,13 @@ if (!isset($submit)) {
   </head>
 
   <body class="rules">
+    <div class="dropdown">
+      <button class="dropbtn"><?php echo $_SESSION['displayName'] ?></button>
+      <div class="dropdown-content">
+        <p><?php echo $_SESSION['email'] ?></p>
+        <a href="logout.php">Log out</a>
+      </div>
+    </div>
     <h3>Enter your rules:</h3>
     <form action="rules.php" method="post" style="margin-top: 20px; margin-left: 100px; ">
 
