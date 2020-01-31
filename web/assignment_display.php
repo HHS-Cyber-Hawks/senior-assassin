@@ -30,7 +30,15 @@ $round = $conn->real_escape_string($round);
       </div>
       <div>
         <a href='assignment_create.php'><button class='lower-button'>Create Assignments</button></a>
-        <a href='assignment_clear.php'><button class='lower-button'>Clear Assignments</button></a>
+        <button onclick = "confirmClear()" class='lower-button'>Clear Assignments</button>
+        <script>
+          function confirmClear() {
+            var txt;
+            if (confirm("Do you want to clear the Asssignments?")) {
+              window.location = "assignment_clear.php";
+            }
+          }
+        </script>
         <a href='start_next_round.php?round=<?php echo $round; ?>'><button class='lower-button'>Start Next Round</button></a>
       </div>
       <div>
