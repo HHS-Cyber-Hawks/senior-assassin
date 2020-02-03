@@ -37,7 +37,7 @@ $round = $conn->real_escape_string($round);
             <?php if(isAdmin()){ ?>
             <a href="assignment_display.php?round=1"><button class="button">Assignments</button></a>
             <?php } else {  //if(isAdmin()) ?>
-            <a href="see_target.php?round= <?php echo $round; ?>"><button class="button">My Target</button></a>
+            <a href="see_target.php?round=<?php echo $round; ?>"><button class="button">My Target</button></a>
             <?php }  //End if(isAdmin()) ?>
         </span>
       </div>
@@ -47,6 +47,7 @@ $round = $conn->real_escape_string($round);
             <a href="players_clear.php?round=<?php echo $round; ?>"><button class="lower-button">Clear Players</button></a>
             <a href="players_reset.php?round=<?php echo $round; ?>"><button class="lower-button">Reset Players</button></a>
             <a href="rules.php?round=<?php echo $round; ?>"><button class="lower-button">Add Rules</button></a>
+            <a href="display_rules.php?round=<?php echo $round; ?>"><button class="lower-button">Display Rules</button></a>
         </span>
       </div>
       <div>

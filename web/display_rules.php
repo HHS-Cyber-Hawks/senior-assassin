@@ -12,3 +12,5 @@ while($row = $result->fetch_assoc()){   //Creates a loop to loop through results
 }
 
 echo "</table>"; //Close the table in HTML
+
+echo "<a href='index.php?round=<?php echo $round; ?>'><button class='button'>Player List</button></a>";
