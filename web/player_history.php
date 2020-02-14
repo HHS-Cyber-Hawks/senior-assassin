@@ -14,7 +14,8 @@ $sql = <<<SQL
           targets.last_name as target_last_name,
           assignment_status,
           assignment_round,
-          assignment_timestamp
+          date_format(assignment_timestamp, '%M %d %r') as formatted_date
+
           FROM assignments
           JOIN players attackers ON attackers.player_id = attacker_id
           JOIN players targets ON targets.player_id = target_id
@@ -51,13 +52,13 @@ $name = get_value($fname, "first_name") . " " . get_value($lname, "last_name");
 if ($result->num_rows > 0) {
     echo "<table id='resultsTable' style='td{ width: 100px; }'>";
     echo "<tr><th>Attacker</th><th>Target</th><th>Round</th><th>Timestamp</th></tr>";
-
+    $timeStamp = substr("assignment_timestamp" , 3);
     while($row = $result->fetch_assoc()) {
         echo "<tr>";
         echo "<td>" . $row["attacker_first_name"] . " " . $row["attacker_last_name"] . "</td>";
         echo "<td>" . $row["target_first_name"]   . " " . $row["target_last_name"]   . "</td>";
         echo "<td>" . $row["assignment_round"] . "</td>";
-        echo "<td>" . $row["assignment_timestamp"] . "</td>";
+        echo "<td>" . $row["formatted_date"] . "</td>";
 
         echo "</tr>";
     }
