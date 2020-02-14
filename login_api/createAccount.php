@@ -37,8 +37,8 @@ $count = $result->num_rows;
 if ($count == 0)
 {
     $sql = <<<SQL
-    INSERT INTO users (email, password, display_name)
-    VALUES ('{$email}', PASSWORD('{$password}'), '{$displayName}')
+    INSERT INTO users (user_name, email, password, display_name, has_paid, is_admin)
+    VALUES ('{$name}','{$email}', PASSWORD('{$password}'), '{$displayName}', 0, 0)
 SQL;
 
     if ($dbh->query($sql))

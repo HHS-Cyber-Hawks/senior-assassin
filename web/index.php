@@ -36,6 +36,7 @@ $round = $conn->real_escape_string($round);
             <button class="current-button">Player List</button>
             <?php if(isAdmin()){ ?>
             <a href="assignment_display.php?round=1"><button class="button">Assignments</button></a>
+            <a href="approve_players.php"><button class="button">Yet to Pay</button></a>
             <?php } else {  //if(isAdmin()) ?>
             <a href="see_target.php?round=<?php echo $round; ?>"><button class="button">My Target</button></a>
             <?php }  //End if(isAdmin()) ?>
@@ -75,13 +76,6 @@ $round = $conn->real_escape_string($round);
 
 <?php
 
-// Create connection
-$conn = create_connection();
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
   $sql = <<<SQL
             SELECT player_id, first_name, last_name, email, player_status
@@ -142,7 +136,6 @@ if ($result->num_rows > 0) {
     }
 }
 
-$conn->close();
 ?>
 
     </div>
