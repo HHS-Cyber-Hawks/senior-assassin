@@ -40,7 +40,7 @@ $name = get_value($fname, "first_name") . " " . get_value($lname, "last_name");
     <div class="button-header">
       <div>
         <span>
-          <a href='index.php?round= <?php echo $round; ?>'><button class="lower-button">Back</button></a>
+          <a href='index.php?round=<?php echo $round; ?>'><button class="lower-button">Back</button></a>
         </span>
       </div>
     </div>

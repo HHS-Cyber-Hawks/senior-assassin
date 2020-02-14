@@ -140,6 +140,17 @@ foreach ($attacker_array as $attacker)
   }
   // Add the target to the final array
   array_push($target_array, $potential_target);
+
+  // $sql = "SELECT email from players where player_id = $attacker";
+  // $player = get_value($sql, "email");
+  //
+  // $sql = "SELECT first_name from players where player_id = $potential_target";
+  // $first = get_value($sql, "first_name");
+  //
+  // $sql = "SELECT last_name from players where player_id = $potential_target";
+  // $last = get_value($sql, "last_name");
+  //
+  // send_email($player, "Your Assignment", "Your Target is: " . $first . " " . $last);
 }
 
 // Now insert the records into the database
@@ -155,8 +166,6 @@ foreach ($players_moving_on as $player) {
 
 $num_assignments = get_value("SELECT count(assignment_id) FROM assignments WHERE assignment_round = $round", "count(assignment_id)");
 $num_players_left = get_value("SELECT count(*) FROM players WHERE player_status = 0", "count(*)");
-
-// FIX THIS
 
 if ($num_players_left == 2)
 {

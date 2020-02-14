@@ -102,8 +102,8 @@
 
         $mail->setFrom('seniorassassinemail@gmail.com', 'Senior Assassin No-Reply');
 
-        //$mail->addAddress($recipient);
-        $mail->addAddress('jheyl20@hanoverstudents.org');
+        // $mail->addAddress($recipient);
+        $mail->addAddress('lbertoni20@hanoverstudents.org');
         $mail->Subject = $subject;
         $mail->msgHTML($message);
 

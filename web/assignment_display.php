@@ -13,6 +13,13 @@ $round = $conn->real_escape_string($round);
     <link rel='stylesheet' type='text/css' href='styles.css?<?php echo rand(); ?>' />
   </head>
   <body>
+    <div class="dropdown">
+      <button class="dropbtn"><?php echo $_SESSION['displayName'] ?></button>
+      <div class="dropdown-content">
+        <p><?php echo $_SESSION['email'] ?></p>
+        <a href="logout.php">Log out</a>
+      </div>
+    </div>
     <div class='header'>
       <h1 class='title'>Hanover Senior Assassin</h1>
     </div>
@@ -23,7 +30,15 @@ $round = $conn->real_escape_string($round);
       </div>
       <div>
         <a href='assignment_create.php'><button class='lower-button'>Create Assignments</button></a>
-        <a href='assignment_clear.php'><button class='lower-button'>Clear Assignments</button></a>
+        <button onclick = "confirmClear()" class='lower-button'>Clear Assignments</button>
+        <script>
+          function confirmClear() {
+            var txt;
+            if (confirm("Do you want to clear the Asssignments?")) {
+              window.location = "assignment_clear.php";
+            }
+          }
+        </script>
         <a href='start_next_round.php?round=<?php echo $round; ?>'><button class='lower-button'>Start Next Round</button></a>
       </div>
       <div>

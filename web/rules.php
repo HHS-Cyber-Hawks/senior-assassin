@@ -23,6 +23,7 @@ if (!isset($submit)) {
     <h1 class="header">Rules</h1>
     <link rel="stylesheet" type="text/css" href="styles.css?<?php echo rand(); ?>" />
   </head>
+<<<<<<< HEAD
 <?php
   echo"<form action='rules.php' method='post' style='margin-bottom: 5px;'>" .
       "<textarea rows='4' cols='50' type='text' name='rule' value='" . $row['rule'] . "'></textarea>" .
@@ -30,6 +31,27 @@ if (!isset($submit)) {
       "<button class ='button' type='submit' name='submit'>Save</button>" .
   "</form>"
 ?>
+=======
+
+  <!-- <body class="rules">
+    <div class="dropdown">
+      <button class="dropbtn"><?php echo $_SESSION['displayName'] ?></button>
+      <div class="dropdown-content">
+        <p><?php echo $_SESSION['email'] ?></p>
+        <a href="logout.php">Log out</a>
+      </div>
+    </div>
+    <h3>Enter your rules:</h3>
+    <form action="rules.php" method="post" style="margin-top: 20px; margin-left: 100px; ">
+
+        <textarea name="rule" style="width: 50%; height:200px"/></textarea>
+        <br />
+        <button class ='button' type="submit" name="submit">Save</button>
+    </form>
+  </body>
+</html> -->
+
+>>>>>>> 54cd6c36a44680f2341078a7c0ca73bc32ca599e
 <?php
 
 }
