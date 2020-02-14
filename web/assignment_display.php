@@ -43,11 +43,20 @@ $round = $conn->real_escape_string($round);
       </div>
       <div>
         <?php
+
+          $sql = "SELECT count(*) FROM players WHERE player_status = 0";
+          $num_players_left = get_value($sql, "count(*)");
+
           if ($max_round != 1)
           {
             for ($i = 1; $i <= $max_round; $i++)
             {
               echo "<a href='assignment_display?round=$i'><button>Round $i</button></a>";
+            }
+
+            if ($num_players_left == 1)
+            {
+              echo "<a href='assignment_display?round=" . $max_round + 1 . "'><button>Winner</button></a>";
             }
           }
         ?>
@@ -120,6 +129,15 @@ if ($result->num_rows > 0)
 
   echo "</table>";
   echo "<br />";
+}
+else
+{
+  $sql = "SELECT first_name, last_name FROM players WHERE player_status = 0";
+  $result = $conn->query($sql);
+  while($row = $result->fetch_assoc())
+  {
+    echo "<p style='text-align: center'> Winner: " . $row['first_name'] . " " . $row['last_name'] . "</p>";
+  }
 }
 
 $conn->close();

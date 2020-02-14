@@ -68,7 +68,7 @@ foreach ($attacker_array as $attacker)
   $sql = "SELECT last_name from players where player_id = $potential_target";
   $last = get_value($sql, "last_name");
 
-  //send_email($player, "Your Assignment", "Your Target is: " . $first . " " . $last);
+  send_email($player, "Your Assignment", "Your Target is: " . $first . " " . $last);
 }
 
 // Now insert the records into the database
