@@ -1,8 +1,6 @@
 <?php
 include("environment.php");
 
-extract($_REQUEST);
-
 if (!isset($submit)) {
 
 ?>

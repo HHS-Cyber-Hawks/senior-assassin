@@ -28,11 +28,23 @@
   $max_round = get_value($sql, "MAX(assignment_round)");
 
 // If you aren't logged in and you try to access a page, it redirects you to the login page
-  // if((!isset($_SESSION) || sizeof($_SESSION) == 0) && strpos($_SERVER['REQUEST_URI'], "login.php") == false)
-  // {
-  //     header("Location: login.php");
-  //     die("Redirecting to login.php");
-  // }
+  if((!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) && !allowed($_SERVER['REQUEST_URI'])) {
+    header("Location: login.php");
+    die("Redirecting to login.php");
+  }
+// FIX THIS
+  function allowed($URI) {
+    $listOfAllowed = ['login.php', 'logout.php', 'register.php', 'authenticate.php', 'createAccount.php', 'resetPassword.php'];
+    $inList = false;
+    foreach ($listOfAllowed as $url)
+    {
+      if (strpos($URI, $url))
+      {
+        $inList = true;
+      }
+    }
+    return $inList;
+  }
 
   function isAdmin()
   {

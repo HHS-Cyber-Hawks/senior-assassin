@@ -3,7 +3,7 @@
 //copy of player history, but only showing attacker's target currently open
 include("environment.php");
 
-$email =  strval($_SESSION['email']);
+$email = strval($_SESSION['email']);
 
 $sql = "SELECT player_id FROM players WHERE email = '$email'";
 $result = $conn->query($sql);
@@ -12,7 +12,14 @@ while($row = $result->fetch_assoc())
 {
   array_push($temp, $row['player_id']);
 }
-$id = $temp[0];
+if (sizeof($temp) != 0)
+{
+  $id = $temp[0];
+}
+else
+{
+  $id = 0;
+}
 
 $sql = <<<SQL
           SELECT assignment_id,
