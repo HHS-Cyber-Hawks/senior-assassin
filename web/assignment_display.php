@@ -44,19 +44,23 @@ $round = $conn->real_escape_string($round);
       <div>
         <?php
 
+          $sql = "SELECT MAX(assignment_round) FROM assignments";
+          $max_round = get_value($sql, "MAX(assignment_round)");
+
           $sql = "SELECT count(*) FROM players WHERE player_status = 0";
           $num_players_left = get_value($sql, "count(*)");
 
           if ($max_round != 1)
           {
+            echo "<br />";
             for ($i = 1; $i <= $max_round; $i++)
             {
-              echo "<a href='assignment_display?round=$i'><button>Round $i</button></a>";
+              echo "<a href='assignment_display?round=$i'><button>Round $i</button></a> &nbsp &nbsp";
             }
 
             if ($num_players_left == 1)
             {
-              echo "<a href='assignment_display?round=" . $max_round + 1 . "'><button>Winner</button></a>";
+              echo "<a href='assignment_display?round=" . ($max_round + 1) . "'><button>Winner</button></a>";
             }
           }
         ?>
@@ -66,8 +70,15 @@ $round = $conn->real_escape_string($round);
     <br />
 
 <?php
-
-echo "<h1 class='title' style='text-align: center;'>ROUND $round</h1>";
+  echo "<hr>";
+  if ($round != $max_round + 1)
+  {
+    echo "<h1 class='title' style='text-align: center;'>ROUND $round</h1>";
+  }
+  else if ($round == $max_round + 1 && $num_players_left == 1)
+  {
+    echo "<h1 class='title' style='text-align: center;'>WINNER</h1>";
+  }
 
 $sql = <<<SQL
           SELECT assignment_id,
@@ -130,14 +141,18 @@ if ($result->num_rows > 0)
   echo "</table>";
   echo "<br />";
 }
-else
+else if ($num_players_left == 1)
 {
   $sql = "SELECT first_name, last_name FROM players WHERE player_status = 0";
   $result = $conn->query($sql);
   while($row = $result->fetch_assoc())
   {
-    echo "<p style='text-align: center'> Winner: " . $row['first_name'] . " " . $row['last_name'] . "</p>";
+    echo "<p style='text-align: center; font-family: arial; font-size: 20px;'>" . $row['first_name'] . " " . $row['last_name'] . "</p>";
   }
+}
+else
+{
+  echo "<p style='text-align: center; font-family: arial; font-size: 20px;'>No Assignments</p>";
 }
 
 $conn->close();

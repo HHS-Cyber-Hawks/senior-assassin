@@ -24,8 +24,6 @@
 
   session_start();
   $conn = create_connection();
-  $sql = "SELECT MAX(assignment_round) FROM assignments";
-  $max_round = get_value($sql, "MAX(assignment_round)");
 
 // If you aren't logged in and you try to access a page, it redirects you to the login page
   if((!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) && !allowed($_SERVER['REQUEST_URI'])) {
