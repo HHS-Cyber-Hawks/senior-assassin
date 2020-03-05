@@ -35,8 +35,8 @@ $round = $conn->real_escape_string($round);
         <span>
             <button class="current-button">Player List</button>
             <?php if(isAdmin()){ ?>
-            <a href="assignment_display.php?round=1"><button class="button">Assignments</button></a>
-            <a href="approve_players.php"><button class="button">Yet to Pay</button></a>
+            <a href="assignment_display.php?round=<?php echo $round; ?>"><button class="button">Assignments</button></a>
+            <a href="approve_players.php?round=<?php echo $round; ?>"><button class="button">Yet to Pay</button></a>
             <?php } else {  //if(isAdmin()) ?>
             <a href="see_target.php?round=<?php echo $round; ?>"><button class="button">My Target</button></a>
             <?php }  //End if(isAdmin()) ?>
@@ -78,9 +78,9 @@ $round = $conn->real_escape_string($round);
 
 
   $sql = <<<SQL
-            SELECT player_id, first_name, last_name, email, player_status
+            SELECT player_id, player_name, email, player_status
             FROM players
-            ORDER BY player_status DESC, last_name, first_name;
+            ORDER BY player_status DESC;
 SQL;
 
 $result = $conn->query($sql);
@@ -102,7 +102,7 @@ if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
         echo "<tr>";
-        echo "<td>" . $row["first_name"] . " ". $row["last_name"] . "</td>";
+        echo "<td>" . $row["player_name"] . "</td>";
         if(isAdmin())
         {
           echo "<td>" . $row["email"] . "</td>";
