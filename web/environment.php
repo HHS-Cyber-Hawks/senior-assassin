@@ -30,7 +30,7 @@
     header("Location: login.php");
     die("Redirecting to login.php");
   }
-// FIX THIS
+
   function allowed($URI) {
     $listOfAllowed = ['login.php', 'logout.php', 'register.php', 'authenticate.php', 'createAccount.php', 'resetPassword.php'];
     $inList = false;

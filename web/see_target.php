@@ -21,6 +21,9 @@ else
   $id = 0;
 }
 
+$get_max_round = "SELECT max(assignment_round) FROM assignments";
+$max_round = intval(get_value($get_max_round, "max(assignment_round)"));
+
 $sql = <<<SQL
           SELECT assignment_id,
           attackers.first_name as attacker_first_name,
@@ -34,15 +37,18 @@ $sql = <<<SQL
           WHERE attacker_id = $id AND assignment_status = 0 AND assignment_round = $max_round
           ORDER BY assignment_round;
 SQL;
-$result = $conn->query($sql);
 
-$fname = "SELECT first_name FROM players WHERE player_id = $id";
-$lname = "SELECT last_name FROM players WHERE player_id = $id";
-$name = get_value($fname, "first_name") . " " . get_value($lname, "last_name");
+if($conn->query($sql))
+{
+  $result = $conn->query($sql);
+}
+
+$get_name = "SELECT player_name FROM players";
+$name = get_value($get_name, "player_name");
 echo "<html>";
 echo "<head>" .
       "<script src='scripts.js?" . rand() . "'></script>" .
-      "<link rel='stylesheet' type='text/css' href='styles.css?'" . rand() . "' />" .
+      "<link rel='stylesheet' type='text/css' href='styles.css?" . rand() . "' />" .
       "</head>";
 
 echo "<body>";

@@ -91,54 +91,56 @@ SQL;
 
 $result = $conn->query($sql);
 
-if ($result->num_rows > 0) {
-    echo "<table id='resultsTable' >";
-    echo "<tr><th>Name</th>";
-    if(isAdmin())
-    {
-      echo "<th>Email</th>";
-    }
-    echo "<th>Status</th>";
-    if(isAdmin())
-    {
-      echo "<th>Edit/Delete</th>";
-    }
-    echo "<th>Player History</th></tr>";
-
-    // output data of each row
-    while($row = $result->fetch_assoc()) {
-        echo "<tr>";
-        echo "<td>" . $row["first_name"] . " ". $row["last_name"] . "</td>";
+if ($result) {
+    if ($result->num_rows > 0) {
+        echo "<table id='resultsTable' >";
+        echo "<tr><th>Name</th>";
         if(isAdmin())
         {
-          echo "<td>" . $row["email"] . "</td>";
+          echo "<th>Email</th>";
         }
-        echo "<td>";
-
-        if ($row["player_status"] == -1)
-        {
-          echo "Out";
-        }
-        else if ($row["player_status"] == 0)
-        {
-          echo "Playing";
-        }
-        else if ($row["player_status"] == 1)
-        {
-          echo "Can move on";
-        }
-        else if ($row["player_status"] == 2)
-        {
-          echo "Moving on";
-        }
+        echo "<th>Status</th>";
         if(isAdmin())
         {
-          echo "</td>";
-          echo "<td><button onclick='deletePlayer(" . $row["player_id"] . ")'>Delete</button> <button onclick='editPlayer(" . $row["player_id"] . ", $round)'>Edit</button></td></div>";
+          echo "<th>Edit/Delete</th>";
         }
-        echo "<td><button onclick='showHistory(" . $row["player_id"] . ", $round)'>View History</button>";
-        echo "</tr>";
+        echo "<th>Player History</th></tr>";
 
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+            echo "<tr>";
+            echo "<td>" . $row["first_name"] . " ". $row["last_name"] . "</td>";
+            if(isAdmin())
+            {
+              echo "<td>" . $row["email"] . "</td>";
+            }
+            echo "<td>";
+
+            if ($row["player_status"] == -1)
+            {
+              echo "Out";
+            }
+            else if ($row["player_status"] == 0)
+            {
+              echo "Playing";
+            }
+            else if ($row["player_status"] == 1)
+            {
+              echo "Can move on";
+            }
+            else if ($row["player_status"] == 2)
+            {
+              echo "Moving on";
+            }
+            if(isAdmin())
+            {
+              echo "</td>";
+              echo "<td><button onclick='deletePlayer(" . $row["player_id"] . ")'>Delete</button> <button onclick='editPlayer(" . $row["player_id"] . ", $round)'>Edit</button></td></div>";
+            }
+            echo "<td><button onclick='showHistory(" . $row["player_id"] . ", $round)'>View History</button>";
+            echo "</tr>";
+
+        }
     }
 }
 

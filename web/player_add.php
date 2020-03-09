@@ -18,9 +18,7 @@ if (!isset($submit)) {
     <body>
         <h1 class = 'title'> Add player </h1>
         <form action="player_add.php" method="post" style="margin-bottom: 5px;">
-            <span class="text">First Name:</span><input type="text" name="firstName" style="width: 200px;"/>
-            <br />
-            <span class="text">Last Name:</span><input type="text" name="lastName" style="width: 200px;"/>
+            <span class="text">Name:</span><input type="text" name="name" style="width: 200px;"/>
             <br />
             <span class="text">Email:</span><input type="text" name="email" style="width: 200px;"/>
             <br />
@@ -39,14 +37,13 @@ else
 {
 
     // Sanitize all input values to prevent SQL injection exploits
-    $firstName = $conn->real_escape_string($firstName);
-    $lastName = $conn->real_escape_string($lastName);
+    $name = $conn->real_escape_string($name);
     $email = $conn->real_escape_string($email);
 
     // Prepare the query string (we use HEREDOC syntax to avoid messing around with double quotes and string concatentation)
     $sql = <<<SQL
-    INSERT INTO players (first_name, last_name, email)
-      VALUES ('$firstName', '$lastName', '$email')
+    INSERT INTO players (player_name, email)
+      VALUES ('$name', '$email')
 SQL;
 
     // Execute the query and display the results

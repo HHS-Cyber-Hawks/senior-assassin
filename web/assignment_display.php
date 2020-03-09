@@ -44,8 +44,8 @@ $round = $conn->real_escape_string($round);
       <div>
         <?php
 
-          $sql = "SELECT MAX(assignment_round) FROM assignments";
-          $max_round = get_value($sql, "MAX(assignment_round)");
+          $get_max_round = "SELECT max(assignment_round) FROM assignments";
+          $max_round = intval(get_value($get_max_round, "max(assignment_round)"));
 
           $sql = "SELECT count(*) FROM players WHERE player_status = 0";
           $num_players_left = get_value($sql, "count(*)");
@@ -97,62 +97,60 @@ SQL;
 
 $result = $conn->query($sql);
 
-if ($result->num_rows > 0)
-{
+if ($result) {
+    if ($result->num_rows > 0)
+    {
 
-  echo "<table id='resultsTable'>";
-  echo "<tr> <th>Attacker</th> <th>Target</th> <th>Status</th> <th>Change Status</th> </tr>";
+      echo "<table id='resultsTable'>";
+      echo "<tr> <th>Attacker</th> <th>Target</th> <th>Status</th> <th>Change Status</th> </tr>";
 
-  while ($row = $result->fetch_assoc())
-  {
-      echo "<tr>";
-      echo "<td>" . $row["attacker_first_name"] . " " . $row["attacker_last_name"] . "</td>";
-      echo "<td>" . $row["target_first_name"]   . " " . $row["target_last_name"]   . "</td>";
-      echo "<td style='background-color: ";
-
-      if ($row["assignment_status"] == 0)
+      while ($row = $result->fetch_assoc())
       {
-        echo "'>Open";
-      }
-      else if ($row["assignment_status"] == 1)
-      {
-        echo "'>Pending";
-      }
-      else if ($row["assignment_status"] == 2)
-      {
-        echo "green'>Confirmed";
-      }
-      else if ($row["assignment_status"] == 3)
-      {
-        echo "black'>Obsolete";
+          echo "<tr>";
+          echo "<td>" . $row["attacker_first_name"] . " " . $row["attacker_last_name"] . "</td>";
+          echo "<td>" . $row["target_first_name"]   . " " . $row["target_last_name"]   . "</td>";
+          echo "<td style='background-color: ";
+
+          if ($row["assignment_status"] == 0)
+          {
+            echo "'>Open";
+          }
+          else if ($row["assignment_status"] == 1)
+          {
+            echo "'>Pending";
+          }
+          else if ($row["assignment_status"] == 2)
+          {
+            echo "green'>Confirmed";
+          }
+          else if ($row["assignment_status"] == 3)
+          {
+            echo "black'>Obsolete";
+          }
+
+          echo "</td>";
+
+          echo "<td style='width: 400px'>
+                <button style='width: 80px' onclick='updateStatus(" . $row["assignment_id"] . ", 0" . ", " . $round . ")'>Open</button>
+                <button style='width: 80px' onclick='updateStatus(" . $row["assignment_id"] . ", 1" . ", " . $round . ")'>Pending</button>
+                <button style='width: 80px' onclick='updateStatus(" . $row["assignment_id"] . ", 2" . ", " . $round . ")'>Confirmed</button>
+                <button style='width: 80px' onclick='updateStatus(" . $row["assignment_id"] . ", 3" . ", " . $round . ")'>Obsolete</button>
+                </td>";
+          echo "</tr>";
       }
 
-      echo "</td>";
-
-      echo "<td style='width: 400px'>
-            <button style='width: 80px' onclick='updateStatus(" . $row["assignment_id"] . ", 0" . ", " . $round . ")'>Open</button>
-            <button style='width: 80px' onclick='updateStatus(" . $row["assignment_id"] . ", 1" . ", " . $round . ")'>Pending</button>
-            <button style='width: 80px' onclick='updateStatus(" . $row["assignment_id"] . ", 2" . ", " . $round . ")'>Confirmed</button>
-            <button style='width: 80px' onclick='updateStatus(" . $row["assignment_id"] . ", 3" . ", " . $round . ")'>Obsolete</button>
-            </td>";
-      echo "</tr>";
-  }
-
-  echo "</table>";
-  echo "<br />";
-}
-else if ($num_players_left == 1)
-{
-  $sql = "SELECT first_name, last_name FROM players WHERE player_status = 0";
-  $result = $conn->query($sql);
-  while($row = $result->fetch_assoc())
-  {
-    echo "<p style='text-align: center; font-family: arial; font-size: 20px;'>" . $row['first_name'] . " " . $row['last_name'] . "</p>";
-  }
-}
-else
-{
-  echo "<p style='text-align: center; font-family: arial; font-size: 20px;'>No Assignments</p>";
+      echo "</table>";
+      echo "<br />";
+    }
+    else if ($num_players_left == 1)
+    {
+      $sql = "SELECT first_name, last_name FROM players WHERE player_status = 0";
+      $result = $conn->query($sql);
+      while($row = $result->fetch_assoc())
+      {
+        echo "<p style='text-align: center; font-family: arial; font-size: 20px;'>" . $row['first_name'] . " " . $row['last_name'] . "</p>";
+      }
+    }
 }
 
 $conn->close();
