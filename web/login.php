@@ -21,8 +21,7 @@ include("environment.php");
    <title>Login</title>
  </head>
  <body>
-
-      <div class="jumbotron">
+      <div class="jumbotron" style="height: 100%;">
           <h2 style="text-align: center">Welcome to Senior Assassin!</h2>
           <form class="justify-content-center" action="javascript:void(0);">
               <div class="col-xs-12" style="height:20px;"></div>
