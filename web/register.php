@@ -26,6 +26,14 @@ include("environment.php");
               <div class="col-xs-12" style="height:20px;"></div>
               <div class="form-group">
                 <div class = "row">
+                  <label class="col-sm-8 mx-auto" for="name">Name:</label>
+                </div>
+                  <div class="col-sm-8 mx-auto">
+                      <input type="name" class="form-control" id="name" name="name" placeholder="Name" />
+                  </div>
+              </div>
+              <div class="form-group">
+                <div class = "row">
                   <label class="col-sm-8 mx-auto" for="email">Email:</label>
                 </div>
                   <div class="col-sm-8 mx-auto">
@@ -77,10 +85,12 @@ include("environment.php");
               showAlert('danger', 'Password Mismatch!', 'Your passwords don\'t match, try again.');
           } else if ($('#displayName').val() == '') {
                   showAlert('danger', 'Display Name Required!', 'Your display name can\'t be blank. Enter a value and try again.');
+          } else if ($('#name').val() == '') {
+                showAlert('danger', 'Name Required!', 'Your name can\'t be blank. Enter a value and try again.');
           } else {
               var settings = {
                   'async': true,
-                  'url': '../login_api/createAccount.php?email=' + $('#email').val() + '&password=' + $('#password').val() + '&displayName=' + $('#displayName').val() + '&is_admin=0',
+                  'url': '../login_api/createAccount.php?email=' + $('#email').val() + '&password=' + $('#password').val() + '&displayName=' + $('#displayName').val() + '&is_admin=0' + '&name=' + $('#name').val(),
                   'method': 'POST',
                   'headers': {
                       'Cache-Control': 'no-cache'
@@ -94,7 +104,7 @@ include("environment.php");
                   setTimeout(function() { window.location.replace('login.php'); }, 5000);
               }).fail(function(jqXHR) {
                   if (jqXHR.status == 400) {
-                      showAlert('danger', 'Email Taken!', 'This email address has been used already. Do you need to <a href="index.php?content=passwordRecovery">reset the password</a>?');
+                      showAlert('danger', 'Email Taken!', 'This email address has been used already.');
                   } else {
                       showAlert('danger', 'Oops, Error!', 'Something went wrong, try again later.');
                   }

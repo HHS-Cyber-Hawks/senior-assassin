@@ -35,7 +35,8 @@ $round = $conn->real_escape_string($round);
         <span>
             <button class="current-button">Player List</button>
             <?php if(isAdmin()){ ?>
-            <a href="assignment_display.php?round=1"><button class="button">Assignments</button></a>
+            <a href="assignment_display.php?round=<?php echo $round; ?>"><button class="button">Assignments</button></a>
+            <a href="approve_players.php?round=<?php echo $round; ?>"><button class="button">Yet to Pay</button></a>
             <?php } else {  //if(isAdmin()) ?>
             <a href="see_target.php?round=<?php echo $round; ?>"><button class="button">My Target</button></a>
             <?php }  //End if(isAdmin()) ?>
@@ -75,76 +76,66 @@ $round = $conn->real_escape_string($round);
 
 <?php
 
-// Create connection
-$conn = create_connection();
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
   $sql = <<<SQL
-            SELECT player_id, first_name, last_name, email, player_status
+            SELECT player_id, player_name, email, player_status
             FROM players
-            ORDER BY player_status DESC, last_name, first_name;
+            ORDER BY player_status DESC;
 SQL;
 
 $result = $conn->query($sql);
 
-if ($result) {
-    if ($result->num_rows > 0) {
-        echo "<table id='resultsTable' >";
-        echo "<tr><th>Name</th>";
-        if(isAdmin())
-        {
-          echo "<th>Email</th>";
-        }
-        echo "<th>Status</th>";
-        if(isAdmin())
-        {
-          echo "<th>Edit/Delete</th>";
-        }
-        echo "<th>Player History</th></tr>";
+  if ($result->num_rows > 0) {
+      echo "<table id='resultsTable'>";
+      echo "<tr><th>Name</th>";
+      if(isAdmin())
+      {
+        echo "<th>Email</th>";
+      }
+      echo "<th>Status</th>";
+      if(isAdmin())
+      {
+        echo "<th>Edit/Delete</th>";
+      }
+      echo "<th>Player History</th></tr>";
 
-        // output data of each row
-        while($row = $result->fetch_assoc()) {
-            echo "<tr>";
-            echo "<td>" . $row["first_name"] . " ". $row["last_name"] . "</td>";
-            if(isAdmin())
-            {
-              echo "<td>" . $row["email"] . "</td>";
-            }
-            echo "<td>";
+      // output data of each row
+      while($row = $result->fetch_assoc()) {
+          echo "<tr>";
+          echo "<td>" . $row["player_name"] . "</td>";
+          if(isAdmin())
+          {
+            echo "<td>" . $row["email"] . "</td>";
+          }
+          echo "<td>";
 
-            if ($row["player_status"] == -1)
-            {
-              echo "Out";
-            }
-            else if ($row["player_status"] == 0)
-            {
-              echo "Playing";
-            }
-            else if ($row["player_status"] == 1)
-            {
-              echo "Can move on";
-            }
-            else if ($row["player_status"] == 2)
-            {
-              echo "Moving on";
-            }
-            if(isAdmin())
-            {
-              echo "</td>";
-              echo "<td><button onclick='deletePlayer(" . $row["player_id"] . ")'>Delete</button> <button onclick='editPlayer(" . $row["player_id"] . ", $round)'>Edit</button></td></div>";
-            }
-            echo "<td><button onclick='showHistory(" . $row["player_id"] . ", $round)'>View History</button>";
-            echo "</tr>";
+          if ($row["player_status"] == -1)
+          {
+            echo "Out";
+          }
+          else if ($row["player_status"] == 0)
+          {
+            echo "Playing";
+          }
+          else if ($row["player_status"] == 1)
+          {
+            echo "Can move on";
+          }
+          else if ($row["player_status"] == 2)
+          {
+            echo "Moving on";
+          }
+          if(isAdmin())
+          {
+            echo "</td>";
+            echo "<td><button onclick='deletePlayer(" . $row["player_id"] . ")'>Delete</button> <button onclick='editPlayer(" . $row["player_id"] . ", $round)'>Edit</button></td></div>";
+          }
+          echo "<td><button onclick='showHistory(" . $row["player_id"] . ", $round)'>View History</button>";
+          echo "</tr>";
 
-        }
-    }
-}
+      }
+  }
 
-$conn->close();
 ?>
 
     </div>

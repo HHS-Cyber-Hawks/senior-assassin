@@ -21,3 +21,8 @@ function showHistory(id, round) {
 function newRound() {
     location.href = "new_round.php";
 }
+
+function approvePlayer(id)
+{
+    location.href = "verifyPlayer.php?id=" + id;
+}
