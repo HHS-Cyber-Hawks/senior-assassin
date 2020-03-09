@@ -43,8 +43,6 @@ if($conn->query($sql))
   $result = $conn->query($sql);
 }
 
-$get_name = "SELECT player_name FROM players";
-$name = get_value($get_name, "player_name");
 echo "<html>";
 echo "<head>" .
       "<script src='scripts.js?" . rand() . "'></script>" .
@@ -52,7 +50,7 @@ echo "<head>" .
       "</head>";
 
 echo "<body>";
-echo "<h1 style='text-align: center;'>" . $name . "</h1>";
+echo "<h1 style='text-align: center;'>" . $_SESSION['displayName'] . "</h1>";
 echo "<div class='button-header'>
         <div>
           <span>
