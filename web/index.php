@@ -39,6 +39,7 @@ $round = $conn->real_escape_string($round);
             <a href="approve_players.php?round=<?php echo $round; ?>"><button class="button">Yet to Pay</button></a>
             <?php } else {  //if(isAdmin()) ?>
             <a href="see_target.php?round=<?php echo $round; ?>"><button class="button">My Target</button></a>
+            <a href="feed.php?round=<?php echo $round; ?>"><button class="button">Feed</button></a>
             <?php }  //End if(isAdmin()) ?>
         </span>
       </div>

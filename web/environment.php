@@ -26,12 +26,12 @@
   $conn = create_connection();
 
 // If you aren't logged in and you try to access a page, it redirects you to the login page
-  if((!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) && !allowed($_SERVER['REQUEST_URI'])) {
+  if((!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) && !allowedForLogin($_SERVER['REQUEST_URI'])) {
     header("Location: login.php");
     die("Redirecting to login.php");
   }
 
-  function allowed($URI) {
+  function allowedForLogin($URI) {
     $listOfAllowed = ['login.php', 'logout.php', 'register.php', 'authenticate.php', 'createAccount.php', 'resetPassword.php'];
     $inList = false;
     foreach ($listOfAllowed as $url)
@@ -44,9 +44,40 @@
     return $inList;
   }
 
+// If you aren't an admin and try to access an admin page, you get redirected back to index.php
+  if(!isAdmin() && !allowedForPlayerUse($_SERVER['REQUEST_URI'])) {
+    header("Location: index.php?round=1");
+    die("Redirecting to index.php?round=1");
+  }
+
+  function allowedForPlayerUse($URI) {
+    $listOfAllowed = ['login.php', 'logout.php', 'register.php',
+                      'authenticate.php', 'createAccount.php', 'resetPassword.php',
+                      'display_rules.php', 'feed.php', 'index.php',
+                      'see_target.php', 'player_history.php', 'rules.php'];
+    $inList = false;
+    foreach ($listOfAllowed as $url)
+    {
+      if (strpos($URI, $url))
+      {
+        $inList = true;
+      }
+    }
+    return $inList;
+  }
+
+
+
   function isAdmin()
   {
-    return $_SESSION["admin"];
+    if(isset($_SESSION["admin"]))
+    {
+      return $_SESSION["admin"];
+    }
+    else
+    {
+      return false;
+    }
   }
 
   function create_connection()

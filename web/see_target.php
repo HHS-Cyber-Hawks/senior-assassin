@@ -50,12 +50,21 @@ echo "<head>" .
       "</head>";
 
 echo "<body>";
+echo   "<div class='dropdown'>
+        <button class='dropbtn'>" . $_SESSION['displayName'] . "</button>
+        <div class='dropdown-content'>
+          <p>" . $_SESSION['email'] . "</p>
+          <a href='logout.php'>Log out</a>
+        </div>
+      </div>";
 echo "<h1 style='text-align: center;'>" . $_SESSION['displayName'] . "</h1>";
 echo "<div class='button-header'>
         <div>
-          <span>
-            <a href='index.php?round=$round'><button class='lower-button'>Back</button></a>
-          </span>
+          <span>";
+            echo "<a href='index.php?round=$round'><button class='button'>Player List</button></a>";
+            echo "<a href=''><button class='current-button'>My Target</button></a>";
+            echo "<a href='feed.php?round=$round'><button class='button'>Feed</button></a>";
+          echo "</span>
         </div>
       </div>
       <br />
