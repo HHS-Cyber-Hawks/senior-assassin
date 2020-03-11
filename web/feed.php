@@ -37,10 +37,8 @@ $round = $conn->real_escape_string($round);
 
 $sql = <<<SQL
           SELECT assignment_id,
-          attackers.first_name as attacker_first_name,
-          attackers.last_name as attacker_last_name,
-          targets.first_name as target_first_name,
-          targets.last_name as target_last_name,
+          attackers.player_name as attacker_name,
+          targets.player_name as target_name,
           assignment_status,
           assignment_round,
           date_format(assignment_timestamp, '%M %d %r') as formatted_date

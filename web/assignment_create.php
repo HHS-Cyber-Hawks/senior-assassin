@@ -62,13 +62,10 @@ foreach ($attacker_array as $attacker)
   $sql = "SELECT email from players where player_id = $attacker";
   $player = get_value($sql, "email");
 
-  $sql = "SELECT first_name from players where player_id = $potential_target";
-  $first = get_value($sql, "first_name");
+  $sql = "SELECT player_name from players where player_id = $potential_target";
+  $name = get_value($sql, "player_name");
 
-  $sql = "SELECT last_name from players where player_id = $potential_target";
-  $last = get_value($sql, "last_name");
-
-  send_email($player, "Your Assignment", "Your Target is: " . $first . " " . $last);
+  send_email($player, "Your Assignment", "Your Target is: " . $name);
 }
 
 // Now insert the records into the database

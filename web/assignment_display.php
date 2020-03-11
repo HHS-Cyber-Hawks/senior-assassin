@@ -82,10 +82,8 @@ $round = $conn->real_escape_string($round);
 
 $sql = <<<SQL
           SELECT assignment_id,
-          attackers.first_name as attacker_first_name,
-          attackers.last_name as attacker_last_name,
-          targets.first_name as target_first_name,
-          targets.last_name as target_last_name,
+          attackers.player_name as attacker_name,
+          targets.player_name as target_name,
           assignment_status,
           assignment_round
           FROM assignments
@@ -107,8 +105,8 @@ if ($result) {
       while ($row = $result->fetch_assoc())
       {
           echo "<tr>";
-          echo "<td>" . $row["attacker_first_name"] . " " . $row["attacker_last_name"] . "</td>";
-          echo "<td>" . $row["target_first_name"]   . " " . $row["target_last_name"]   . "</td>";
+          echo "<td>" . $row["attacker_name"] .  "</td>";
+          echo "<td>" . $row["target_name"]   .  "</td>";
           echo "<td style='background-color: ";
 
           if ($row["assignment_status"] == 0)
